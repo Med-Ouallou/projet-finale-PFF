@@ -16,7 +16,7 @@ He mentioned the following problems:
 * Staff responsibilities are not clearly separated.
 * Customers cannot reserve tables online.
 
-### 🎯 Client Goals
+### Client Goals
 
 The client wants a simple and efficient digital system that will:
 
