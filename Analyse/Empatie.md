@@ -1,62 +1,45 @@
-- Project Type: Mini Restaurant Management System
-- Client Name: Ayoube Jamali
-- Interview Date: 24/02/2026
+## Client Interview & Empathy
 
+* **Project Type:** Mini Restaurant Management System
+* **Client Name:** Ayoube Jamali
+* **Interview Date:** 24/02/2026
 
-# Mini Restaurant Management System (Laravel)
+### Understanding the Client Needs
 
-A full-stack **Restaurant Ordering & Management Platform** built with **Laravel**, designed for managing a small restaurant.
-The system includes menu management, order processing, table reservations, admin dashboard, and role-based access control.
+During the meeting, Mr. Ayoube explained that he owns a small restaurant and faces daily management challenges.
 
-This project is developed as a **client-based project simulation**, following clean architecture and best development practices.
+He mentioned the following problems:
 
----
+* Orders are sometimes disorganized during busy hours.
+* Revenue tracking is done manually and takes time.
+* There is no clear system to manage menu availability.
+* Staff responsibilities are not clearly separated.
+* Customers cannot reserve tables online.
 
-## Client Requirements
+### 🎯 Client Goals
 
-### Menu Management (CRUD)
+The client wants a simple and efficient digital system that will:
 
-* Add/Edit/Delete menu items
-* Categorization (Pizza, Burgers, Drinks, Desserts…)
-* Item status: **Available / Out of Stock**
-
----
-
-## Order Management System
-
-* Customers can:
-
-  * Add items to cart
-  * Place online orders
-* Staff can:
-  * View incoming orders
-  * Update order status (**Pending, Preparing, Ready, Completed**)
-* Auto calculation of total price
-* Order history for customers
+* Organize menu items and categories clearly.
+* Manage orders in real time.
+* Automatically calculate totals and revenue.
+* Provide a clear dashboard for daily and monthly performance.
+* Allow customers to place orders and reserve tables easily.
+* Separate roles between Admin, Staff, and Customers.
 
 ---
+# System Features
 
-## 📊 Admin Dashboard
+## Menu Management (CRUD)
 
-* Overview:
+**Problem:** No clear system to manage menu availability.  
 
-  * Total orders
-  * Daily revenue
-  * Monthly revenue
-  * Total reservations
-* Manage:
+**Solution:**
+- Add / Edit / Delete menu items  
+- Organize items by categories (Pizza, Burgers, Drinks, Desserts…)  
+- Set item status (**Available / Out of Stock**)  
+- Set price and description  
 
-  * Menu
-  * Categories
-  * Users
-  * Staff
-* Statistics & charts (Sales per day/month)
+**Benefit:** Keeps the menu organized and updated in real time.
 
 ---
-
-## Additional Features (Client Optional Requests)
-
-* 🧾 Invoice generation (PDF export)
-* 📦 Inventory tracking (ingredients stock management)
-* 📢 Notification system (Order ready alert)
-
