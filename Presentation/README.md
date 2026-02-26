@@ -1,4 +1,3 @@
-
 ---
 marp: true
 theme: default
@@ -107,8 +106,8 @@ style: |
 # **Projet de Fin de Formation**
 ### **Digitalisation des Services de Coaching : Développement d’une Solution Web Intégrée de Gestion et de Branding**
 
-**Réalisé par :** <span class="highlight">Mehdi Bentaleb</span>  
-**Encadré par :** <span class="highlight">M. ESSARRAJ Fouad</span>  
+**Réalisé par :** Mehdi Bentaleb  
+**Encadré par :** M. ESSARRAJ Fouad  
 **Filière :** Développement Mobile et Web
 
 ---
@@ -121,7 +120,7 @@ style: |
   <div class="sommaire-item"><div class="sommaire-num">3</div><div class="sommaire-text">Branche Fonctionnelle</div></div>
   <div class="sommaire-item"><div class="sommaire-num">4</div><div class="sommaire-text">Branche Technique</div></div>
   <div class="sommaire-item"><div class="sommaire-num">5</div><div class="sommaire-text">Conception</div></div>
-    <div class="sommaire-item"><div class="sommaire-num">6</div><div class="sommaire-text">Démonstration</div></div>
+  <div class="sommaire-item"><div class="sommaire-num">6</div><div class="sommaire-text">Démonstration</div></div>
   <div class="sommaire-item"><div class="sommaire-num">7</div><div class="sommaire-text">Conclusion</div></div>
 </div>
 
@@ -207,11 +206,9 @@ style: |
 ---
 ## Branche Fonctionnelle : Maquettes (UI/UX)
 
-
-
 <div class="maquette-grid">
   <div style="text-align: center;">
-   
+    <img src="images/maquette.png" alt="Maquette" style="max-height: 350px;">
   </div>
 </div>
 
@@ -222,24 +219,27 @@ style: |
   <div class="dt-card" style="margin-top:0;">
     <h4>Les technologies à utiliser</h4>
     <ul>
-      <li><strong>Base de données:</strong> MySQL </li>
+      <li><strong>Base de données:</strong> MySQL</li>
       <li><strong>Framework:</strong> Laravel 12</li>
-      <li><strong>Architecture:</strong> N-Tiers</li>
-      <strong>Controller:</strong> Requêtes HTTP
-      <strong>Service:</strong> Logique métier
-      <strong>Model:</strong> Base de données
-      <li><strong>Architecture:</strong> MVC</li>
-      <li><strong> Blade :</strong>Templates réutilisables (components, layouts).</li>
+      <li><strong>Architecture N-Tiers:</strong>
+        <ul style="margin-top: 5px;">
+          <li>Controller: Requêtes HTTP</li>
+          <li>Service: Logique métier</li>
+          <li>Model: Base de données</li>
+        </ul>
+      </li>
+      <li><strong>Architecture MVC</strong></li>
+      <li><strong>Blade:</strong> Templates réutilisables</li>
     </ul>
   </div>
   <div class="dt-card" style="margin-top:0; border-top-color: #27ae60;">
     <ul>
-      <li><strong> AJAX :</strong> Interactions dynamiques (ex: Modales) sans rechargement de page.</li>
-      <li><strong>Alpine.js :</strong>  Librairie JavaScript pour les interactions dynamiques.</li>
-      <li><strong>Spatie :</strong> Librairie pour la gestion des permissions et rôles.</li>
-      <li><strong>Vite :</strong>   Outil de build rapide.</li>
-      <li><strong>Lucide :</strong> Librairie d'icônes.</li>
-      <li><strong>Tailwind CSS :</strong>Développement rapide, responsive.</li>
+      <li><strong>AJAX:</strong> Interactions dynamiques sans rechargement</li>
+      <li><strong>Alpine.js:</strong> Librairie JavaScript dynamique</li>
+      <li><strong>Spatie:</strong> Gestion permissions et rôles</li>
+      <li><strong>Vite:</strong> Outil de build rapide</li>
+      <li><strong>Lucide:</strong> Librairie d'icônes</li>
+      <li><strong>Tailwind CSS:</strong> Développement responsive</li>
     </ul>
   </div>
 </div>
@@ -249,39 +249,35 @@ style: |
 
 ## 5. Conception : Diagramme de classe
 
-
- <h3>Modélisation des données (MLD)</h3>
+<h3>Modélisation des données (MLD)</h3>
 <div class="img-container">
- 
-  
+  <img src="images/diagramme-class.png" class="img-methodo" alt="Diagramme de classe">
 </div>
 
 ---
 
-## 5. Démonstration : Environnement & Outils
+## 6. Démonstration : Environnement & Outils
 
 <div class="sommaire-grid">
   <div class="dt-card" style="margin-top:0;">
     <h4>Environnement de Développement</h4>
     <ul>
-      <li><strong>IDE :</strong> VS Code & Antigravity </li>
-      <li><strong>Monitoring DB :</strong> Workbench Sql</li>
+      <li><strong>IDE:</strong> VS Code & Antigravity</li>
+      <li><strong>Monitoring DB:</strong> Workbench SQL</li>
     </ul>
   </div>
   <div class="dt-card" style="margin-top:0; border-top-color: #27ae60;">
     <h4>Gestion & Déploiement</h4>
     <ul>
-      <li><strong>Modelisation UML :</strong>Mermaid/PlantUML</li>
-      <li><strong>Gestion de version :</strong> Git (GitHub)</li>
-      <li><strong>Navigateur :</strong> Chrome DevTools</li>
+      <li><strong>Modélisation UML:</strong> Mermaid/PlantUML</li>
+      <li><strong>Gestion de version:</strong> Git (GitHub)</li>
+      <li><strong>Navigateur:</strong> Chrome DevTools</li>
     </ul>
   </div>
 </div>
 
-<br>
-
 ---
-## 6. Conclusion
 
+## 7. Conclusion
 
 ### Merci pour votre attention !
