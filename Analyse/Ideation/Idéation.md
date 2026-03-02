@@ -27,7 +27,6 @@ Based on the empathy analysis, the following solutions were proposed for each ma
 - Online menu with updated availability status
 - Table reservation system
 - Online order placement and tracking
-- Digital payment options
 - Quick and organized service with confirmation notifications
 
 ### Global System Features
