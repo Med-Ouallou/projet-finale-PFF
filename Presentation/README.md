@@ -106,7 +106,7 @@ style: |
 # **Projet de Fin de Formation**
 ### **Digitalisation des Services de Coaching : Développement d’une Solution Web Intégrée de Gestion et de Branding**
 
-**Réalisé par :** Mehdi Bentaleb  
+**Réalisé par :** Mohamed Ouallou
 **Encadré par :** M. ESSARRAJ Fouad  
 **Filière :** Développement Mobile et Web
 
@@ -126,12 +126,18 @@ style: |
 
 ---
 ## 1. Contexte du projet
+<div class="dt-card" style="border-top-color: #f39c12;">
+  <h4>Contexte : </h4>
+  <blockquote style="font-style: italic; background: white; padding: 15px; border-radius: 8px;">
+    "Mr. Ayoube Jamali owns a small restaurant and is highly skilled in food preparation and customer service. However, he faces difficulties managing daily operations such as order organization, revenue tracking, and staff coordination, as most processes are handled manually.
+
+This project aims to design a Mini Restaurant Management System that digitalizes operations, improves workflow efficiency, and enhances overall business performance."
+  </blockquote>
+</div>
 
 ---
 
 ## 2. Méthodologie : Design Thinking
-
-
 
 <div class="img-container">
   <img src="images/designThinking.png" class="img-methodo" alt="Design Thinking">
@@ -158,7 +164,14 @@ style: |
   <div class="dt-card" style="border-top-color: #f39c12;">
     <h4>Comprendre l'utilisateur</h4>
     <blockquote style="font-style: italic; background: white; padding: 15px; border-radius: 8px;">
-      "Observation des difficultés réelles des étudiants lors des examens : stress du temps, erreurs de lecture et attente des résultats."
+      "Mr. Ayoube Jamali, owner of a small restaurant, struggles with daily operational management due to manual processes. This causes stress, order confusion during peak hours, and limits business efficiency. He needs a structured digital system to improve organization and performance."
+
+#### Key Points
+- Manual order management causes confusion  
+- Revenue tracking is time-consuming and error-prone  
+- No centralized system for menu and staff management  
+- Need for real-time order tracking  
+- Desire for a clear dashboard and better control .
     </blockquote>
   </div>
 </div>
@@ -172,9 +185,15 @@ style: |
   <div class="dt-card" style="border-top-color: #f39c12;">
     <h4>Cadrage du problème</h4>
     <blockquote style="font-style: italic; background: white; padding: 15px; border-radius: 8px;">
-      "Comment simplifier l'évaluation tout en offrant un feedback immédiat ?"
+
+  - Manual management of daily operations (orders, revenue, menu, staff)  
+  - Order confusion during peak hours  
+  - Errors in revenue calculation  
+  - Lack of real-time visibility on performance  
+  - Poor menu organization  
+  - Increased operational stress  
+  - Absence of a centralized digital system limits efficiency, scalability, and performance
     </blockquote>
-    <p>Focus sur : L'accessibilité, la rapidité et la fiabilité des données.</p>
   </div>
 </div>
 
