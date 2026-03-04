@@ -29,28 +29,59 @@
                 Kit</p>
         </div>
         <nav id="sidebar-nav" class="flex-1 overflow-y-auto p-4 space-y-8">
-            <!-- Mockups Section -->
-            <div class="space-y-3">
-                <h3 class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest px-2">Mockups (Premium)</h3>
+            <!-- Pages Client Section -->
+            <div class="space-y-3 pb-6 border-b border-slate-100">
+                <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Client (Desktop)</h3>
                 <div class="space-y-1">
-                    <button onclick="loadComponent('mockups/accueil.html', 'Page: Accueil')"
-                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 transition">Page
-                        Accueil</button>
+                    <button onclick="loadComponent('mockups/accueil.html', 'Page: Accueil Client')"
+                        class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Accueil
+                        Client</button>
+                    <button onclick="loadComponent('mockups/menu.html', 'Page: Menu Online (WhatsApp)')"
+                        class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Menu
+                        Online</button>
+                    <button onclick="loadComponent('mockups/contact.html', 'Page: Contact')"
+                        class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Contact</button>
+                </div>
+            </div>
+
+            <!-- Client Mobile Section -->
+            <div class="space-y-3 pb-6 border-b border-slate-100">
+                <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">Client (Mobile App)</h3>
+                <div class="space-y-1">
+                    <button onclick="loadComponent('mockups/mobile-index.html', 'Page Mobile: Accueil App')"
+                        class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition flex items-center gap-2">
+                        <span class="size-1.5 rounded-full bg-emerald-500"></span> Accueil Mobile
+                    </button>
+                    <button onclick="loadComponent('mockups/mobile-menu.html', 'Page Mobile: Menu App')"
+                        class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition flex items-center gap-2">
+                        <span class="size-1.5 rounded-full bg-emerald-500"></span> Menu Mobile
+                    </button>
+                    <button onclick="loadComponent('mockups/mobile-contact.html', 'Page Mobile: Contact App')"
+                        class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition flex items-center gap-2">
+                        <span class="size-1.5 rounded-full bg-emerald-500"></span> Contact Mobile
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Mockups Section -->
+            <div class="space-y-3 pb-6 border-b border-slate-100">
+                <h3 class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest px-2">Admin (Desktop)</h3>
+                <div class="space-y-1">
                     <button onclick="loadComponent('mockups/admin-dashboard.html', 'Page: Admin Dashboard')"
-                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Admin
+                        class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Admin
                         Dashboard</button>
                     <button onclick="loadComponent('mockups/admin-reports.html', 'Page: Admin Reports')"
-                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Rapports
+                        class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Rapports
                         & Stats</button>
                     <button onclick="loadComponent('mockups/menu-crud.html', 'Page: Menu CRUD')"
-                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Gestion
+                        class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Gestion
                         Menu (CRUD)</button>
                     <button onclick="loadComponent('mockups/category-crud.html', 'Page: Category CRUD')"
                         class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Gestion
                         Catégories</button>
-                    <button onclick="loadComponent('mockups/menu.html', 'Page: Menu Online')"
+                    <button onclick="loadComponent('mockups/menu.html', 'Page: Menu & WhatsApp Flow')"
                         class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Menu
-                        Online</button>
+                        Online (WhatsApp)</button>
                     <button onclick="loadComponent('mockups/contact.html', 'Page: Contact')"
                         class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Contact</button>
                     <button onclick="loadComponent('mockups/login.html', 'Page: Login')"
@@ -116,6 +147,10 @@
                         onclick="loadComponent('components-lib/molecules/cart-drawer/index.html', 'Molecule: Cart Drawer')"
                         class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Cart
                         Drawer</button>
+                    <button
+                        onclick="loadComponent('components-lib/molecules/product-card/index.html', 'Molecule: Product Card')"
+                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition">Product
+                        Card</button>
                 </div>
             </div>
 

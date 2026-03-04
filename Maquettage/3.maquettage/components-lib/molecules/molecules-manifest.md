@@ -11,5 +11,6 @@
 | **Stat Card** | `molecules/stat-card/` | Cartes d'indicateurs Dashboard. | Terminé |
 | **Orders Table** | `molecules/orders-table/` | Tableau de commandes Admin. | Terminé |
 | **Cart Drawer** | `molecules/cart-drawer/` | Panier coulissant (Drawer). | Terminé |
+| **Product Card** | `molecules/product-card/` | Carte produit client avec prix et action. | Terminé |
 | **Category Table** | `molecules/category-table/` | Tableau de gestion des catégories. | Terminé |
 | **Category Modal** | `molecules/category-modal/` | Modale d'ajout/édition de catégories. | Terminé |
