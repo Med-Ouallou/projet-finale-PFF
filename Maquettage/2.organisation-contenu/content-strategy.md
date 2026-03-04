@@ -196,3 +196,35 @@ Une question ? Une réservation spéciale ? Notre équipe est à votre écoute.
 
 **Appel à l'Action (CTA)** :
 Envoyer le message
+
+---
+
+## Page : Gestion des Catégories (Admin)
+
+### SEO & Structure
+
+**Mot-clé Principal** : Organiser catégories menu restaurant
+**Intention de Recherche** : Navigationnelle (Gestion interne)
+
+**Structure des Titres** :
+- **H1** : Gestion des Catégories
+- **H2** : Liste des catégories actuelles
+- **H2** : Ajouter une nouvelle catégorie
+
+**Mots-Clés Secondaires** :
+- Catégories plats restaurant
+- Icônes catégories menu
+- Organisation carte restaurant
+
+### Copywriting
+
+**Accroche Principale** :
+Structurez votre carte pour une meilleure lisibilité. Gérez les catégories de vos plats pour faciliter la commande de vos clients.
+
+**Messages Clés** :
+- **Ordre** : Classez vos plats logiquement (Entrées, Plats, Desserts, etc.).
+- **Visibilité** : Choisissez des icônes et des couleurs distinctives pour chaque catégorie.
+- **Efficacité** : Visualisez instantanément combien de plats sont rattachés à chaque catégorie.
+
+**Appel à l'Action (CTA)** :
+Ajouter une catégorie

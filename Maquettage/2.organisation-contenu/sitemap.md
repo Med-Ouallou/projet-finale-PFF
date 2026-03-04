@@ -15,5 +15,6 @@
     - [Gestion Menu (CRUD)]
         - [Liste des Plats]
         - [Ajouter/Éditer Plat (Modal/Form)]
+        - [Gestion des Catégories]
     - [Statistiques]
     - [Gestion Équipe]
