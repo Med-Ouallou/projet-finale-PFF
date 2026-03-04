@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap');
+
+:root {
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+}
+
+.font-heading {
+    font-family: var(--font-heading);
+}
+
+/* Preline Overrides s'il y en a besoin (Config Tailwind prioritaire) */

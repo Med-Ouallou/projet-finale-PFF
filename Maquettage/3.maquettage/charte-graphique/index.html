@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charte Graphique - Resto Manager</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#ecfdf5',
+                            600: '#059669',
+                            900: '#064e3b',
+                        },
+                        secondary: {
+                            500: '#f59e0b',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-slate-50 font-body p-8">
+    <div class="max-w-4xl mx-auto space-y-16">
+        <header class="border-b pb-8">
+            <h1 class="text-4xl font-heading font-extrabold text-slate-900 tracking-tight">Charte Graphique : Resto
+                Manager</h1>
+            <p class="text-slate-500 mt-2 text-lg">Identité visuelle basée sur Preline UI & Tailwind CSS.</p>
+        </header>
+
+        <!-- Couleurs -->
+        <section class="space-y-6">
+            <h2 class="text-2xl font-heading font-bold text-slate-900 border-l-4 border-emerald-600 pl-4">Palette de
+                Couleurs</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="space-y-2">
+                    <div class="h-24 rounded-2xl bg-emerald-600 shadow-lg flex items-end p-3"><span
+                            class="text-white text-xs font-mono">Primary 600</span></div>
+                    <p class="text-xs text-slate-400 text-center uppercase tracking-widest font-bold">#059669</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="h-24 rounded-2xl bg-amber-500 shadow-lg flex items-end p-3"><span
+                            class="text-white text-xs font-mono">Secondary 500</span></div>
+                    <p class="text-xs text-slate-400 text-center uppercase tracking-widest font-bold">#f59e0b</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="h-24 rounded-2xl bg-slate-900 shadow-lg flex items-end p-3"><span
+                            class="text-white text-xs font-mono">Neutral 900</span></div>
+                    <p class="text-xs text-slate-400 text-center uppercase tracking-widest font-bold">#0f172a</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typographie -->
+        <section class="space-y-6">
+            <h2 class="text-2xl font-heading font-bold text-slate-900 border-l-4 border-emerald-600 pl-4">Typographie
+            </h2>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 space-y-8">
+                <div class="space-y-3">
+                    <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-emerald-600">Heading : Outfit</p>
+                    <h3 class="text-4xl font-heading font-extrabold text-slate-900">Le futur de la gestion restaurant.
+                    </h3>
+                </div>
+                <div class="space-y-3">
+                    <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-emerald-600">Body : Inter</p>
+                    <p class="text-slate-600 leading-relaxed max-w-lg">
+                        Découvrez notre interface intuitive conçue pour les professionnels. Simplifiez vos commandes,
+                        gérez vos stocks et suivez vos revenus en temps réel. Un système épuré pour une efficacité
+                        maximale.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Composants Preline (Aperçu) -->
+        <section class="space-y-6">
+            <h2 class="text-2xl font-heading font-bold text-slate-900 border-l-4 border-emerald-600 pl-4">Composants
+                Preline (Standards)</h2>
+            <div class="flex flex-wrap gap-4 items-center">
+                <!-- Bouton Solid -->
+                <button type="button"
+                    class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                    Bouton Primaire
+                </button>
+                <!-- Bouton Soft -->
+                <button type="button"
+                    class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-emerald-100 text-emerald-800 hover:bg-emerald-200 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                    Bouton Soft
+                </button>
+                <!-- Badge -->
+                <span
+                    class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                    <span class="w-1.5 h-1.5 inline-block rounded-full bg-amber-800"></span>
+                    En attente
+                </span>
+                <span
+                    class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                    <span class="w-1.5 h-1.5 inline-block rounded-full bg-emerald-800"></span>
+                    Livrable
+                </span>
+            </div>
+        </section>
+
+        <footer class="pt-8 border-t text-center">
+            <p class="text-slate-400 text-xs uppercase tracking-widest font-bold">Action exécutée : Créer Charte
+                Graphique (Skill: designer-ui)</p>
+        </footer>
+    </div>
+</body>
+
+</html>

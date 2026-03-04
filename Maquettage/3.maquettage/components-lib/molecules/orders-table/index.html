@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 p-8">
+    <div class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+        <!-- Header -->
+        <div class="px-6 py-4 flex justify-between items-center border-b border-gray-100">
+            <div>
+                <h2 class="text-base font-bold font-heading text-gray-800">Commandes récentes</h2>
+                <p class="text-xs text-gray-400">3 résultats · Mis à jour à 16:10</p>
+            </div>
+            <button type="button"
+                class="py-2 px-4 inline-flex items-center gap-x-2 text-xs font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                Voir tout →
+            </button>
+        </div>
+        <!-- Table -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full">
+                <thead class="bg-gray-50 border-b border-gray-100">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                            Client</th>
+                        <th class="px-6 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                            Plats</th>
+                        <th class="px-6 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                            Heure</th>
+                        <th class="px-6 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                            Statut</th>
+                        <th class="px-6 py-3 text-right text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                            Montant</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    <tr class="hover:bg-gray-50/50 transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <img class="w-8 h-8 rounded-full object-cover" src="https://i.pravatar.cc/32?img=1"
+                                    alt="">
+                                <span class="text-sm font-medium text-gray-800">Ayoube Jamali</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">Bowl Santé × 2</td>
+                        <td class="px-6 py-4 text-sm text-gray-400">15:42</td>
+                        <td class="px-6 py-4">
+                            <span
+                                class="py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold bg-emerald-100 text-emerald-800 rounded-full">
+                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                                Livrée
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right text-sm font-bold text-gray-800">45.00 €</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50/50 transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <img class="w-8 h-8 rounded-full object-cover" src="https://i.pravatar.cc/32?img=5"
+                                    alt="">
+                                <span class="text-sm font-medium text-gray-800">Marie Durand</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">Pancakes × 1</td>
+                        <td class="px-6 py-4 text-sm text-gray-400">15:51</td>
+                        <td class="px-6 py-4">
+                            <span
+                                class="py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full">
+                                <span class="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></span>
+                                En cours
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right text-sm font-bold text-gray-800">9.00 €</td>
+                    </tr>
+                    <tr class="hover:bg-gray-50/50 transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <img class="w-8 h-8 rounded-full object-cover" src="https://i.pravatar.cc/32?img=9"
+                                    alt="">
+                                <span class="text-sm font-medium text-gray-800">Fatima Zahra</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">Tajine × 1, Salade × 1</td>
+                        <td class="px-6 py-4 text-sm text-gray-400">16:02</td>
+                        <td class="px-6 py-4">
+                            <span
+                                class="py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-full">
+                                <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                                Confirmée
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right text-sm font-bold text-gray-800">32.50 €</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Footer -->
+        <div class="px-6 py-3 bg-gray-50 border-t border-gray-100 flex justify-between items-center">
+            <p class="text-xs text-gray-400">Total : <strong class="text-gray-700">86.50 €</strong></p>
+            <p class="text-xs text-gray-400">Exporté à 16:10 (GMT+1)</p>
+        </div>
+    </div>
+</body>
+
+</html>

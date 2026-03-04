@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Online - Resto Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-active {
+            background-color: #059669;
+            color: white !important;
+            border-color: #059669 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+        <div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+            <a class="flex items-center gap-2.5 text-xl font-bold font-heading text-slate-900" href="accueil.html">
+                <div
+                    class="flex items-center justify-center w-9 h-9 bg-emerald-600 rounded-xl shadow-lg shadow-emerald-200">
+                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+                Resto<span class="text-emerald-600">Manager</span>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <!-- Search -->
+                <div class="hidden md:block relative w-56">
+                    <input type="text"
+                        class="py-2 px-4 ps-10 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 bg-gray-50"
+                        placeholder="Rechercher un plat...">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Cart Button -->
+                <button type="button"
+                    class="relative py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl border border-emerald-200 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-colors"
+                    data-hs-overlay="#hs-overlay-cart">
+                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    Mon panier
+                    <span
+                        class="w-5 h-5 flex items-center justify-center bg-emerald-600 text-white text-[10px] font-bold rounded-full">2</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <div class="bg-emerald-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-amber-300 rounded-full blur-3xl"></div>
+        </div>
+        <div class="relative max-w-[1200px] mx-auto px-6 py-10 text-center">
+            <h1 class="text-3xl lg:text-4xl font-extrabold font-heading text-white">Notre Carte du Jour 🍽️</h1>
+            <p class="mt-2 text-emerald-200/80">Des produits frais, préparés chaque matin avec passion.</p>
+        </div>
+    </div>
+
+    <main class="max-w-[1200px] mx-auto px-6 py-10">
+        <!-- Category Tabs -->
+        <div class="flex gap-2 overflow-x-auto pb-2 mb-8">
+            <button id="tab-all"
+                class="tab-active shrink-0 py-2 px-5 text-sm font-semibold rounded-full border border-transparent transition-all">Tout
+                voir</button>
+            <button id="tab-entrees"
+                class="shrink-0 py-2 px-5 text-sm font-semibold rounded-full border border-gray-200 text-gray-600 bg-white hover:border-emerald-300 hover:text-emerald-700 transition-all">Entrées</button>
+            <button id="tab-plats"
+                class="shrink-0 py-2 px-5 text-sm font-semibold rounded-full border border-gray-200 text-gray-600 bg-white hover:border-emerald-300 hover:text-emerald-700 transition-all">Plats</button>
+            <button id="tab-desserts"
+                class="shrink-0 py-2 px-5 text-sm font-semibold rounded-full border border-gray-200 text-gray-600 bg-white hover:border-emerald-300 hover:text-emerald-700 transition-all">Desserts</button>
+            <button id="tab-boissons"
+                class="shrink-0 py-2 px-5 text-sm font-semibold rounded-full border border-gray-200 text-gray-600 bg-white hover:border-emerald-300 hover:text-emerald-700 transition-all">Boissons</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            <!-- Card 1 -->
+            <div
+                class="group flex flex-col bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all">
+                <div class="relative h-44 overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Bowl Santé">
+                    <span
+                        class="absolute top-3 left-3 py-1 px-2.5 text-xs font-bold bg-emerald-600 text-white rounded-full shadow">Populaire</span>
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="text-base font-bold font-heading text-gray-800">Bowl Santé Signature</h3>
+                    <p class="mt-1 text-gray-400 text-xs leading-relaxed flex-1">Quinoa, avocat, grenade et légumes
+                        frais de saison.</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-lg font-extrabold font-heading text-emerald-600">14.50 €</span>
+                        <button type="button"
+                            class="py-2 px-4 inline-flex items-center gap-x-1.5 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition-colors shadow-sm shadow-emerald-200">
+                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div
+                class="group flex flex-col bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all">
+                <div class="relative h-44 overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Pancakes">
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="text-base font-bold font-heading text-gray-800">Pancakes Gourmands</h3>
+                    <p class="mt-1 text-gray-400 text-xs leading-relaxed flex-1">Nappage au caramel beurre salé et
+                        fruits rouges.</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-lg font-extrabold font-heading text-emerald-600">9.00 €</span>
+                        <button type="button"
+                            class="py-2 px-4 inline-flex items-center gap-x-1.5 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition-colors shadow-sm shadow-emerald-200">
+                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div
+                class="group flex flex-col bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all">
+                <div class="relative h-44 overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Tajine">
+                    <span
+                        class="absolute top-3 left-3 py-1 px-2.5 text-xs font-bold bg-amber-500 text-white rounded-full shadow">Chef</span>
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="text-base font-bold font-heading text-gray-800">Tajine de Poulet</h3>
+                    <p class="mt-1 text-gray-400 text-xs leading-relaxed flex-1">Citron confit, olives et épices maison
+                        traditionnelles.</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-lg font-extrabold font-heading text-emerald-600">18.00 €</span>
+                        <button type="button"
+                            class="py-2 px-4 inline-flex items-center gap-x-1.5 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition-colors shadow-sm shadow-emerald-200">
+                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div
+                class="group flex flex-col bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all">
+                <div class="relative h-44 overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://images.unsplash.com/photo-1551024601-bec78aea704b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Dessert">
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="text-base font-bold font-heading text-gray-800">Fondant au Chocolat</h3>
+                    <p class="mt-1 text-gray-400 text-xs leading-relaxed flex-1">Coulant praliné, crème anglaise et
+                        glace vanille.</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-lg font-extrabold font-heading text-emerald-600">7.50 €</span>
+                        <button type="button"
+                            class="py-2 px-4 inline-flex items-center gap-x-1.5 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition-colors shadow-sm shadow-emerald-200">
+                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- CART DRAWER -->
+    <div id="hs-overlay-cart"
+        class="hs-overlay hs-overlay-open:translate-x-0 translate-x-full fixed top-0 end-0 transition-all duration-300 transform h-full max-w-sm w-full z-[80] bg-white border-s border-gray-100 shadow-2xl hidden"
+        tabindex="-1">
+        <!-- Header -->
+        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+            <div>
+                <h3 class="font-bold font-heading text-gray-800 text-lg">Mon Panier</h3>
+                <p class="text-xs text-gray-400">2 articles</p>
+            </div>
+            <button type="button"
+                class="w-8 h-8 flex justify-center items-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
+                data-hs-overlay="#hs-overlay-cart">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Items -->
+        <div class="p-6 space-y-4 overflow-y-auto h-[calc(100%-200px)]">
+            <div class="flex items-center gap-4 p-3 bg-gray-50 rounded-xl">
+                <img class="w-14 h-14 rounded-xl object-cover flex-shrink-0"
+                    src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    alt="Bowl">
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-semibold text-gray-800">Bowl Santé Signature</p>
+                    <p class="text-xs text-emerald-600 font-bold">14.50 €</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-6 h-6 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs hover:bg-gray-300 transition-colors font-bold">−</button>
+                    <span class="text-sm font-bold text-gray-800 w-4 text-center">1</span>
+                    <button
+                        class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs hover:bg-emerald-700 transition-colors font-bold">+</button>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-3 bg-gray-50 rounded-xl">
+                <img class="w-14 h-14 rounded-xl object-cover flex-shrink-0"
+                    src="https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    alt="Pancakes">
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-semibold text-gray-800">Pancakes Gourmands</p>
+                    <p class="text-xs text-emerald-600 font-bold">9.00 €</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-6 h-6 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs hover:bg-gray-300 transition-colors font-bold">−</button>
+                    <span class="text-sm font-bold text-gray-800 w-4 text-center">1</span>
+                    <button
+                        class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs hover:bg-emerald-700 transition-colors font-bold">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="absolute bottom-0 w-full px-6 py-5 border-t border-gray-100 bg-white">
+            <div class="flex justify-between items-center mb-1">
+                <span class="text-sm text-gray-500">Sous-total</span>
+                <span class="text-sm font-semibold text-gray-700">23.50 €</span>
+            </div>
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-sm text-gray-500">Livraison</span>
+                <span
+                    class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Gratuite</span>
+            </div>
+            <div class="flex justify-between items-center mb-5 pt-3 border-t border-gray-100">
+                <span class="text-base font-bold text-gray-800">Total</span>
+                <span class="text-xl font-extrabold font-heading text-gray-900">23.50 €</span>
+            </div>
+            <button type="button"
+                class="w-full py-3.5 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-200/60 transition-all hover:-translate-y-0.5">
+                Valider ma commande
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>
