@@ -1,0 +1,102 @@
+# Diagramme de Classes - Mini Restaurant Management System
+
+Ce diagramme illustre la structure des données et les relations entre les différentes entités du système.
+
+```mermaid
+classDiagram
+    %% Spatie Roles & Permissions Integration
+    class Role {
+        +int id
+        +string name
+        +string guard_name
+    }
+
+    class Permission {
+        +int id
+        +string name
+        +string guard_name
+    }
+
+    class User {
+        +int id
+        +string name
+        +string email
+        +string password
+        +timestamp email_verified_at
+        +assignRole(Role role)
+        +givePermissionTo(Permission permission)
+        +hasRole(string role) bool
+        +hasPermissionTo(string permission) bool
+    }
+
+    User "1" -- "*" Role : has many
+    Role "*" -- "*" Permission : has many
+    User "*" -- "*" Permission : has direct permissions
+
+    %% Menu et Produits
+    class Menu {
+        +int id
+        +string name
+    }
+
+    class Category {
+        +int id
+        +string name
+    }
+
+    class MenuItem {
+        +int id
+        +string name
+        +string description
+        +float price
+        +string status
+        +updateAvailability()
+    }
+
+    Menu "1" *-- "*" Category
+    Category "1" *-- "*" MenuItem
+
+    %% Commandes
+    class Order {
+        +int id
+        +datetime date
+        +float totalAmount
+        +string status
+        +calculateTotal()
+    }
+
+    class OrderItem {
+        +int quantity
+        +float subtotal
+    }
+
+    User "1" -- "*" Order : places / handles
+    Order "1" *-- "*" OrderItem
+    OrderItem "*" -- "1" MenuItem : contains
+
+    %% Rapports
+    class Report {
+        +int id
+        +string type
+        +datetime dateRange
+        +string content
+        +generate()
+    }
+
+    User "1" -- "*" Report : views
+```
+
+## Description des Classes Principales
+
+### 1. Gestion des Utilisateurs (Laravel + Spatie)
+- **User** : Modèle unique utilisant le trait `HasRoles`. Les distinctions entre Admin, Employer et Customer se font via les **Rôles** de Spatie.
+- **Role & Permission** : Entités natives de Spatie permettant une gestion dynamique des accès (ex: `manage-menu`, `place-order`).
+
+### 2. Gestion du Menu
+- **Menu / Category / MenuItem** : Structure hiérarchique pour organiser les plats. `MenuItem` inclut le prix et le statut (disponible/rupture).
+
+### 3. Gestion des Flux (Commandes)
+- **Order / OrderItem** : Traduit le panier du client en une commande traitable par le personnel.
+
+### 4. Analyses
+- **Report** : Synthétise les données de revenus et de performance pour l'Admin et le personnel.
