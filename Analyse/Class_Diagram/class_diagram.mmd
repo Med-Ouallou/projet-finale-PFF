@@ -1,8 +1,3 @@
-# Diagramme de Classes - Mini Restaurant Management System
-
-Ce diagramme illustre la structure des données et les relations entre les différentes entités du système.
-
-```mermaid
 classDiagram
     %% Spatie Roles & Permissions Integration
     class Role {
@@ -84,19 +79,5 @@ classDiagram
     }
 
     User "1" -- "*" Report : views
-```
 
-## Description des Classes Principales
 
-### 1. Gestion des Utilisateurs (Laravel + Spatie)
-- **User** : Modèle unique utilisant le trait `HasRoles`. Les distinctions entre Admin, Employer et Customer se font via les **Rôles** de Spatie.
-- **Role & Permission** : Entités natives de Spatie permettant une gestion dynamique des accès (ex: `manage-menu`, `place-order`).
-
-### 2. Gestion du Menu
-- **Menu / Category / MenuItem** : Structure hiérarchique pour organiser les plats. `MenuItem` inclut le prix et le statut (disponible/rupture).
-
-### 3. Gestion des Flux (Commandes)
-- **Order / OrderItem** : Traduit le panier du client en une commande traitable par le personnel.
-
-### 4. Analyses
-- **Report** : Synthétise les données de revenus et de performance pour l'Admin et le personnel.
