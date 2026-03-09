@@ -1,83 +1,79 @@
 classDiagram
-    %% Spatie Roles & Permissions Integration
-    class Role {
-        +int id
-        +string name
-        +string guard_name
-    }
+direction LR
 
-    class Permission {
-        +int id
-        +string name
-        +string guard_name
-    }
+class Role {
+  int id
+  string name
+  string guard_name
+}
 
-    class User {
-        +int id
-        +string name
-        +string email
-        +string password
-        +timestamp email_verified_at
-        +assignRole(Role role)
-        +givePermissionTo(Permission permission)
-        +hasRole(string role) bool
-        +hasPermissionTo(string permission) bool
-    }
+class Permission {
+  int id
+  string name
+  string guard_name
+}
 
-    User "1" -- "*" Role : has many
-    Role "*" -- "*" Permission : has many
-    User "*" -- "*" Permission : has direct permissions
+class User {
+  int id
+  string name
+  string email
+  string password
+  timestamp email_verified_at
+  assignRole(role)
+  givePermissionTo(permission)
+  hasRole(role)
+  hasPermissionTo(permission)
+}
 
-    %% Menu et Produits
-    class Menu {
-        +int id
-        +string name
-    }
+User "1" --> "*" Role : has roles
+Role "*" --> "*" Permission : has permissions
+User "*" --> "*" Permission : direct permissions
 
-    class Category {
-        +int id
-        +string name
-    }
+class Menu {
+  int id
+  string name
+}
 
-    class MenuItem {
-        +int id
-        +string name
-        +string description
-        +float price
-        +string status
-        +updateAvailability()
-    }
+class Category {
+  int id
+  string name
+}
 
-    Menu "1" *-- "*" Category
-    Category "1" *-- "*" MenuItem
+class MenuItem {
+  int id
+  string name
+  string description
+  float price
+  string status
+  updateAvailability()
+}
 
-    %% Commandes
-    class Order {
-        +int id
-        +datetime date
-        +float totalAmount
-        +string status
-        +calculateTotal()
-    }
+Menu "1" --> "*" Category
+Category "1" --> "*" MenuItem
 
-    class OrderItem {
-        +int quantity
-        +float subtotal
-    }
+class Order {
+  int id
+  datetime date
+  float totalAmount
+  string status
+  calculateTotal()
+}
 
-    User "1" -- "*" Order : places / handles
-    Order "1" *-- "*" OrderItem
-    OrderItem "*" -- "1" MenuItem : contains
+class OrderItem {
+  int quantity
+  float subtotal
+}
 
-    %% Rapports
-    class Report {
-        +int id
-        +string type
-        +datetime dateRange
-        +string content
-        +generate()
-    }
+User "1" --> "*" Order : places
+Order "1" --> "*" OrderItem
+OrderItem "*" --> "1" MenuItem : contains
 
-    User "1" -- "*" Report : views
+class Report {
+  int id
+  string type
+  datetime dateRange
+  string content
+  generate()
+}
 
-
+User "1" --> "*" Report : views

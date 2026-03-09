@@ -116,9 +116,9 @@ style: |
 </div>
 
 # Projet de Fin de Formation
-### Digitalisation des Services de Coaching : Développement d’une Solution Web Intégrée de Gestion et de Branding
+### Digitalisation des Services de Mini Restaurant : Développement d’une Solution Web Intégrée de Gestion
 
-**Réalisé par :** <span class="highlight">Mehdi Bentaleb</span>  
+**Réalisé par :** <span class="highlight">Mohamed Ouallou</span>  
 **Encadré par :** <span class="highlight">M. ESSARRAJ Fouad</span>  
 **Filière :** Développement Mobile et Web
 
@@ -266,11 +266,10 @@ style: |
 </div>
 
 ---
-## 5. Conception : MLD
+## 5. Conception : Modélisation des données
 
-<h3>Modélisation des données</h3>
 <div class="img-container">
-  <img src="images/class_diagram.png" class="img-usecase" alt="MLD Diagram">
+ <img src="../Presentation/images/class_diagram.png" alt="Maquette" width="45%" />
 </div>
 
 ---

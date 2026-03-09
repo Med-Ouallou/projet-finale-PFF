@@ -146,7 +146,7 @@ Le système est structuré autour d'une architecture multi-acteurs sécurisée, 
 
 ### 6.3 Cas d’Utilisation Global
 
-![Cas d’Utilisation Global](/Presentation/images/use-case.png)
+![Cas d’Utilisation Global](images/use-case.png)
 
 ---
 
@@ -169,7 +169,7 @@ Basé sur la méthode Agile Scrum, le développement est découpé en Sprints it
 | **Staff & Sécurité** | UC3 | Gestion Utilisateurs | Création des accès pour le personnel. |
 | **Analyse** | UC4 | Dashboard | Vue globale sur les indicateurs de performance. |
 
-![Cas d’Utilisation du Sprint 1](/Presentation/images/sprint-1.png)
+![Cas d’Utilisation du Sprint 1](images/sprint-1.png)
 
 ---
 
@@ -182,15 +182,15 @@ Basé sur la méthode Agile Scrum, le développement est découpé en Sprints it
 | **Expérience Client** | UC6 | Prise de Commande | Le client construit son panier et valide la commande. |
 | **Logistique Staff** | UC7 | Voir Commandes | Interface AJAX single-question de traitement avec timers. |
 
-![Cas d’Utilisation du Sprint 2](/Presentation/images/sprinte-2.png)
+![Cas d’Utilisation du Sprint 2](images/sprinte-2.png)
 
 ---
 
 ## Maquettes (UI/UX)
 
-![Maquette](/Presentation/images/img-1.png)
-<img src="../Presentation/images/img-2.png" alt="Maquette" width="200" />
-<img src="../Presentation/images/img-3.png" alt="Maquette" width="200" />
+![Maquette](images/img-1.png)
+![Maquette](images/img-2.png){width=200px}
+![Maquette](images/img-3.png){width=200px}
 
 ---
 
@@ -209,7 +209,7 @@ L'application repose sur une architecture robuste s'appuyant sur l'écosystème 
 
 La base de données relationnelle structure l'interaction entre Utilisateurs, Rôles, Catégories, Produits (Menu), Commandes et Réservations.
 
-<img src="../Presentation/images/class_diagram.png" alt="Maquette" width="auto" />
+![Diagramme de Classe](images/class_diagram.png)
 
 ---
 
