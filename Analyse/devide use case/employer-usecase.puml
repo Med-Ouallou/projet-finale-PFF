@@ -1,0 +1,19 @@
+@startuml
+top to bottom direction
+skinparam packageStyle rectangle
+
+actor Employer
+
+rectangle "Mini Restaurant Management System" {
+    (Authentication)
+    
+    Employer -- (View Orders)
+    Employer -- (View Personal Reports)
+    Employer -- (Manage Menu Items)
+    Employer -- (Authentication)
+
+    (View Orders) .. (Authentication) : <<include>>
+    (View Personal Reports) .. (Authentication) : <<include>>
+    (Manage Menu Items) .. (Authentication) : <<include>>
+}
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+
+actor Customer
+actor "Mobile API" as API <<system>>
+
+rectangle "Mobile App" {
+    usecase "Authentication" as Auth
+    usecase "Browse Menu" as Browse
+    usecase "Place Order" as Order
+    usecase "Manage Profile" as Profile
+}
+
+Customer --> Auth
+Customer --> Browse
+Customer --> Order
+Customer --> Profile
+
+Order ..> Auth : <<include>>
+Profile ..> Auth : <<include>>
+Auth --> API
+Browse --> API
+Order --> API
+Profile --> API
+
+@enduml
