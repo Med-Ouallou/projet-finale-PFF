@@ -173,7 +173,10 @@ style: |
 <div class="dt-card" style="border-top-color: #f39c12;">
   <h4>Cadrage du problème</h4>
   <blockquote style="font-style: italic; background: white; padding: 15px; border-radius: 8px;">
-    "Ses tâches sont réalisées manuellement via des outils dispersés comme WhatsApp et Excel, ce qui entraîne une perte de temps, un manque d’efficacité et une image professionnelle qui ne reflète pas son véritable niveau d’expertise."
+    Les tâches sont réalisées manuellement avec plusieurs outils, ce qui cause : <br>
+    - perte de temps <br>
+    - manque d’efficacité <br>
+    - image professionnelle faible. <br>
   </blockquote>
 </div>
 
