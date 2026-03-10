@@ -1,0 +1,4 @@
+name,description,valid_from,valid_until,is_active,display_order,image_url,currency,created_at,updated_at
+Main Menu,Restaurant main dishes,2026-01-01,,1,1,,MAD,2026-01-01,2026-01-01
+Drinks Menu,Beverages and drinks,2026-01-01,,1,2,,MAD,2026-01-01,2026-01-01
+Seasonal Menu,Special seasonal menu,2026-01-01,2026-12-31,1,3,,MAD,2026-01-01,2026-01-01
