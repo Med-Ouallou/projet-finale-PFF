@@ -1,79 +1,140 @@
 classDiagram
-direction LR
+    direction LR
 
-class Role {
-  int id
-  string name
-  string guard_name
-}
+    class Customer {
+        +int id
+        +string name
+        +string phone
+        +string email
+        +string address
+        +datetime created_at
+        +placeOrder()
+        +viewOrderHistory()
+        +cancelOrder()
+    }
 
-class Permission {
-  int id
-  string name
-  string guard_name
-}
+    class Role {
+        +int id
+        +string name
+        +string guard_name
+    }
 
-class User {
-  int id
-  string name
-  string email
-  string password
-  timestamp email_verified_at
-  assignRole(role)
-  givePermissionTo(permission)
-  hasRole(role)
-  hasPermissionTo(permission)
-}
+    class Permission {
+        +int id
+        +string name
+        +string guard_name
+    }
 
-User "1" --> "*" Role : has roles
-Role "*" --> "*" Permission : has permissions
-User "*" --> "*" Permission : direct permissions
+    class User {
+        +int id
+        +string name
+        +string email
+        +string password
+        +timestamp email_verified_at
+        +assignRole(role)
+        +givePermissionTo(permission)
+        +hasRole(role)
+        +hasPermissionTo(permission)
+    }
 
-class Menu {
-  int id
-  string name
-}
+    class Menu {
+        +int id
+        +string name                  // "Main Menu", "Drinks", "Brunch", "Seasonal"
+        +string description
+        +datetime valid_from
+        +datetime valid_until
+        +boolean is_active
+        +int display_order
+        +string image_url
+        +string currency              // "MAD", "EUR", ...
+    }
 
-class Category {
-  int id
-  string name
-}
+    class Category {
+        +int id
+        +int menu_id                  // foreign key to Menu
+        +string name                  // "Starters", "Main Courses", "Desserts", "Beverages"
+        +string description
+        +int parent_id                // for sub-categories
+        +int display_order
+        +string icon_url
+        +boolean is_active
+    }
 
-class MenuItem {
-  int id
-  string name
-  string description
-  float price
-  string status
-  updateAvailability()
-}
+    class MenuItem {
+        +int id
+        +int category_id
+        +string name
+        +string description
+        +float price
+        +string unit                  // "piece", "portion", "glass", "bottle"...
+        +string status                // available / unavailable / out-of-stock / seasonal
+        +string image_url
+        +updateAvailability()
+        +getCurrentPrice()
+    }
 
-Menu "1" --> "*" Category
-Category "1" --> "*" MenuItem
+    class InventoryItem {
+        +int id
+        +string name
+        +string reference
+        +int quantity_in_stock
+        +int min_threshold
+        +string unit
+        +float unit_price
+        +updateQuantity(delta)
+        +isLowStock()
+    }
 
-class Order {
-  int id
-  datetime date
-  float totalAmount
-  string status
-  calculateTotal()
-}
+    class Promotion {
+        +int id
+        +string code
+        +float discount_percentage
+        +float discount_amount
+        +datetime valid_from
+        +datetime valid_until
+        +int usage_limit
+        +apply(order)
+        +isValid()
+    }
 
-class OrderItem {
-  int quantity
-  float subtotal
-}
+    class Order {
+        +int id
+        +int customer_id              // FK to Customer
+        +datetime created_at
+        +datetime updated_at
+        +float subtotal
+        +float discount_amount
+        +float total_amount
+        +string status                // pending, preparing, ready, served, paid, cancelled
+        +string payment_method
+        +string notes
+        +calculateTotal()
+        +applyPromotion(promotion)
+    }
 
-User "1" --> "*" Order : places
-Order "1" --> "*" OrderItem
-OrderItem "*" --> "1" MenuItem : contains
+    class OrderItem {
+        +int order_id
+        +int menu_item_id
+        +int quantity
+        +float unit_price_at_order    // snapshot of price when ordered
+        +float subtotal
+    }
 
-class Report {
-  int id
-  string type
-  datetime dateRange
-  string content
-  generate()
-}
+    %% Relationships
+    User "0..1" -- "0..1" Customer : authenticated/profile
 
-User "1" --> "*" Report : views
+    Customer "1" --> "*" Order : places / creates
+
+    User "1" --> "*" Role : has
+    Role "*" --> "*" Permission : has
+    User "*" --> "*" Permission : direct permissions
+
+    Menu "1" --> "*" Category : contains
+    Category "1" --> "*" MenuItem : contains
+
+    MenuItem "1" --> "*" InventoryItem : requires / uses
+
+    Order "1" --> "*" OrderItem : contains
+    OrderItem "*" --> "1" MenuItem : refers to
+
+    Order "*" --> "0..1" Promotion : applies / uses
