@@ -1,0 +1,9 @@
+name,reference,quantity_in_stock,min_threshold,unit,unit_price,created_at,updated_at
+Chicken Raw,ING001,50,10,kg,40,2026-01-01,2026-01-01
+Bread,ING002,30,5,unit,2,2026-01-01,2026-01-01
+Beef Meat,ING003,40,10,kg,80,2026-01-01,2026-01-01
+Pizza Dough,ING004,25,5,unit,5,2026-01-01,2026-01-01
+Milk,ING005,20,5,liter,6,2026-01-01,2026-01-01
+Coffee Beans,ING006,15,5,kg,90,2026-01-01,2026-01-01
+Sugar,ING007,50,10,kg,4,2026-01-01,2026-01-01
+Orange,ING008,60,10,kg,3,2026-01-01,2026-01-01
