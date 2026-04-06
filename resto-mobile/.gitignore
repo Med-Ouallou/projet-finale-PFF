@@ -1,0 +1,66 @@
+# ========================
+# OS Files
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Logs
+# ========================
+*.log
+
+# ========================
+# Environment
+# ========================
+.env
+.env.*
+!.env.example
+
+# ========================
+# Laravel Core
+# ========================
+/vendor/
+/node_modules/
+/public/build/
+/public/hot
+/public/storage
+
+# ========================
+# Storage
+# ========================
+/storage/*.key
+/storage/app/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+
+# Keep required folders
+!/storage/app/public
+!/storage/framework/.gitignore
+!/storage/logs/.gitignore
+
+# ========================
+# Cache / Testing
+# ========================
+.phpunit.result.cache
+/.phpunit.cache
+
+# ========================
+# IDE / Editors
+# ========================
+/.vscode/
+/.idea/
+/.fleet/
+/.zed/
+/.nova/
+
+# ========================
+# Config / Misc
+# ========================
+/auth.json
+.phpactor.json
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
