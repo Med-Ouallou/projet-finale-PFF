@@ -2,50 +2,34 @@
 
 namespace App\Services;
 
-use App\Models\Menu;
+use App\Models\Category;
+use App\Models\MenuItem;
+use Illuminate\Database\Eloquent\Collection;
 
 class MenuService
 {
-    public function getAll()
+    /**
+     * Get all active categories with their active menu items.
+     * Uses eager loading to avoid N+1 queries.
+     */
+    public function getMenuData(): Collection
     {
-        return Menu::orderBy('display_order')->get();
+        return Category::with(['menuItems' => function ($query) {
+            $query->where('status', 'available'); // Assuming 'status' is the field for availability
+        }])
+        ->where('is_active', true)
+        ->orderBy('display_order')
+        ->get();
     }
 
-    public function getById(int $id)
+    /**
+     * Search for menu items.
+     */
+    public function searchItems(string $query): Collection
     {
-        return Menu::findOrFail($id);
-    }
-
-    public function create(array $data)
-    {
-        return Menu::create($data);
-    }
-
-    public function update(int $id, array $data)
-    {
-        $menu = $this->getById($id);
-        $menu->update($data);
-        return $menu;
-    }
-
-    public function delete(int $id)
-    {
-        $menu = $this->getById($id);
-        return $menu->delete();
-    }
-
-    public function getActiveMenus()
-    {
-        return Menu::where('is_active', true)
-            ->where(function($query) {
-                $query->whereNull('valid_from')
-                      ->orWhere('valid_from', '<=', now());
-            })
-            ->where(function($query) {
-                $query->whereNull('valid_until')
-                      ->orWhere('valid_until', '>=', now());
-            })
-            ->orderBy('display_order')
+        return MenuItem::where('name', 'like', "%{$query}%")
+            ->orWhere('description', 'like', "%{$query}%")
+            ->where('status', 'available')
             ->get();
     }
 }
