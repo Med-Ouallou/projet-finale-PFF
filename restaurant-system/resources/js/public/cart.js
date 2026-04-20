@@ -36,7 +36,7 @@ export default function cartManager() {
         },
         
         sendToWhatsApp() {
-            const phoneNumber = "212600000000"; 
+            const phoneNumber = "212776440786"; 
             let message = "🍱 *NOUVELLE COMMANDE - RESTOMANAGER*\n\n";
             
             this.cart.forEach(item => {
