@@ -39,6 +39,7 @@
             
             <button type="button" 
                     @click="addToCart({ id: '{{ $item->id }}', name: '{{ $item->name }}', price: {{ $item->price }} })"
+                    aria-label="Ajouter {{ $item->name }} au panier"
                     class="py-2.5 px-5 inline-flex items-center gap-x-1.5 text-xs font-bold rounded-2xl bg-emerald-600 text-white hover:bg-emerald-900 transition-all shadow-lg shadow-emerald-200 active:scale-95 group/btn">
                 <svg class="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform"
                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"

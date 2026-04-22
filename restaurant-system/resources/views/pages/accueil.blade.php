@@ -49,7 +49,7 @@
                         </div>
                         <div>
                             <p class="text-xs text-gray-400">Revenus du mois</p>
-                            <p class="text-base font-bold font-heading text-gray-800">+18,420 €</p>
+                            <p class="text-base font-bold font-heading text-gray-800">+18,420 DH</p>
                         </div>
                     </div>
                 </div>
@@ -119,9 +119,11 @@
         <div class="relative max-w-[1200px] mx-auto px-6">
             <h2 class="text-3xl lg:text-4xl font-extrabold font-heading text-white mb-4">Prêt à transformer votre restaurant ?</h2>
             <p class="text-emerald-200 text-lg mb-8 max-w-xl mx-auto">Commencez gratuitement et découvrez pourquoi 2,400 restaurants nous font confiance.</p>
-            <x-ui.button variant="primary" size="xl" class="bg-white text-emerald-900 hover:bg-emerald-50">
-                Essai gratuit — 14 jours
-            </x-ui.button>
+            <a href="{{ route('admin.login') }}">
+                <x-ui.button variant="primary" size="xl" class="bg-white text-emerald-900 hover:bg-emerald-50">
+                    Essai gratuit — 14 jours
+                </x-ui.button>
+            </a>
         </div>
     </section>
 </x-layouts.app>

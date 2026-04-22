@@ -28,9 +28,9 @@
                 <a class="font-medium {{ request()->routeIs('contact') ? 'text-emerald-600 border-b-2 border-emerald-500' : 'text-gray-500 hover:text-gray-800' }} pb-4 text-sm transition-colors" href="{{ route('contact') }}">Contact</a>
                 
                 <div class="sm:ps-4 pb-4 sm:border-s border-gray-200">
-                    <button type="button" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5">
+                    <a href="{{ route('admin.login') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5">
                         Connexion
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
