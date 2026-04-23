@@ -9,7 +9,7 @@
                 <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Produit</h4>
                 <div class="space-y-2 text-sm text-slate-400">
                     <p><a href="{{ route('menu') }}" class="hover:text-emerald-400 transition-colors">Menu Online</a></p>
-                    <p><a href="#" class="hover:text-emerald-400 transition-colors">Dashboard Admin</a></p>
+                    <p><a href="{{ route('admin.dashboard') }}" class="hover:text-emerald-400 transition-colors">Dashboard Admin</a></p>
                     <p><a href="#" class="hover:text-emerald-400 transition-colors">Tarifs</a></p>
                 </div>
             </div>

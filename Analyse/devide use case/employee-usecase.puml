@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+' ===== STYLE =====
+skinparam backgroundColor #FFFFFF
+skinparam usecase {
+    BackgroundColor #F7F7F7
+    BorderColor #333333
+    ArrowColor #333333
+}
+skinparam actor {
+    BorderColor #000000
+}
+skinparam package {
+    BackgroundColor #FFFFFF
+    BorderColor #666666
+}
+
+' ===== COMPACT LAYOUT =====
+skinparam nodesep 15
+skinparam ranksep 20
+skinparam padding 3
+skinparam packagePadding 5
+skinparam usecasePadding 5
+skinparam wrapWidth 120
+
+' ===== ACTOR =====
+actor "Employee" as Employee
+
+' ===== SYSTEM =====
+rectangle "Employee Use Cases" {
+
+    usecase "Authentication" as AuthUC
+
+    package "Order Management" {
+        usecase "View Orders" as UE1
+        usecase "Update Order Status" as UE2
+    }
+
+    package "Menu Operations" {
+        usecase "Manage Menu Items" as UE3
+    }
+
+    package "Personal Dashboard" {
+        usecase "View Personal Statistics" as UE4
+    }
+    
+    ' ── Authentication includes ──
+    UE1 ..> AuthUC : <<include>>
+    UE2 ..> AuthUC : <<include>>
+    UE3 ..> AuthUC : <<include>>
+    UE4 ..> AuthUC : <<include>>
+}
+
+' ===== ACTOR CONNECTIONS =====
+Employee -- UE1
+Employee -- UE2
+Employee -- UE3
+Employee -- UE4
+Employee -- AuthUC
+
+@enduml

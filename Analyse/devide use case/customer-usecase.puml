@@ -1,26 +1,83 @@
 @startuml
 left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
 
-actor Customer
-actor "Mobile API" as API <<system>>
-
-rectangle "Mobile App" {
-    usecase "Authentication" as Auth
-    usecase "Browse Menu" as Browse
-    usecase "Place Order" as Order
-    usecase "Manage Profile" as Profile
+' ===== STYLE =====
+skinparam backgroundColor #FFFFFF
+skinparam usecase {
+    BackgroundColor #F7F7F7
+    BorderColor #333333
+    ArrowColor #333333
+}
+skinparam actor {
+    BorderColor #000000
+}
+skinparam package {
+    BackgroundColor #FFFFFF
+    BorderColor #666666
 }
 
-Customer --> Auth
-Customer --> Browse
-Customer --> Order
-Customer --> Profile
+' ===== COMPACT LAYOUT =====
+skinparam nodesep 15
+skinparam ranksep 20
+skinparam padding 3
+skinparam packagePadding 5
+skinparam usecasePadding 5
+skinparam wrapWidth 120
 
-Order ..> Auth : <<include>>
-Profile ..> Auth : <<include>>
-Auth --> API
-Browse --> API
-Order --> API
-Profile --> API
+' ===== ACTOR =====
+actor "Customer" as Customer
+
+' ===== SYSTEM =====
+rectangle "Customer Use Cases" {
+
+    usecase "Authentication" as AuthUC
+
+    package "Menu Browsing" {
+        usecase "Browse Menu" as UC1
+        usecase "Filter by Category" as UC1EXT
+    }
+
+    package "Order Management" {
+        usecase "Place Order" as UC2
+        usecase "Order via WhatsApp" as UC2WA
+        usecase "Calculate Total" as UC2CALC
+        usecase "Apply Promotion" as UC2PROMO
+    }
+
+    package "Account Management" {
+        usecase "Track Orders" as UC3
+        usecase "Manage Profile" as UC4
+        usecase "View Order History" as UC5
+    }
+
+    package "Support" {
+        usecase "Contact Restaurant" as UC6
+    }
+
+    ' ── Authentication includes ──
+    UC2 ..> AuthUC : <<include>>
+    UC3 ..> AuthUC : <<include>>
+    UC4 ..> AuthUC : <<include>>
+    UC5 ..> AuthUC : <<include>>
+    UC2WA ..> AuthUC : <<include>>
+    UC2PROMO ..> AuthUC : <<include>>
+    
+    ' ── Other relationships ──
+    UC1EXT ..> UC1 : <<extend>>
+    UC2 ..> UC2CALC : <<include>>
+    UC2WA ..> UC2 : <<extend>>
+    UC2PROMO ..> UC2 : <<extend>>
+}
+
+' ===== ACTOR CONNECTIONS =====
+Customer -- UC1
+Customer -- UC2
+Customer -- UC3
+Customer -- UC4
+Customer -- UC5
+Customer -- UC6
+Customer -- AuthUC
 
 @enduml

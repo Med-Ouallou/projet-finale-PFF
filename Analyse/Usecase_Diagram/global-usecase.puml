@@ -1,43 +1,123 @@
 @startuml
-top to bottom direction
+left to right direction
 skinparam packageStyle rectangle
+skinparam actorStyle awesome
 
-actor Admin
-actor Employer
-actor Customer
-
-rectangle "Mini Restaurant Management System" {
-
-    (Authentication)
-
-    Admin -- (Manage Users)
-    Admin -- (Manage Menu)
-    Admin -- (View Reports & Statistics)
-    Admin -- (Manage Inventory)
-    Admin -- (Authentication)
-
-    Employer -- (View Orders)
-    Employer -- (View Personal Reports)
-    Employer -- (Manage Menu Items)
-    Employer -- (Authentication)
-
-    Customer -- (Browse Menu)
-    Customer -- (Place Order)
-    Customer -- (Manage Profile)
-    Customer -- (Authentication)
-
-    ' include relationships (lines only, no arrows)
-    (Manage Users) .. (Authentication) : <<include>>
-    (Manage Menu) .. (Authentication) : <<include>>
-    (View Reports & Statistics) .. (Authentication) : <<include>>
-    (Manage Inventory) .. (Authentication) : <<include>>
-
-    (View Orders) .. (Authentication) : <<include>>
-    (View Personal Reports) .. (Authentication) : <<include>>
-    (Manage Menu Items) .. (Authentication) : <<include>>
-
-    (Browse Menu) .. (Authentication) : <<include>>
-    (Place Order) .. (Authentication) : <<include>>
-    (Manage Profile) .. (Authentication) : <<include>>
+' ===== STYLE =====
+skinparam backgroundColor #FFFFFF
+skinparam usecase {
+    BackgroundColor #F7F7F7
+    BorderColor #333333
+    ArrowColor #333333
 }
+skinparam actor {
+    BorderColor #000000
+}
+skinparam package {
+    BackgroundColor #FFFFFF
+    BorderColor #666666
+}
+
+' ===== COMPACT LAYOUT =====
+skinparam nodesep 15
+skinparam ranksep 20
+skinparam padding 3
+skinparam packagePadding 5
+skinparam usecasePadding 5
+skinparam wrapWidth 120
+
+' ===== ACTORS =====
+actor "Admin" as Admin
+actor "Employee" as Employee
+actor "Customer" as Customer
+
+' ===== SYSTEM =====
+rectangle "Global: Restaurant Management System" {
+
+    usecase "Authentication" as AuthUC
+
+    package "Admin Management" {
+        usecase "Manage Users" as UA1
+        usecase "Manage Menus" as UA2
+        usecase "Manage Categories" as UA3
+        usecase "View Dashboard" as UA4
+        usecase "View Revenue Reports" as UA5
+        usecase "Manage Inventory" as UA6
+        usecase "Manage Promotions" as UA7
+        usecase "Check Low Stock" as UA6INC
+    }
+
+    package "Staff Operations" {
+        usecase "View Orders" as UE1
+        usecase "Update Order Status" as UE2
+        usecase "Manage Menu Items" as UE3
+        usecase "View Personal Statistics" as UE4
+    }
+
+    package "Customer Portal" {
+        usecase "Browse Menu" as UC1
+        usecase "Filter by Category" as UC1EXT
+        usecase "Contact Restaurant" as UC6
+        usecase "Place Order" as UC2
+        usecase "Order via WhatsApp" as UC2WA
+        usecase "Apply Promotion" as UC2PROMO
+        usecase "Track Orders" as UC3
+        usecase "Manage Profile" as UC4
+        usecase "View Order History" as UC5
+        usecase "Calculate Total" as UC2CALC
+    }
+
+    ' ── Authentication includes ──
+    UA1 ..> AuthUC : <<include>>
+    UA2 ..> AuthUC : <<include>>
+    UA3 ..> AuthUC : <<include>>
+    UA4 ..> AuthUC : <<include>>
+    UA5 ..> AuthUC : <<include>>
+    UA6 ..> AuthUC : <<include>>
+    UA7 ..> AuthUC : <<include>>
+    
+    UE1 ..> AuthUC : <<include>>
+    UE2 ..> AuthUC : <<include>>
+    UE3 ..> AuthUC : <<include>>
+    UE4 ..> AuthUC : <<include>>
+    
+    UC2 ..> AuthUC : <<include>>
+    UC3 ..> AuthUC : <<include>>
+    UC4 ..> AuthUC : <<include>>
+    UC5 ..> AuthUC : <<include>>
+    UC2WA ..> AuthUC : <<include>>
+    UC2PROMO ..> AuthUC : <<include>>
+    
+    ' ── Other relationships ──
+    UA6 ..> UA6INC : <<include>>
+    UC2 ..> UC2CALC : <<include>>
+    UC1EXT ..> UC1 : <<extend>>
+    UC2WA ..> UC2 : <<extend>>
+    UC2PROMO ..> UC2 : <<extend>>
+}
+
+' ===== ACTOR CONNECTIONS =====
+Admin -- UA1
+Admin -- UA2
+Admin -- UA3
+Admin -- UA4
+Admin -- UA5
+Admin -- UA6
+Admin -- UA7
+Admin -- AuthUC
+
+Employee -- UE1
+Employee -- UE2
+Employee -- UE3
+Employee -- UE4
+Employee -- AuthUC
+
+Customer -- UC1
+Customer -- UC6
+Customer -- UC2
+Customer -- UC3
+Customer -- UC4
+Customer -- UC5
+Customer -- AuthUC
+
 @enduml

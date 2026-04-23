@@ -219,7 +219,7 @@ style: |
 
 ### Sprint 2 : Nutrition
 <div class="img-container">
-  <img src="images/sprinte-2.png" class="img-usecase" alt="Sprint 2 Use Case">
+  <img src="images/sprint-2.png" class="img-usecase" alt="Sprint 2 Use Case">
 </div>
 
 ---
