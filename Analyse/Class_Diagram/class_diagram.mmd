@@ -1,140 +1,240 @@
 classDiagram
-    direction LR
+    direction TB
 
-    class Customer {
-        +int id
-        +string name
-        +string phone
-        +string email
-        +string address
-        +datetime created_at
-        +placeOrder()
-        +viewOrderHistory()
-        +cancelOrder()
+    %% ════════════════════════════════════════════════════════════════
+    %%  ENUMS
+    %% ════════════════════════════════════════════════════════════════
+
+    class MenuItemStatus {
+        <<enumeration>>
+        AVAILABLE
+        UNAVAILABLE
+        DISABLED
     }
 
-    class Role {
-        +int id
-        +string name
-        +string guard_name
+    class OrderStatus {
+        <<enumeration>>
+        PENDING
+        PREPARING
+        READY
+        DELIVERED
+        CANCELLED
     }
 
-    class Permission {
-        +int id
-        +string name
-        +string guard_name
+    %% ════════════════════════════════════════════════════════════════
+    %%  1. AUTHENTICATION & AUTHORIZATION
+    %% ════════════════════════════════════════════════════════════════
+
+    namespace Auth {
+        class User {
+            +int id
+            +string name
+            +string email
+            +string password
+            +timestamp email_verified_at
+            +datetime created_at
+            +datetime updated_at
+        }
+
+        class Role {
+            +int id
+            +string name
+            +string guard_name
+        }
+
+        class Permission {
+            +int id
+            +string name
+            +string guard_name
+        }
     }
 
-    class User {
-        +int id
-        +string name
-        +string email
-        +string password
-        +timestamp email_verified_at
-        +assignRole(role)
-        +givePermissionTo(permission)
-        +hasRole(role)
-        +hasPermissionTo(permission)
+    %% ════════════════════════════════════════════════════════════════
+    %%  2. PEOPLE
+    %% ════════════════════════════════════════════════════════════════
+
+    namespace People {
+        class Customer {
+            +int id
+            +int user_id
+            +string name
+            +string phone
+            +string email
+            +string address
+            +datetime created_at
+            +datetime updated_at
+        }
+
+        class Employee {
+            +int id
+            +int user_id
+            +string name
+            +string phone
+            +string position
+            +datetime created_at
+            +datetime updated_at
+        }
     }
 
-    class Menu {
-        +int id
-        +string name                  // "Main Menu", "Drinks", "Brunch", "Seasonal"
-        +string description
-        +datetime valid_from
-        +datetime valid_until
-        +boolean is_active
-        +int display_order
-        +string image_url
-        +string currency              // "MAD", "EUR", ...
+    %% ════════════════════════════════════════════════════════════════
+    %%  4. MENU MANAGEMENT
+    %% ════════════════════════════════════════════════════════════════
+
+    namespace MenuMgmt {
+        class Menu {
+            +int id
+            +string name
+            +string description
+            +datetime valid_from
+            +datetime valid_until
+            +boolean is_active
+            +int display_order
+            +string image_url
+            +string currency
+            +datetime created_at
+            +datetime updated_at
+        }
+
+        class Category {
+            +int id
+            +int menu_id
+            +int parent_id~nullable~
+            +string name
+            +string description
+            +int display_order
+            +string icon_url
+            +boolean is_active
+            +datetime created_at
+            +datetime updated_at
+        }
+
+        class MenuItem {
+            +int id
+            +int category_id
+            +string name
+            +string description
+            +decimal price
+            +string unit
+            +MenuItemStatus status
+            +string image_url
+            +datetime created_at
+            +datetime updated_at
+        }
     }
 
-    class Category {
-        +int id
-        +int menu_id                  // foreign key to Menu
-        +string name                  // "Starters", "Main Courses", "Desserts", "Beverages"
-        +string description
-        +int parent_id                // for sub-categories
-        +int display_order
-        +string icon_url
-        +boolean is_active
+    %% ════════════════════════════════════════════════════════════════
+    %%  5. INVENTORY
+    %% ════════════════════════════════════════════════════════════════
+
+    namespace Inventory {
+        class InventoryItem {
+            +int id
+            +string name
+            +string reference
+            +int quantity_in_stock
+            +int min_threshold
+            +string unit
+            +decimal unit_price
+            +datetime created_at
+            +datetime updated_at
+        }
+
+        class MenuItemIngredient {
+            <<association>>
+            +int id
+            +int menu_item_id
+            +int inventory_item_id
+            +decimal quantity_needed
+        }
     }
 
-    class MenuItem {
-        +int id
-        +int category_id
-        +string name
-        +string description
-        +float price
-        +string unit                  // "piece", "portion", "glass", "bottle"...
-        +string status                // available / unavailable / out-of-stock / seasonal
-        +string image_url
-        +updateAvailability()
-        +getCurrentPrice()
+    %% ════════════════════════════════════════════════════════════════
+    %%  6. ORDER MANAGEMENT
+    %% ════════════════════════════════════════════════════════════════
+
+    namespace OrderMgmt {
+        class Order {
+            +int id
+            +int customer_id
+            +int promotion_id~nullable~
+            +int updated_by~nullable~
+            +OrderStatus status
+            +decimal subtotal
+            +decimal discount_amount
+            +decimal total_amount
+            +string payment_method~nullable~
+            +string notes~nullable~
+            +datetime created_at
+            +datetime updated_at
+        }
+
+        class OrderItem {
+            +int id
+            +int order_id
+            +int menu_item_id
+            +int quantity
+            +decimal unit_price_at_order
+            +decimal subtotal
+        }
+
+        class Promotion {
+            +int id
+            +string code
+            +decimal discount_percentage~nullable~
+            +decimal discount_amount~nullable~
+            +datetime valid_from
+            +datetime valid_until
+            +int usage_limit~nullable~
+            +datetime created_at
+            +datetime updated_at
+        }
     }
 
-    class InventoryItem {
-        +int id
-        +string name
-        +string reference
-        +int quantity_in_stock
-        +int min_threshold
-        +string unit
-        +float unit_price
-        +updateQuantity(delta)
-        +isLowStock()
+    %% ════════════════════════════════════════════════════════════════
+    %%  7. ANALYTICS (utility — no DB table)
+    %% ════════════════════════════════════════════════════════════════
+
+    namespace Analytics {
+        class Dashboard {
+            <<utility>>
+            +getMetrics()
+            +getRevenueReport(period)
+            +getLowStockAlerts()
+            +getEmployeeStatistics(employee)
+        }
     }
 
-    class Promotion {
-        +int id
-        +string code
-        +float discount_percentage
-        +float discount_amount
-        +datetime valid_from
-        +datetime valid_until
-        +int usage_limit
-        +apply(order)
-        +isValid()
-    }
+    %% ════════════════════════════════════════════════════════════════
+    %%  RELATIONSHIPS
+    %% ════════════════════════════════════════════════════════════════
 
-    class Order {
-        +int id
-        +int customer_id              // FK to Customer
-        +datetime created_at
-        +datetime updated_at
-        +float subtotal
-        +float discount_amount
-        +float total_amount
-        +string status                // pending, preparing, ready, served, paid, cancelled
-        +string payment_method
-        +string notes
-        +calculateTotal()
-        +applyPromotion(promotion)
-    }
-
-    class OrderItem {
-        +int order_id
-        +int menu_item_id
-        +int quantity
-        +float unit_price_at_order    // snapshot of price when ordered
-        +float subtotal
-    }
-
-    %% Relationships
-    User "0..1" -- "0..1" Customer : authenticated/profile
-
-    Customer "1" --> "*" Order : places / creates
-
-    User "1" --> "*" Role : has
+    %% ── Auth ──
+    User "*" --> "*" Role : has
     Role "*" --> "*" Permission : has
-    User "*" --> "*" Permission : direct permissions
+    User "*" --> "*" Permission : direct
 
+    %% ── People ↔ Auth (1:1) ──
+    Customer "1" --> "1" User : profile
+    Employee "1" --> "1" User : profile
+
+    %% ── Menu hierarchy ──
     Menu "1" --> "*" Category : contains
+    Category "0..1" --> "*" Category : sub-categories
     Category "1" --> "*" MenuItem : contains
 
-    MenuItem "1" --> "*" InventoryItem : requires / uses
+    %% ── Inventory M:N via pivot ──
+    MenuItem "1" --> "*" MenuItemIngredient : requires
+    MenuItemIngredient "*" --> "1" InventoryItem : uses
 
+    %% ── Order flow ──
+    Customer "1" --> "*" Order : places
+    Order "*" --> "0..1" Promotion : applies
     Order "1" --> "*" OrderItem : contains
-    OrderItem "*" --> "1" MenuItem : refers to
+    OrderItem "*" --> "1" MenuItem : references
 
-    Order "*" --> "0..1" Promotion : applies / uses
+    %% ── Employee → Order ──
+    Employee "1" --> "*" Order : updates status
+
+    %% ── Enum usage ──
+    MenuItemStatus --> MenuItem : status
+    OrderStatus --> Order : status
