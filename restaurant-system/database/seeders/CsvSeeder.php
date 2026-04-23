@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CsvSeeder extends Seeder
 {
@@ -32,11 +33,17 @@ class CsvSeeder extends Seeder
                 return $value === '' ? null : $value;
             }, $data);
 
+            // Hash password for users table
+            if ($table === 'users' && isset($data['password'])) {
+                $data['password'] = Hash::make($data['password']);
+            }
+
             DB::table($table)->insert($data);
         }
     }
     public function run(): void
     {
+        $this->importCSV('users', 'users.csv');
 
         $this->importCSV('customers', 'customers.csv');
 

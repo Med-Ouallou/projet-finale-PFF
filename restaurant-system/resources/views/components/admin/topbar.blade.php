@@ -35,7 +35,34 @@
             <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
         </button>
 
-        <!-- Avatar -->
-        <img class="w-8 h-8 rounded-full object-cover cursor-pointer ring-2 ring-emerald-500 hover:ring-emerald-600 transition" src="https://i.pravatar.cc/36?img=8" alt="Admin">
+        <!-- Avatar with Dropdown -->
+        <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+            <button @click="open = !open" class="flex items-center focus:outline-none">
+                <img class="w-8 h-8 rounded-full object-cover cursor-pointer ring-2 ring-emerald-500 hover:ring-emerald-600 transition" src="https://i.pravatar.cc/36?img=8" alt="Admin">
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div x-show="open" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded-xl border border-gray-100 shadow-lg py-1 z-50">
+                <div class="px-4 py-2 border-b border-gray-100">
+                    <p class="text-sm font-semibold text-gray-900">{{ auth()->user()->name ?? 'Admin' }}</p>
+                    <p class="text-xs text-gray-500">{{ auth()->user()->email ?? 'admin@resto.com' }}</p>
+                </div>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                   class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" x2="9" y1="12" y2="12"/>
+                        </svg>
+                        Se déconnecter
+                    </span>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                    @csrf
+                </form>
+            </div>
+        </div>
     </div>
 </header>
