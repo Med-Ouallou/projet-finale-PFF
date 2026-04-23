@@ -16,4 +16,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/menu', [AdminPageController::class, 'menuItems'])->name('menu-items');
     Route::get('/categories', [AdminPageController::class, 'categories'])->name('categories');
     Route::get('/reports', [AdminPageController::class, 'reports'])->name('reports');
+    Route::get('/users', [AdminPageController::class, 'users'])->name('users');
+    Route::get('/inventory', [AdminPageController::class, 'inventory'])->name('inventory');
 });

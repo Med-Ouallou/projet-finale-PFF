@@ -31,4 +31,14 @@ class AdminPageController extends Controller
     {
         return view('pages.admin.reports');
     }
+
+    public function users()
+    {
+        return view('pages.admin.users');
+    }
+
+    public function inventory()
+    {
+        return view('pages.admin.inventory');
+    }
 }
