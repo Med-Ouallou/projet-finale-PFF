@@ -21,7 +21,9 @@
 
     <!-- Content wrapper -->
     <div class="lg:ps-[260px] min-h-screen flex flex-col">
-        <x-admin.topbar :breadcrumb="$breadcrumb ?? ''" />
+        <x-admin.topbar :breadcrumb="$breadcrumb ?? ''">
+            <x-slot:actions>{{ $actions ?? '' }}</x-slot:actions>
+        </x-admin.topbar>
 
         <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6">
             {{ $slot }}

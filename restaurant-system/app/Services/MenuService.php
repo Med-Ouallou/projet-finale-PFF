@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Models\Menu;
 use App\Models\MenuItem;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -15,11 +16,19 @@ class MenuService
     public function getMenuData(): Collection
     {
         return Category::with(['menuItems' => function ($query) {
-            $query->where('status', 'available'); // Assuming 'status' is the field for availability
+            $query->where('status', 'available');
         }])
         ->where('is_active', true)
         ->orderBy('display_order')
         ->get();
+    }
+
+    /**
+     * Get all menus for admin dropdown.
+     */
+    public function getAllMenus(): Collection
+    {
+        return Menu::orderBy('display_order')->get();
     }
 
     /**
