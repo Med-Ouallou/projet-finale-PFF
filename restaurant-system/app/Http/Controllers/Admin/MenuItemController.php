@@ -50,7 +50,7 @@ class MenuItemController extends Controller
             ]);
         }
 
-        return view('pages.admin.menu-items.index', compact('items', 'categories', 'filters'));
+        return view('admin.menu-items.index', compact('items', 'categories', 'filters'));
     }
 
     public function store(StoreMenuItemRequest $request)
@@ -71,7 +71,7 @@ class MenuItemController extends Controller
         $item = $this->menuItemService->getById($id);
         $categories = $this->categoryService->getAll();
 
-        return view('pages.admin.menu-items.edit', compact('item', 'categories'));
+        return view('admin.menu-items.edit', compact('item', 'categories'));
     }
 
     public function update(UpdateMenuItemRequest $request, int $id)

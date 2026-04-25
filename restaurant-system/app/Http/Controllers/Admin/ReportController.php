@@ -44,7 +44,7 @@ class ReportController extends Controller
                 ->get(),
         ];
 
-        return view('pages.admin.reports.index', [
+        return view('admin.reports.index', [
             'report' => $report,
             'dateFrom' => $from->format('Y-m-d'),
             'dateTo' => $to->format('Y-m-d'),

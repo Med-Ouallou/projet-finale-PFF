@@ -39,7 +39,7 @@ class InventoryController extends Controller
             ]);
         }
 
-        return view('pages.admin.inventory.index', compact('items', 'filters', 'lowStockCount'));
+        return view('admin.inventory.index', compact('items', 'filters', 'lowStockCount'));
     }
 
     public function store(StoreInventoryRequest $request)
@@ -53,7 +53,7 @@ class InventoryController extends Controller
     {
         $item = InventoryItem::findOrFail($id);
 
-        return view('pages.admin.inventory.edit', compact('item'));
+        return view('admin.inventory.edit', compact('item'));
     }
 
     public function update(UpdateInventoryRequest $request, int $id)

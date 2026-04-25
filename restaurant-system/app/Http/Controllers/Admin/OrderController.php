@@ -36,14 +36,14 @@ class OrderController extends Controller
 
         $orders = $query->latest()->paginate(20);
 
-        return view('pages.admin.orders.index', compact('orders', 'filters'));
+        return view('admin.orders.index', compact('orders', 'filters'));
     }
 
     public function show(int $id)
     {
         $order = $this->orderService->getById($id);
 
-        return view('pages.admin.orders.show', compact('order'));
+        return view('admin.orders.show', compact('order'));
     }
 
     public function updateStatus(UpdateOrderStatusRequest $request, int $id)

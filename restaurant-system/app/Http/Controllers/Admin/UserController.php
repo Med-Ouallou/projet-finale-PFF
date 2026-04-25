@@ -41,7 +41,7 @@ class UserController extends Controller
             ]);
         }
 
-        return view('pages.admin.users.index', compact('users', 'filters'));
+        return view('admin.users.index', compact('users', 'filters'));
     }
 
     public function store(StoreUserRequest $request)
@@ -55,7 +55,7 @@ class UserController extends Controller
     {
         $user = $this->userService->getById($id);
 
-        return view('pages.admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user'));
     }
 
     public function update(UpdateUserRequest $request, int $id)

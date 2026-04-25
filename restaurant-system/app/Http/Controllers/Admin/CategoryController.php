@@ -44,7 +44,7 @@ class CategoryController extends Controller
             ]);
         }
 
-        return view('pages.admin.categories.index', compact('categories', 'menus', 'filters'));
+        return view('admin.categories.index', compact('categories', 'menus', 'filters'));
     }
 
     public function store(StoreCategoryRequest $request)
@@ -60,7 +60,7 @@ class CategoryController extends Controller
         $menus = $this->menuService->getAllMenus();
         $parentCategories = $this->categoryService->getAll()->where('id', '!=', $id);
 
-        return view('pages.admin.categories.edit', compact('category', 'menus', 'parentCategories'));
+        return view('admin.categories.edit', compact('category', 'menus', 'parentCategories'));
     }
 
     public function update(UpdateCategoryRequest $request, int $id)
