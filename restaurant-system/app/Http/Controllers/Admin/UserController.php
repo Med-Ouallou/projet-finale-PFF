@@ -71,13 +71,20 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'Utilisateur modifié avec succès.');
     }
 
-    public function destroy(int $id)
+    public function destroy(Request $request, int $id)
     {
         if (auth()->id() === $id) {
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json(['success' => false, 'message' => 'Vous ne pouvez pas supprimer votre propre compte.'], 403);
+            }
             return back()->with('error', 'Vous ne pouvez pas supprimer votre propre compte.');
         }
 
         $this->userService->delete($id);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Utilisateur supprimé avec succès.']);
+        }
 
         return redirect()->route('admin.users.index')->with('success', 'Utilisateur supprimé avec succès.');
     }

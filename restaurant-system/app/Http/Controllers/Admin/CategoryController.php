@@ -70,9 +70,13 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Catégorie modifiée avec succès.');
     }
 
-    public function destroy(int $id)
+    public function destroy(Request $request, int $id)
     {
         $this->categoryService->delete($id);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Catégorie supprimée avec succès.']);
+        }
 
         return redirect()->route('admin.categories.index')->with('success', 'Catégorie supprimée avec succès.');
     }

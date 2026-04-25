@@ -133,6 +133,7 @@
                 
                 init() {
                     this.applyFilters();
+                    @if($errors->any()) this.showCreateModal = true; @endif
                 },
                 
                 applyFilters() {
@@ -176,9 +177,12 @@
                                 'Accept': 'application/json',
                             }
                         });
-                        if (response.ok) {
+                        const data = await response.json();
+                        if (response.ok && data.success) {
                             this.allCategories = this.allCategories.filter(c => c.id !== id);
                             this.applyFilters();
+                        } else {
+                            alert(data.message || 'Erreur lors de la suppression');
                         }
                     } catch (error) {
                         console.error('Error deleting category:', error);
@@ -189,13 +193,13 @@
     </script>
 
     <!-- Create Modal -->
-    <div id="create-modal" class="fixed inset-0 z-[80] @if($errors->any()) @else hidden @endif">
-        <div class="fixed inset-0 bg-black/40" onclick="document.getElementById('create-modal').classList.add('hidden')"></div>
+    <div id="create-modal" x-show="showCreateModal" x-cloak style="display: none;" class="fixed inset-0 z-[80]">
+        <div class="fixed inset-0 bg-black/40" @click="showCreateModal = false"></div>
         <div class="relative min-h-[calc(100%-3.5rem)] flex items-center m-3 sm:mx-auto sm:max-w-lg sm:w-full">
             <div class="w-full flex flex-col bg-white border border-gray-100 shadow-2xl rounded-3xl pointer-events-auto relative">
                 <div class="flex justify-between items-center py-5 px-6 border-b border-gray-100">
                     <h3 class="font-bold font-heading text-gray-900">Nouvelle catégorie</h3>
-                    <button onclick="document.getElementById('create-modal').classList.add('hidden')" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50">
+                    <button type="button" @click="showCreateModal = false" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
@@ -246,7 +250,7 @@
                         </div>
                     </div>
                     <div class="flex gap-3 pt-2">
-                        <button type="button" onclick="document.getElementById('create-modal').classList.add('hidden')" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50">Annuler</button>
+                        <button type="button" @click="showCreateModal = false" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50">Annuler</button>
                         <button type="submit" class="flex-1 py-3.5 px-4 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Créer</button>
                     </div>
                 </form>

@@ -91,17 +91,31 @@ class MenuItemController extends Controller
         return redirect()->route('admin.menu-items.index')->with('success', 'Plat modifié avec succès.');
     }
 
-    public function destroy(int $id)
+    public function destroy(Request $request, int $id)
     {
-        $item = $this->menuItemService->getById($id);
+        try {
+            $item = $this->menuItemService->getById($id);
 
-        if ($item->image_url) {
-            Storage::disk('public')->delete($item->image_url);
+            if ($item->image_url) {
+                Storage::disk('public')->delete($item->image_url);
+            }
+
+            $this->menuItemService->delete($id);
+
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json(['success' => true, 'message' => 'Plat supprimé avec succès.']);
+            }
+
+            return redirect()->route('admin.menu-items.index')->with('success', 'Plat supprimé avec succès.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() === '23000') {
+                if ($request->wantsJson() || $request->ajax()) {
+                    return response()->json(['success' => false, 'message' => 'Impossible de supprimer : ce plat est utilisé dans des commandes.'], 422);
+                }
+                return redirect()->route('admin.menu-items.index')->with('error', 'Impossible de supprimer : ce plat est utilisé dans des commandes.');
+            }
+            throw $e;
         }
-
-        $this->menuItemService->delete($id);
-
-        return redirect()->route('admin.menu-items.index')->with('success', 'Plat supprimé avec succès.');
     }
 
     public function toggleStatus(int $id)

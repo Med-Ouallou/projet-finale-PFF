@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
@@ -27,21 +28,29 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Menus
+    Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
+    Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
+    Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menus.edit');
+    Route::put('/menus/{id}', [MenuController::class, 'update'])->name('menus.update');
+    Route::delete('/menus/{id}', [MenuController::class, 'destroy'])->name('menus.destroy');
+    Route::patch('/menus/{id}/toggle', [MenuController::class, 'toggleActive'])->name('menus.toggle');
+
     // Menu Items
     Route::get('/menu-items', [MenuItemController::class, 'index'])->name('menu-items.index');
     Route::post('/menu-items', [MenuItemController::class, 'store'])->name('menu-items.store');
-    Route::get('/menu-items/{menuItem}/edit', [MenuItemController::class, 'edit'])->name('menu-items.edit');
-    Route::put('/menu-items/{menuItem}', [MenuItemController::class, 'update'])->name('menu-items.update');
-    Route::delete('/menu-items/{menuItem}', [MenuItemController::class, 'destroy'])->name('menu-items.destroy');
-    Route::patch('/menu-items/{menuItem}/toggle', [MenuItemController::class, 'toggleStatus'])->name('menu-items.toggle');
+    Route::get('/menu-items/{id}/edit', [MenuItemController::class, 'edit'])->name('menu-items.edit');
+    Route::put('/menu-items/{id}', [MenuItemController::class, 'update'])->name('menu-items.update');
+    Route::delete('/menu-items/{id}', [MenuItemController::class, 'destroy'])->name('menu-items.destroy');
+    Route::patch('/menu-items/{id}/toggle', [MenuItemController::class, 'toggleStatus'])->name('menu-items.toggle');
 
     // Categories
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
-    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
-    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-    Route::patch('/categories/{category}/toggle', [CategoryController::class, 'toggleActive'])->name('categories.toggle');
+    Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::patch('/categories/{id}/toggle', [CategoryController::class, 'toggleActive'])->name('categories.toggle');
 
     // Orders
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
@@ -52,9 +61,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     // Users
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
     // Inventory
     Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
