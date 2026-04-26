@@ -21,7 +21,7 @@
             </div>
         </div>
         
-        <div :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" class="hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
+        <div :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" class="hidden overflow-hidden sm:overflow-visible transition-all duration-300 basis-full grow sm:block">
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-8 sm:mt-0 sm:ps-7">
                 <a class="font-medium {{ request()->routeIs('accueil') ? 'text-emerald-600 border-b-2 border-emerald-500' : 'text-gray-500 hover:text-gray-800' }} pb-4 text-sm transition-colors" href="{{ route('accueil') }}">Accueil</a>
                 <a class="font-medium {{ request()->routeIs('menu') ? 'text-emerald-600 border-b-2 border-emerald-500' : 'text-gray-500 hover:text-gray-800' }} pb-4 text-sm transition-colors" href="{{ route('menu') }}">Menu</a>
@@ -29,9 +29,14 @@
                 
                 <div class="sm:ps-4 pb-4 sm:border-s border-gray-200">
                     @guest
-                        <a href="{{ route('login') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5">
-                            Connexion
-                        </a>
+                        <div class="flex items-center gap-2">
+                            <a href="{{ route('client.login') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all">
+                                Connexion
+                            </a>
+                            <a href="{{ route('client.register') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5">
+                                S'inscrire
+                            </a>
+                        </div>
                     @else
                         <div class="relative" x-data="{ open: false }" @click.outside="open = false">
                             <button @click="open = !open" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-emerald-600 transition-colors focus:outline-none">
@@ -58,6 +63,18 @@
                                     <p class="text-sm font-semibold text-gray-900">{{ Auth::user()->name }}</p>
                                     <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
                                 </div>
+                                
+                                @if(!Auth::user()->isCustomer())
+                                    {{-- Admin/Employee Dashboard Link --}}
+                                    <a href="{{ route('admin.dashboard') }}"
+                                       class="flex items-center gap-2 px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 transition-colors">
+                                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                                        </svg>
+                                        Tableau de bord
+                                    </a>
+                                @endif
+                                
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('navbar-logout-form').submit();"
                                    class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors mt-1">

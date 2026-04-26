@@ -139,30 +139,27 @@
                         </div>
                         <button type="button" @click="open = false" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
                     </div>
-                    <div class="p-6 space-y-5 overflow-y-auto max-h-[70vh]">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Prénom <span class="text-red-400">*</span></label><input type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="Prénom"></div>
-                            <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Nom <span class="text-red-400">*</span></label><input type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="Nom"></div>
-                        </div>
-                        <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Email <span class="text-red-400">*</span></label><input type="email" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="email@exemple.com"></div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Rôle <span class="text-red-400">*</span></label>
-                                <div x-data="{ roleOpen: false, selectedRole: 'Employé' }" class="relative w-full">
-                                    <button type="button" @click="roleOpen = !roleOpen" class="py-3 px-4 inline-flex items-center justify-between w-full gap-x-2 text-sm font-medium rounded-xl border border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition text-start"><span x-text="selectedRole"></span><svg class="w-4 h-4 text-gray-400 transition-transform shrink-0" :class="{ 'rotate-180': roleOpen }" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
-                                    <div x-show="roleOpen" x-cloak @click.away="roleOpen = false" x-transition class="absolute w-full bg-white shadow-xl rounded-2xl border border-gray-100 mt-1 z-[90] p-2">
-                                        <button type="button" @click="selectedRole = 'Admin'; roleOpen = false" class="flex items-center py-2 px-3 rounded-xl text-sm text-gray-700 hover:bg-gray-100 transition-colors w-full text-start">Admin</button>
-                                        <button type="button" @click="selectedRole = 'Employé'; roleOpen = false" class="flex items-center py-2 px-3 rounded-xl text-sm text-gray-700 hover:bg-gray-100 transition-colors w-full text-start">Employé</button>
-                                    </div>
+                    <form action="{{ route('admin.users.store') }}" method="POST" id="create-user-form">
+                        @csrf
+                        <div class="p-6 space-y-5 overflow-y-auto max-h-[70vh]">
+                            <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Nom <span class="text-red-400">*</span></label><input type="text" name="name" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="Nom complet" required></div>
+                            <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Email <span class="text-red-400">*</span></label><input type="email" name="email" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="email@exemple.com" required></div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Rôle <span class="text-red-400">*</span></label>
+                                    <select name="role" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" required>
+                                        <option value="admin">Admin</option>
+                                        <option value="employee" selected>Employé</option>
+                                    </select>
                                 </div>
+                                <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Téléphone</label><input type="tel" name="phone" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="+212 6XX XXX XXX"></div>
                             </div>
-                            <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Téléphone</label><input type="tel" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="+212 6XX XXX XXX"></div>
+                            <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Mot de passe <span class="text-red-400">*</span></label><input type="password" name="password" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="••••••••" required><p class="text-xs text-gray-400 mt-1">Minimum 8 caractères</p></div>
                         </div>
-                        <div><label class="block text-sm font-bold text-gray-800 mb-1.5">Mot de passe <span class="text-red-400">*</span></label><input type="password" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="••••••••"><p class="text-xs text-gray-400 mt-1">Minimum 8 caractères</p></div>
-                    </div>
-                    <div class="flex justify-end items-center gap-3 px-6 py-5 border-t border-gray-100">
-                        <button type="button" @click="open = false" class="py-2.5 px-5 text-sm font-semibold text-gray-500 hover:bg-gray-100 rounded-xl transition-colors">Annuler</button>
-                        <button type="button" class="py-2.5 px-6 text-sm font-bold inline-flex items-center gap-x-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-200/50 transition-all hover:-translate-y-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4.5 12.75l6 6 9-13.5" stroke-linecap="round" stroke-linejoin="round" /></svg>Créer</button>
-                    </div>
+                        <div class="flex justify-end items-center gap-3 px-6 py-5 border-t border-gray-100">
+                            <button type="button" @click="open = false" class="py-2.5 px-5 text-sm font-semibold text-gray-500 hover:bg-gray-100 rounded-xl transition-colors">Annuler</button>
+                            <button type="submit" class="py-2.5 px-6 text-sm font-bold inline-flex items-center gap-x-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-200/50 transition-all hover:-translate-y-0.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4.5 12.75l6 6 9-13.5" stroke-linecap="round" stroke-linejoin="round" /></svg>Créer</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

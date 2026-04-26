@@ -26,6 +26,18 @@
     <div class="flex items-center gap-2 sm:gap-3">
         {{ $actions ?? '' }}
 
+        <!-- Go to Public Site -->
+        <a href="{{ route('accueil') }}" 
+           class="hidden sm:flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+           title="Voir le site public">
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            <span>Voir le site</span>
+        </a>
+
         <!-- Notification bell -->
         <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Notifications">
             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

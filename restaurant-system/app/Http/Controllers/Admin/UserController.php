@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -15,24 +16,24 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $filters = [
-            'is_admin' => $request->is_admin,
+            'role' => $request->role,
             'search' => $request->search,
         ];
 
-        $query = $this->userService->getAll();
+        $query = User::with('roles');
 
-        if ($filters['is_admin'] !== null) {
-            $query = $query->where('is_admin', $filters['is_admin']);
+        if ($filters['role']) {
+            $query = $query->role($filters['role']);
         }
 
         if ($filters['search']) {
-            $query = $query->filter(function ($user) use ($filters) {
-                return str_contains(strtolower($user->name), strtolower($filters['search']))
-                    || str_contains(strtolower($user->email), strtolower($filters['search']));
+            $query = $query->where(function ($q) use ($filters) {
+                $q->where('name', 'like', '%' . $filters['search'] . '%')
+                  ->orWhere('email', 'like', '%' . $filters['search'] . '%');
             });
         }
 
-        $users = $query;
+        $users = $query->get();
 
         if ($request->wantsJson() || $request->ajax()) {
             return response()->json([
@@ -46,7 +47,13 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $this->userService->create($request->validated());
+        $data = $request->validated();
+        $role = $data['role'];
+        unset($data['role']);
+        unset($data['phone']);
+
+        $user = $this->userService->create($data);
+        $user->assignRole($role);
 
         return redirect()->route('admin.users.index')->with('success', 'Utilisateur créé avec succès.');
     }
@@ -66,7 +73,14 @@ class UserController extends Controller
             unset($data['password']);
         }
 
-        $this->userService->update($id, $data);
+        $role = $data['role'] ?? null;
+        unset($data['role']);
+
+        $user = $this->userService->update($id, $data);
+
+        if ($role) {
+            $user->syncRoles([$role]);
+        }
 
         return redirect()->route('admin.users.index')->with('success', 'Utilisateur modifié avec succès.');
     }

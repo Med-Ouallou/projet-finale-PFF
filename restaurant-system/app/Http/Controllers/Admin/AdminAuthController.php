@@ -10,7 +10,7 @@ class AdminAuthController extends Controller
 {
     public function showLogin()
     {
-        if (auth()->check() && auth()->user()->is_admin) {
+        if (auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isEmployee())) {
             return redirect()->route('admin.dashboard');
         }
 
@@ -25,9 +25,12 @@ class AdminAuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            if (!auth()->user()->is_admin) {
+            $user = auth()->user();
+
+            // Check if user has admin or employee role
+            if (!$user->isAdmin() && !$user->isEmployee()) {
                 Auth::logout();
-                return back()->withErrors(['email' => 'Accès réservé aux administrateurs.'])->withInput();
+                return back()->withErrors(['email' => 'Accès réservé aux administrateurs et employés.'])->withInput();
             }
 
             $request->session()->regenerate();

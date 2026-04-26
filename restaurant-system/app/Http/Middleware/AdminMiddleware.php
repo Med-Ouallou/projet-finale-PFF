@@ -10,8 +10,15 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || !auth()->user()->is_admin) {
-            return redirect()->route('admin.login')->with('error', 'Accès réservé aux administrateurs.');
+        if (!auth()->check()) {
+            return redirect()->route('admin.login')->with('error', 'Veuillez vous connecter.');
+        }
+
+        $user = auth()->user();
+
+        // Allow both admin and employee roles
+        if (!$user->isAdmin() && !$user->isEmployee()) {
+            return redirect()->route('admin.login')->with('error', 'Accès réservé aux administrateurs et employés.');
         }
 
         return $next($request);

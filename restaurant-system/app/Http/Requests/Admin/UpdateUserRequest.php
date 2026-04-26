@@ -20,7 +20,7 @@ class UpdateUserRequest extends FormRequest
             'name' => 'sometimes|string|max:255',
             'email' => ['sometimes', 'email', Rule::unique('users')->ignore($userId)],
             'password' => 'nullable|string|min:8',
-            'is_admin' => 'sometimes|boolean',
+            'role' => 'sometimes|in:admin,employee,customer',
         ];
     }
 
@@ -29,6 +29,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'email.unique' => 'Cet email est déjà utilisé.',
             'password.min' => 'Le mot de passe doit faire au moins 8 caractères.',
+            'role.in' => 'Le rôle doit être admin ou employee.',
         ];
     }
 }

@@ -9,12 +9,29 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Customer\AuthController as CustomerAuthController;
 use App\Http\Controllers\Public\PublicPageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicPageController::class, 'accueil'])->name('accueil');
 Route::get('/menu', [PublicPageController::class, 'menu'])->name('menu');
 Route::get('/contact', [PublicPageController::class, 'contact'])->name('contact');
+
+// Customer Auth Routes (public)
+Route::prefix('client')->name('client.')->group(function () {
+    Route::get('/register', [CustomerAuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [CustomerAuthController::class, 'register'])->name('register.post');
+    Route::get('/login', [CustomerAuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [CustomerAuthController::class, 'login'])->name('login.post');
+    Route::post('/logout', [CustomerAuthController::class, 'logout'])->name('logout');
+});
+
+// Protected Customer Routes
+Route::prefix('client')->name('client.')->middleware(['auth', 'role:customer'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('customer.dashboard');
+    })->name('dashboard');
+});
 
 // Admin Auth Routes (no middleware)
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -24,7 +41,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 // Protected Admin Routes
-Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin|employee'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -77,5 +94,14 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 });
 
 Auth::routes();
+
+// Redirect default auth routes to customer routes
+Route::get('/login', function () {
+    return redirect()->route('client.login');
+})->name('login');
+
+Route::get('/register', function () {
+    return redirect()->route('client.register');
+})->name('register');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

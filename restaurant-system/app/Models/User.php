@@ -4,13 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +23,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_admin',
     ];
 
     /**
@@ -34,6 +35,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = ['role_name'];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -44,7 +47,43 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'is_admin' => 'boolean',
         ];
+    }
+
+    /**
+     * Get the customer profile associated with the user.
+     */
+    public function customer(): HasOne
+    {
+        return $this->hasOne(Customer::class);
+    }
+
+    /**
+     * Check if the user is a customer.
+     */
+    public function isCustomer(): bool
+    {
+        return $this->hasRole('customer');
+    }
+
+    /**
+     * Check if the user is an admin.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
+    }
+
+    /**
+     * Check if the user is an employee.
+     */
+    public function isEmployee(): bool
+    {
+        return $this->hasRole('employee');
+    }
+
+    public function getRoleNameAttribute(): string
+    {
+        return $this->roles->first()?->name ?? 'customer';
     }
 }

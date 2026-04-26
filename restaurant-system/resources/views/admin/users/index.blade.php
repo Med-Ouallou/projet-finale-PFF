@@ -2,7 +2,8 @@
     <div x-data="usersApp({ users: @js($users), filters: @js($filters), authId: {{ auth()->id() }} })" x-init="init()">
     @php
         $totalUsers = $users->count();
-        $adminUsers = $users->where('is_admin', true)->count();
+        $adminUsers = $users->filter(fn($u) => $u->isAdmin())->count();
+        $employeeUsers = $users->filter(fn($u) => $u->isEmployee())->count();
     @endphp
 
     <!-- KPI Cards -->
@@ -22,7 +23,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
                 </svg>
             </div>
-            <p class="text-3xl font-extrabold font-heading text-emerald-600" x-text="filteredUsers.filter(u => u.is_admin).length">{{ $adminUsers }}</p>
+            <p class="text-3xl font-extrabold font-heading text-emerald-600" x-text="filteredUsers.filter(u => u.role_name === 'admin').length">{{ $adminUsers }}</p>
             <p class="text-xs text-gray-400 font-medium">Administrateurs</p>
         </div>
     </div>
@@ -45,8 +46,9 @@
             <select x-model="roleFilter" @change="applyFilters()"
                 class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
                 <option value="">Tous les rôles</option>
-                <option value="1">Admin</option>
-                <option value="0">Utilisateur</option>
+                <option value="admin">Admin</option>
+                <option value="employee">Employé</option>
+                <option value="customer">Client</option>
             </select>
         </div>
     </div>
@@ -82,7 +84,11 @@
                                 <span class="text-sm text-gray-600" x-text="user.email"></span>
                             </td>
                             <td class="px-6 py-4">
-                                <span :class="user.is_admin ? 'inline-flex items-center py-1 px-2.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700' : 'inline-flex items-center py-1 px-2.5 rounded-full text-xs font-bold bg-gray-100 text-gray-700'" x-text="user.is_admin ? 'Admin' : 'Utilisateur'"></span>
+                                <span :class="{
+                                    'inline-flex items-center py-1 px-2.5 rounded-full text-xs font-bold bg-violet-50 text-violet-700': user.role_name === 'admin',
+                                    'inline-flex items-center py-1 px-2.5 rounded-full text-xs font-bold bg-blue-50 text-blue-700': user.role_name === 'employee',
+                                    'inline-flex items-center py-1 px-2.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700': user.role_name === 'customer',
+                                }" x-text="user.role_name === 'admin' ? 'Admin' : (user.role_name === 'employee' ? 'Employé' : 'Client')"></span>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -116,7 +122,7 @@
                 allUsers: initialData.users || [],
                 authId: initialData.authId,
                 search: '',
-                roleFilter: initialData.filters?.is_admin || '',
+                roleFilter: initialData.filters?.role || '',
                 showCreateModal: false,
                 filteredUsers: [],
                 
@@ -132,7 +138,7 @@
                             (user.name && user.name.toLowerCase().includes(searchTerm)) ||
                             (user.email && user.email.toLowerCase().includes(searchTerm));
                         const matchesRole = this.roleFilter === '' || 
-                            user.is_admin == (this.roleFilter === '1');
+                            user.role_name === this.roleFilter;
                         return matchesSearch && matchesRole;
                     });
                 },
@@ -203,10 +209,11 @@
                         <p class="text-xs text-gray-400 mt-1">Minimum 8 caractères</p>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Rôle</label>
-                        <select name="is_admin" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
-                            <option value="1">Administrateur</option>
-                            <option value="0" selected>Utilisateur</option>
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Rôle <span class="text-red-400">*</span></label>
+                        <select name="role" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" required>
+                            <option value="admin">Admin</option>
+                            <option value="employee" selected>Employé</option>
+                            <option value="customer">Client</option>
                         </select>
                     </div>
                     <div class="flex gap-3 pt-2">
