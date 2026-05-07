@@ -181,14 +181,17 @@
                             }
                         });
                         if (response.ok) {
+                            const data = await response.json();
                             const category = this.allCategories.find(c => c.id === id);
                             if (category) {
-                                category.is_active = !category.is_active;
+                                category.is_active = data.is_active;
                                 this.applyFilters();
                             }
+                            showAlert('Statut modifié avec succès', 'success');
                         }
                     } catch (error) {
                         console.error('Error toggling status:', error);
+                        showAlert('Erreur lors du changement de statut', 'error');
                     }
                 },
                 

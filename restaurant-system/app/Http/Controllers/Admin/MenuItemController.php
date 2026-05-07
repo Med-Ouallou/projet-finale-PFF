@@ -118,12 +118,20 @@ class MenuItemController extends Controller
         }
     }
 
-    public function toggleStatus(int $id)
+    public function toggleStatus(Request $request, int $id)
     {
         $item = $this->menuItemService->getById($id);
         $newStatus = $item->status === 'available' ? 'unavailable' : 'available';
 
         $this->menuItemService->updateAvailability($id, $newStatus);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Statut modifié avec succès.',
+                'status' => $newStatus,
+            ]);
+        }
 
         return back()->with('success', 'Statut modifié avec succès.');
     }

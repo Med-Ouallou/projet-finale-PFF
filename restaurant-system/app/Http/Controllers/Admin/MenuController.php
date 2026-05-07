@@ -115,9 +115,17 @@ class MenuController extends Controller
         }
     }
 
-    public function toggleActive(int $id)
+    public function toggleActive(Request $request, int $id)
     {
-        $this->menuService->toggleActive($id);
+        $menu = $this->menuService->toggleActive($id);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Statut modifié avec succès.',
+                'is_active' => $menu->is_active,
+            ]);
+        }
 
         return back()->with('success', 'Statut modifié avec succès.');
     }

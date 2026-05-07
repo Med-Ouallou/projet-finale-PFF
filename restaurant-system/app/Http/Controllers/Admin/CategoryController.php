@@ -81,10 +81,18 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Catégorie supprimée avec succès.');
     }
 
-    public function toggleActive(int $id)
+    public function toggleActive(Request $request, int $id)
     {
         $category = $this->categoryService->getById($id);
         $category->update(['is_active' => !$category->is_active]);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Statut modifié avec succès.',
+                'is_active' => $category->is_active,
+            ]);
+        }
 
         return back()->with('success', 'Statut modifié avec succès.');
     }

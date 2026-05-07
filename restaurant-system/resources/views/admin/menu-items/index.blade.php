@@ -207,14 +207,17 @@
                             }
                         });
                         if (response.ok) {
+                            const data = await response.json();
                             const item = this.allItems.find(i => i.id === id);
                             if (item) {
-                                item.status = item.status === 'available' ? 'unavailable' : 'available';
+                                item.status = data.status;
                                 this.applyFilters();
                             }
+                            showAlert('Statut modifié avec succès', 'success');
                         }
                     } catch (error) {
                         console.error('Error toggling status:', error);
+                        showAlert('Erreur lors du changement de statut', 'error');
                     }
                 },
                 
