@@ -1,91 +1,87 @@
-<x-layouts.admin :title="'Modifier Menu - Resto Admin'" :breadcrumb="'Modifier Menu'">
+<x-layouts.admin :title="'Modifier Menu - Resto Admin'" :breadcrumb="'Modifier le menu'">
+
     <div class="max-w-2xl mx-auto">
-        <!-- Back Button -->
-        <div class="mb-6">
-            <a href="{{ route('admin.menus.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-emerald-600 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                <span class="font-medium">Retour aux menus</span>
-            </a>
-        </div>
-
-        @if(session('success'))
-            <div class="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-700">{{ session('success') }}</div>
-        @endif
-        @if(session('error'))
-            <div class="mb-4 p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-700">{{ session('error') }}</div>
-        @endif
-
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-100">
-                <h1 class="text-xl font-bold text-gray-900">Modifier Menu</h1>
+            <div class="p-6 border-b border-gray-100">
+                <h2 class="text-lg font-bold font-heading text-gray-900">Modifier le menu</h2>
+                <p class="text-sm text-gray-400">Mettez à jour les informations du menu.</p>
             </div>
-            
-            <form action="{{ route('admin.menus.update', $menu->id) }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-6">
+
+            <form method="POST" action="{{ route('admin.menus.update', $menu) }}" enctype="multipart/form-data" class="p-6 space-y-6">
                 @csrf
                 @method('PUT')
 
-                <!-- Image Preview -->
-                @if($menu->image_url)
+                <!-- Image -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-800 mb-2">Image du menu</label>
                     <div class="flex items-center gap-4">
-                        <img src="{{ asset('storage/' . $menu->image_url) }}" alt="Current" class="w-20 h-20 rounded-xl object-cover border border-gray-200">
+                        @if($menu->image_url)
+                            <img src="{{ asset('storage/' . $menu->image_url) }}" alt="{{ $menu->name }}" class="w-20 h-20 rounded-2xl object-cover">
+                        @endif
+                        <label class="w-20 h-20 rounded-2xl bg-gray-50 flex flex-col gap-1 items-center justify-center border-2 border-dashed border-gray-200 hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-500 text-gray-400 transition-all cursor-pointer group">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <input type="file" name="image" class="hidden" accept="image/*">
+                        </label>
                         <div>
-                            <label class="flex items-center gap-2 text-gray-500 cursor-pointer hover:text-rose-600 transition-colors">
-                                <input type="checkbox" name="remove_image" value="1" class="rounded bg-gray-50 border-gray-200 text-rose-500 focus:ring-rose-500">
-                                <span class="text-sm font-medium">Supprimer l'image</span>
-                            </label>
+                            <p class="text-sm font-semibold text-gray-700">Cliquez pour changer</p>
+                            <p class="text-xs text-gray-400 mt-1">PNG, JPG, WebP — max 2MB</p>
                         </div>
+                        @if($menu->image_url)
+                            <div class="ml-auto">
+                                <label class="flex items-center gap-2 text-gray-500 cursor-pointer hover:text-red-600 transition-colors text-sm">
+                                    <input type="checkbox" name="remove_image" value="1" class="rounded bg-gray-50 border-gray-200 text-red-500 focus:ring-red-500">
+                                    <span>Supprimer l'image</span>
+                                </label>
+                            </div>
+                        @endif
                     </div>
-                @endif
-
-                <!-- Name -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">Nom <span class="text-rose-400">*</span></label>
-                    <input type="text" name="name" value="{{ old('name', $menu->name) }}" required
-                        class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:border-emerald-500 focus:ring-emerald-500 transition-all">
-                    @error('name')<p class="text-rose-400 text-sm mt-1">{{ $message }}</p>@enderror
                 </div>
 
-                <!-- Description -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">Description</label>
-                    <textarea name="description" rows="4"
-                        class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:border-emerald-500 focus:ring-emerald-500 transition-all">{{ old('description', $menu->description) }}</textarea>
-                </div>
+                <!-- Form Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Nom du menu <span class="text-red-400">*</span></label>
+                        <input type="text" name="name" required value="{{ old('name', $menu->name) }}"
+                            class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                    </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Currency -->
+                    <div class="col-span-2">
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Description</label>
+                        <textarea name="description" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" rows="3">{{ old('description', $menu->description) }}</textarea>
+                    </div>
+
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">Devise</label>
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Devise</label>
                         <input type="text" name="currency" value="{{ old('currency', $menu->currency ?? 'MAD') }}"
-                            class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:border-emerald-500">
+                            class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
                     </div>
 
-                    <!-- Display Order -->
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">Ordre d'affichage</label>
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Ordre d'affichage</label>
                         <input type="number" name="display_order" value="{{ old('display_order', $menu->display_order ?? 0) }}" min="0"
-                            class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:border-emerald-500">
+                            class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
                     </div>
                 </div>
 
-                <!-- New Image -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">Nouvelle Image</label>
-                    <input type="file" name="image" accept="image/*"
-                        class="w-full text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 file:font-medium transition-all">
-                    @error('image')<p class="text-rose-400 text-sm mt-1">{{ $message }}</p>@enderror
+                <div class="flex items-center justify-between p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100">
+                    <div>
+                        <p class="text-sm font-bold text-gray-800">Statut</p>
+                        <p class="text-xs text-gray-400 mt-0.5">Visibilité dans le menu client.</p>
+                    </div>
+                    <select name="is_active" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
+                        <option value="1" {{ old('is_active', $menu->is_active) ? 'selected' : '' }}>Actif</option>
+                        <option value="0" {{ old('is_active', $menu->is_active) ? '' : 'selected' }}>Inactif</option>
+                    </select>
                 </div>
 
-                <!-- Actions -->
-                <div class="flex items-center justify-between pt-6 border-t border-gray-100">
-                    <a href="{{ route('admin.menus.index') }}" class="px-5 py-2.5 text-gray-500 hover:text-gray-700 font-medium transition-colors">
-                        Annuler
-                    </a>
-                    <button type="submit" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-md shadow-emerald-200/50 transition-all">
-                        Enregistrer
-                    </button>
+                <div class="flex gap-3 pt-2">
+                    <a href="{{ route('admin.menus.index') }}" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition">Annuler</a>
+                    <button type="submit" class="flex-1 py-3.5 px-4 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition">Sauvegarder</button>
                 </div>
             </form>
         </div>
     </div>
+
 </x-layouts.admin>

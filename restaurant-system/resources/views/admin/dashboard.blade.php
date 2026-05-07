@@ -1,7 +1,7 @@
 <x-layouts.admin :title="'Dashboard - Resto Admin'" :breadcrumb="'Tableau de bord'">
 
     <!-- Stats -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <x-admin.stat-card
             :label="'Revenus du jour'"
             :value="number_format($stats['revenue'], 2) . ' DH'"
@@ -36,7 +36,7 @@
     </div>
 
     <!-- Orders Table -->
-    <div class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+    <div class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden mb-6">
         <div class="px-4 sm:px-6 py-4 flex justify-between items-center border-b border-gray-100">
             <div>
                 <h2 class="text-base font-bold font-heading text-gray-800">Commandes récentes</h2>

@@ -11,6 +11,17 @@
                 @csrf
                 @method('PUT')
 
+                @if($errors->any())
+                    <div class="p-4 bg-red-50 border border-red-200 rounded-xl">
+                        <p class="text-sm font-bold text-red-700 mb-2">Veuillez corriger les erreurs :</p>
+                        <ul class="text-sm text-red-600 space-y-1">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="grid grid-cols-2 gap-4">
                     <div class="col-span-2">
                         <label class="block text-sm font-bold text-gray-800 mb-1.5">Nom <span class="text-red-400">*</span></label>
@@ -33,9 +44,10 @@
 
                     <div class="col-span-2">
                         <label class="block text-sm font-bold text-gray-800 mb-1.5">Rôle</label>
-                        <select name="is_admin" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
-                            <option value="1" {{ old('is_admin', $user->is_admin) ? 'selected' : '' }}>Administrateur</option>
-                            <option value="0" {{ !old('is_admin', $user->is_admin) ? 'selected' : '' }}>Utilisateur</option>
+                        <select name="role" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                            <option value="admin" {{ old('role', $user->role_name) == 'admin' ? 'selected' : '' }}>Administrateur</option>
+                            <option value="employee" {{ old('role', $user->role_name) == 'employee' ? 'selected' : '' }}>Employé</option>
+                            <option value="customer" {{ old('role', $user->role_name) == 'customer' ? 'selected' : '' }}>Client</option>
                         </select>
                     </div>
                 </div>

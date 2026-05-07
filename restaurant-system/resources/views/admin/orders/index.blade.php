@@ -10,8 +10,8 @@
         ];
     @endphp
 
-    <!-- Filters -->
-    <form method="GET" action="{{ route('admin.orders.index') }}" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+    <!-- Filters Bar -->
+    <form method="GET" action="{{ route('admin.orders.index') }}" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
         <div class="flex gap-2">
             <select name="status" onchange="this.form.submit()"
                 class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
@@ -28,7 +28,7 @@
     </form>
 
     <!-- Table -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead class="bg-gray-50/80 border-b border-gray-100">

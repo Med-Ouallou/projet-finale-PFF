@@ -3,10 +3,12 @@
     @php
         $totalCategories = $categories->count();
         $activeCategories = $categories->where('is_active', true)->count();
+        $inactiveCategories = $categories->where('is_active', false)->count();
+        $menusCount = $menus->count();
     @endphp
 
     <!-- KPI Cards -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
             <div class="w-9 h-9 bg-slate-100 rounded-xl flex items-center justify-center mb-2">
                 <svg class="w-5 h-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -25,13 +27,36 @@
             <p class="text-3xl font-extrabold font-heading text-emerald-600" x-text="filteredCategories.filter(c => c.is_active).length">{{ $activeCategories }}</p>
             <p class="text-xs text-gray-400 font-medium">Actives</p>
         </div>
+        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+            <div class="w-9 h-9 bg-red-50 rounded-xl flex items-center justify-center mb-2">
+                <svg class="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                </svg>
+            </div>
+            <p class="text-3xl font-extrabold font-heading text-red-500" x-text="filteredCategories.filter(c => !c.is_active).length">{{ $inactiveCategories }}</p>
+            <p class="text-xs text-gray-400 font-medium">Inactives</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+            <div class="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center mb-2">
+                <svg class="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                </svg>
+            </div>
+            <p class="text-3xl font-extrabold font-heading text-gray-900">{{ $menusCount }}</p>
+            <p class="text-xs text-gray-400 font-medium">Menus</p>
+        </div>
     </div>
 
-    <!-- Filters -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+    <!-- Filters Bar -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
         <div class="relative flex-1 max-w-xs">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
             <input type="text" x-model="search" @input.debounce.300ms="applyFilters()"
-                class="py-2.5 ps-4 pe-4 block w-full bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-emerald-500 transition-shadow"
+                class="py-2.5 ps-10 pe-4 block w-full bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-emerald-500 transition-shadow"
                 placeholder="Rechercher une catégorie...">
         </div>
         <div class="flex gap-2">
@@ -52,7 +77,7 @@
     </div>
 
     <!-- Table -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead class="bg-gray-50/80 border-b border-gray-100">
@@ -167,26 +192,28 @@
                     }
                 },
                 
-                async deleteCategory(id) {
-                    if (!confirm('Supprimer cette catégorie ?')) return;
-                    try {
-                        const response = await fetch(`/admin/categories/${id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
-                                'Accept': 'application/json',
+                deleteCategory(id) {
+                    showConfirm('Supprimer cette catégorie ?', async () => {
+                        try {
+                            const response = await fetch(`/admin/categories/${id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+                                    'Accept': 'application/json',
+                                }
+                            });
+                            const data = await response.json();
+                            if (response.ok && data.success) {
+                                this.allCategories = this.allCategories.filter(c => c.id !== id);
+                                this.applyFilters();
+                                showAlert('Catégorie supprimée avec succès', 'success');
+                            } else {
+                                showAlert(data.message || 'Erreur lors de la suppression', 'error');
                             }
-                        });
-                        const data = await response.json();
-                        if (response.ok && data.success) {
-                            this.allCategories = this.allCategories.filter(c => c.id !== id);
-                            this.applyFilters();
-                        } else {
-                            alert(data.message || 'Erreur lors de la suppression');
+                        } catch (error) {
+                            console.error('Error deleting category:', error);
                         }
-                    } catch (error) {
-                        console.error('Error deleting category:', error);
-                    }
+                    }, { type: 'warning', title: 'Confirmation de suppression' });
                 }
             }
         }

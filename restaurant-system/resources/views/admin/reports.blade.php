@@ -16,13 +16,13 @@
     </x-slot:actions>
 
     <!-- Section Title -->
-    <div class="flex flex-col gap-1 text-start">
+    <div class="flex flex-col gap-1 text-start mb-6">
         <h1 class="text-2xl font-bold font-heading text-gray-900">Performance de l'Établissement</h1>
         <p class="text-sm text-gray-500">Analyse détaillée de votre activité commerciale.</p>
     </div>
 
     <!-- KPIs Flash -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm text-start">
             <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Revenu Total</p>
             <div class="flex items-baseline gap-2">
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Graphs Section -->
-    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-6">
         <!-- Area Chart Placeholder -->
         <div class="xl:col-span-2 bg-white border border-gray-100 shadow-sm rounded-3xl p-8 text-start flex flex-col">
             <div class="flex justify-between items-center mb-8">

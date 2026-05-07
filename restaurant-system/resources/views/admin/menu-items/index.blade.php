@@ -8,7 +8,7 @@
     @endphp
 
     <!-- KPI Cards -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
             <div class="w-9 h-9 bg-slate-100 rounded-xl flex items-center justify-center mb-2">
                 <svg class="w-5 h-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Filters Bar -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
         <div class="relative flex-1 max-w-xs">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -84,7 +84,7 @@
     </div>
 
     <!-- Table -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead class="bg-gray-50/80 border-b border-gray-100">
@@ -218,26 +218,28 @@
                     }
                 },
                 
-                async deleteItem(id) {
-                    if (!confirm('Supprimer ce plat ?')) return;
-                    try {
-                        const response = await fetch(`/admin/menu-items/${id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
-                                'Accept': 'application/json',
+                deleteItem(id) {
+                    showConfirm('Supprimer ce plat ?', async () => {
+                        try {
+                            const response = await fetch(`/admin/menu-items/${id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+                                    'Accept': 'application/json',
+                                }
+                            });
+                            const data = await response.json();
+                            if (response.ok && data.success) {
+                                this.allItems = this.allItems.filter(i => i.id !== id);
+                                this.applyFilters();
+                                showAlert('Plat supprimé avec succès', 'success');
+                            } else {
+                                showAlert(data.message || 'Erreur lors de la suppression', 'error');
                             }
-                        });
-                        const data = await response.json();
-                        if (response.ok && data.success) {
-                            this.allItems = this.allItems.filter(i => i.id !== id);
-                            this.applyFilters();
-                        } else {
-                            alert(data.message || 'Erreur lors de la suppression');
+                        } catch (error) {
+                            console.error('Error deleting item:', error);
                         }
-                    } catch (error) {
-                        console.error('Error deleting item:', error);
-                    }
+                    }, { type: 'warning', title: 'Confirmation de suppression' });
                 }
             }
         }

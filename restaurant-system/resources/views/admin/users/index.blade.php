@@ -4,10 +4,11 @@
         $totalUsers = $users->count();
         $adminUsers = $users->filter(fn($u) => $u->isAdmin())->count();
         $employeeUsers = $users->filter(fn($u) => $u->isEmployee())->count();
+        $customerUsers = $users->filter(fn($u) => $u->isCustomer())->count();
     @endphp
 
     <!-- KPI Cards -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
             <div class="w-9 h-9 bg-slate-100 rounded-xl flex items-center justify-center mb-2">
                 <svg class="w-5 h-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -26,14 +27,37 @@
             <p class="text-3xl font-extrabold font-heading text-emerald-600" x-text="filteredUsers.filter(u => u.role_name === 'admin').length">{{ $adminUsers }}</p>
             <p class="text-xs text-gray-400 font-medium">Administrateurs</p>
         </div>
+        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+            <div class="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center mb-2">
+                <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 3.147V3.587c0-1.081-.768-2.015-1.837-2.175a48.111 48.111 0 00-3.413-.387m1.5 3.147a2.25 2.25 0 01-1.5 3.147m-12 0a2.25 2.25 0 011.5-3.147m0 0a2.18 2.18 0 01.75 1.661v4.253c0 1.081-.768 2.015-1.837 2.175a48.114 48.114 0 00-3.413.387m13.5-3.147a2.18 2.18 0 00-.75-1.661V5.587c0-1.081.768-2.015 1.837-2.175a48.114 48.114 0 013.413-.387m-8.25 3.147a2.25 2.25 0 01-1.5 3.147m12 0a2.25 2.25 0 01-1.5-3.147" />
+                </svg>
+            </div>
+            <p class="text-3xl font-extrabold font-heading text-blue-600" x-text="filteredUsers.filter(u => u.role_name === 'employee').length">{{ $employeeUsers }}</p>
+            <p class="text-xs text-gray-400 font-medium">Employés</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+            <div class="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center mb-2">
+                <svg class="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+            </div>
+            <p class="text-3xl font-extrabold font-heading text-amber-500" x-text="filteredUsers.filter(u => u.role_name === 'customer').length">{{ $customerUsers }}</p>
+            <p class="text-xs text-gray-400 font-medium">Clients</p>
+        </div>
     </div>
 
-    <!-- Filters -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+    <!-- Filters Bar -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
         <div class="relative flex-1 max-w-xs">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
             <input type="text" x-model="search" @input.debounce.300ms="applyFilters()"
-                class="py-2.5 ps-4 pe-4 block w-full bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-emerald-500 transition-shadow"
-                placeholder="Rechercher...">
+                class="py-2.5 ps-10 pe-4 block w-full bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-emerald-500 transition-shadow"
+                placeholder="Rechercher un utilisateur...">
         </div>
         <div class="flex gap-2">
             <button type="button" @click="showCreateModal = true"
@@ -54,7 +78,7 @@
     </div>
 
     <!-- Table -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead class="bg-gray-50/80 border-b border-gray-100">
@@ -143,26 +167,28 @@
                     });
                 },
                 
-                async deleteUser(id) {
-                    if (!confirm('Supprimer cet utilisateur ?')) return;
-                    try {
-                        const response = await fetch(`/admin/users/${id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
-                                'Accept': 'application/json',
+                deleteUser(id) {
+                    showConfirm('Supprimer cet utilisateur ?', async () => {
+                        try {
+                            const response = await fetch(`/admin/users/${id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+                                    'Accept': 'application/json',
+                                }
+                            });
+                            const data = await response.json();
+                            if (response.ok && data.success) {
+                                this.allUsers = this.allUsers.filter(u => u.id !== id);
+                                this.applyFilters();
+                                showAlert('Utilisateur supprimé avec succès', 'success');
+                            } else {
+                                showAlert(data.message || 'Erreur lors de la suppression', 'error');
                             }
-                        });
-                        const data = await response.json();
-                        if (response.ok && data.success) {
-                            this.allUsers = this.allUsers.filter(u => u.id !== id);
-                            this.applyFilters();
-                        } else {
-                            alert(data.message || 'Erreur lors de la suppression');
+                        } catch (error) {
+                            console.error('Error deleting user:', error);
                         }
-                    } catch (error) {
-                        console.error('Error deleting user:', error);
-                    }
+                    }, { type: 'warning', title: 'Confirmation de suppression' });
                 }
             }
         }

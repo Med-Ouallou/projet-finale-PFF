@@ -3,26 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Menu;
+use App\Http\Requests\Admin\StoreMenuRequest;
+use App\Http\Requests\Admin\UpdateMenuRequest;
+use App\Services\MenuService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\QueryException;
 
 class MenuController extends Controller
 {
+    public function __construct(
+        private MenuService $menuService
+    ) {}
+
     public function index(Request $request)
     {
         $filters = [
             'is_active' => $request->is_active,
         ];
 
-        $query = Menu::query();
+        $menus = $this->menuService->getAll();
 
         if ($filters['is_active'] !== null) {
-            $query->where('is_active', $filters['is_active']);
+            $menus = $menus->where('is_active', $filters['is_active']);
         }
-
-        $menus = $query->orderBy('display_order')->get();
 
         if ($request->wantsJson() || $request->ajax()) {
             return response()->json([
@@ -34,58 +38,29 @@ class MenuController extends Controller
         return view('admin.menus.index', compact('menus', 'filters'));
     }
 
-    public function store(Request $request)
+    public function store(StoreMenuRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
-            'currency' => 'nullable|string|max:10',
-            'display_order' => 'nullable|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-        ]);
-
-        $data = [
-            'name' => $validated['name'],
-            'description' => $validated['description'] ?? null,
-            'currency' => $validated['currency'] ?? 'MAD',
-            'display_order' => $validated['display_order'] ?? 0,
-            'is_active' => true,
-        ];
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
             $data['image_url'] = $request->file('image')->store('menus', 'public');
         }
 
-        Menu::create($data);
+        $this->menuService->create($data);
 
         return redirect()->route('admin.menus.index')->with('success', 'Menu créé avec succès.');
     }
 
     public function edit(int $id)
     {
-        $menu = Menu::findOrFail($id);
+        $menu = $this->menuService->getById($id);
         return view('admin.menus.edit', compact('menu'));
     }
 
-    public function update(Request $request, int $id)
+    public function update(UpdateMenuRequest $request, int $id)
     {
-        $menu = Menu::findOrFail($id);
-
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
-            'currency' => 'nullable|string|max:10',
-            'display_order' => 'nullable|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'remove_image' => 'nullable|boolean',
-        ]);
-
-        $data = [
-            'name' => $validated['name'],
-            'description' => $validated['description'] ?? null,
-            'currency' => $validated['currency'] ?? 'MAD',
-            'display_order' => $validated['display_order'] ?? 0,
-        ];
+        $data = $request->validated();
+        $menu = $this->menuService->getById($id);
 
         // Handle image removal
         if ($request->boolean('remove_image') && $menu->image_url) {
@@ -101,7 +76,7 @@ class MenuController extends Controller
             $data['image_url'] = $request->file('image')->store('menus', 'public');
         }
 
-        $menu->update($data);
+        $this->menuService->update($id, $data);
 
         return redirect()->route('admin.menus.index')->with('success', 'Menu modifié avec succès.');
     }
@@ -109,7 +84,7 @@ class MenuController extends Controller
     public function destroy(Request $request, int $id)
     {
         try {
-            $menu = Menu::findOrFail($id);
+            $menu = $this->menuService->getById($id);
 
             // Check if menu has categories
             if ($menu->categories()->count() > 0) {
@@ -124,7 +99,7 @@ class MenuController extends Controller
                 Storage::disk('public')->delete($menu->image_url);
             }
 
-            $menu->delete();
+            $this->menuService->delete($id);
 
             if ($request->wantsJson() || $request->ajax()) {
                 return response()->json(['success' => true, 'message' => 'Menu supprimé avec succès.']);
@@ -142,8 +117,7 @@ class MenuController extends Controller
 
     public function toggleActive(int $id)
     {
-        $menu = Menu::findOrFail($id);
-        $menu->update(['is_active' => !$menu->is_active]);
+        $this->menuService->toggleActive($id);
 
         return back()->with('success', 'Statut modifié avec succès.');
     }

@@ -33,6 +33,9 @@
 
     {{ $modal ?? '' }}
 
+    <!-- Global Alert Component -->
+    <x-ui.alert />
+
     @stack('scripts')
 
     <script>

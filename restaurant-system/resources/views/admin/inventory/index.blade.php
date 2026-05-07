@@ -3,10 +3,12 @@
     @php
         $totalItems = $items->count();
         $lowStockItems = $items->filter(fn($item) => $item->quantity_in_stock <= $item->min_threshold)->count();
+        $goodStockItems = $totalItems - $lowStockItems;
+        $totalValue = $items->sum(fn($item) => $item->quantity_in_stock * $item->unit_price);
     @endphp
 
     <!-- KPI Cards -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
             <div class="w-9 h-9 bg-slate-100 rounded-xl flex items-center justify-center mb-2">
                 <svg class="w-5 h-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -17,6 +19,15 @@
             <p class="text-xs text-gray-400 font-medium">Total articles</p>
         </div>
         <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+            <div class="w-9 h-9 bg-emerald-50 rounded-xl flex items-center justify-center mb-2">
+                <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <p class="text-3xl font-extrabold font-heading text-emerald-600" x-text="filteredItems.filter(i => i.quantity_in_stock > i.min_threshold).length">{{ $goodStockItems }}</p>
+            <p class="text-xs text-gray-400 font-medium">Stock OK</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
             <div class="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center mb-2">
                 <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
@@ -25,14 +36,28 @@
             <p class="text-3xl font-extrabold font-heading text-amber-600" x-text="filteredItems.filter(i => i.quantity_in_stock <= i.min_threshold).length">{{ $lowStockItems }}</p>
             <p class="text-xs text-gray-400 font-medium">Stock faible</p>
         </div>
+        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+            <div class="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center mb-2">
+                <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.003 0l.194.148" />
+                </svg>
+            </div>
+            <p class="text-3xl font-extrabold font-heading text-gray-900">{{ number_format($totalValue, 2) }}</p>
+            <p class="text-xs text-gray-400 font-medium">Valeur totale (DH)</p>
+        </div>
     </div>
 
-    <!-- Filters -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+    <!-- Filters Bar -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
         <div class="relative flex-1 max-w-xs">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
             <input type="text" x-model="search" @input.debounce.300ms="applyFilters()"
-                class="py-2.5 ps-4 pe-4 block w-full bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-emerald-500 transition-shadow"
-                placeholder="Rechercher...">
+                class="py-2.5 ps-10 pe-4 block w-full bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-emerald-500 transition-shadow"
+                placeholder="Rechercher un article...">
         </div>
         <div class="flex gap-2">
             <button type="button" @click="showCreateModal = true"
@@ -50,7 +75,7 @@
     </div>
 
     <!-- Table -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead class="bg-gray-50/80 border-b border-gray-100">
@@ -140,23 +165,28 @@
                     });
                 },
                 
-                async deleteItem(id) {
-                    if (!confirm('Supprimer cet article ?')) return;
-                    try {
-                        const response = await fetch(`/admin/inventory/${id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
-                                'Accept': 'application/json',
+                deleteItem(id) {
+                    showConfirm('Supprimer cet article ?', async () => {
+                        try {
+                            const response = await fetch(`/admin/inventory/${id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+                                    'Accept': 'application/json',
+                                }
+                            });
+                            if (response.ok) {
+                                this.allItems = this.allItems.filter(i => i.id !== id);
+                                this.applyFilters();
+                                showAlert('Article supprimé avec succès', 'success');
+                            } else {
+                                const data = await response.json();
+                                showAlert(data.message || 'Erreur lors de la suppression', 'error');
                             }
-                        });
-                        if (response.ok) {
-                            this.allItems = this.allItems.filter(i => i.id !== id);
-                            this.applyFilters();
+                        } catch (error) {
+                            console.error('Error deleting item:', error);
                         }
-                    } catch (error) {
-                        console.error('Error deleting item:', error);
-                    }
+                    }, { type: 'warning', title: 'Confirmation de suppression' });
                 }
             }
         }
