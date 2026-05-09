@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'Admin - Resto Manager' }}</title>
 
     <!-- Fonts -->
@@ -21,7 +22,9 @@
 
     <!-- Content wrapper -->
     <div class="lg:ps-[260px] min-h-screen flex flex-col">
-        <x-admin.topbar :breadcrumb="$breadcrumb ?? ''" />
+        <x-admin.topbar :breadcrumb="$breadcrumb ?? ''">
+            <x-slot:actions>{{ $actions ?? '' }}</x-slot:actions>
+        </x-admin.topbar>
 
         <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6">
             {{ $slot }}
@@ -29,6 +32,9 @@
     </div>
 
     {{ $modal ?? '' }}
+
+    <!-- Global Alert Component -->
+    <x-ui.alert />
 
     @stack('scripts')
 

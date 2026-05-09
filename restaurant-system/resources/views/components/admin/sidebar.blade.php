@@ -38,50 +38,57 @@
                 Dashboard
             </a>
 
-            <a href="{{ route('admin.menu-items') }}"
-               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.menu-items') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
-                <svg class="w-4 h-4 {{ request()->routeIs('admin.menu-items') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <a href="{{ route('admin.menus.index') }}"
+               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.menus.index') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
+                <svg class="w-4 h-4 {{ request()->routeIs('admin.menus.index') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                </svg>
+                Menus
+            </a>
+
+            <a href="{{ route('admin.menu-items.index') }}"
+               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.menu-items.index') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
+                <svg class="w-4 h-4 {{ request()->routeIs('admin.menu-items.index') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
                 </svg>
                 Gestion du Menu
             </a>
 
-            <a href="{{ route('admin.categories') }}"
-               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.categories') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
-                <svg class="w-4 h-4 {{ request()->routeIs('admin.categories') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <a href="{{ route('admin.categories.index') }}"
+               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.categories.index') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
+                <svg class="w-4 h-4 {{ request()->routeIs('admin.categories.index') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                 </svg>
                 Catégories
             </a>
 
-            <a href="{{ route('admin.reports') }}"
-               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.reports') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
-                <svg class="w-4 h-4 {{ request()->routeIs('admin.reports') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <a href="{{ route('admin.reports.index') }}"
+               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.reports.index') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
+                <svg class="w-4 h-4 {{ request()->routeIs('admin.reports.index') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
                 </svg>
                 Rapports & Stats
             </a>
 
-            <a href="#"
-               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
-                <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <a href="{{ route('admin.orders.index') }}"
+               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.orders.index') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
+                <svg class="w-4 h-4 {{ request()->routeIs('admin.orders.index') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
                 </svg>
                 Commandes
-                <span class="ms-auto py-0.5 px-2 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">6</span>
             </a>
 
-            <a href="{{ route('admin.users') }}"
-               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.users') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
-                <svg class="w-4 h-4 {{ request()->routeIs('admin.users') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <a href="{{ route('admin.users.index') }}"
+               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.users.index') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
+                <svg class="w-4 h-4 {{ request()->routeIs('admin.users.index') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                 </svg>
                 Utilisateurs
             </a>
 
-            <a href="{{ route('admin.inventory') }}"
-               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.inventory') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
-                <svg class="w-4 h-4 {{ request()->routeIs('admin.inventory') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <a href="{{ route('admin.inventory.index') }}"
+               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.inventory.index') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
+                <svg class="w-4 h-4 {{ request()->routeIs('admin.inventory.index') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                 </svg>
                 Inventaire

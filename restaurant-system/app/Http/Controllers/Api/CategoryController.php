@@ -13,6 +13,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::where('is_active', true)
+            ->whereHas('menu', function ($query) {
+                $query->where('is_active', true);
+            })
             ->orderBy('display_order')
             ->get();
 

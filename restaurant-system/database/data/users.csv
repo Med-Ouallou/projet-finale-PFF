@@ -1,0 +1,7 @@
+name,email,email_verified_at,password,is_admin,created_at,updated_at
+Administrateur,admin@resto.com,2026-01-01 00:00:00,admin123,1,2026-01-01,2026-01-01
+Manager,manager@resto.com,2026-01-01 00:00:00,manager123,0,2026-01-01,2026-01-01
+Cuisinier,chef@resto.com,2026-01-01 00:00:00,chef123,0,2026-01-01,2026-01-01
+Serveur,serveur@resto.com,2026-01-01 00:00:00,serveur123,0,2026-01-01,2026-01-01
+Client1,client1@resto.com,2026-01-01 00:00:00,client123,0,2026-01-01,2026-01-01
+Client2,client2@resto.com,2026-01-01 00:00:00,client123,0,2026-01-01,2026-01-01

@@ -9,36 +9,36 @@ class AdminPageController extends Controller
 {
     public function login()
     {
-        return view('pages.admin.login');
+        return view('admin.login');
     }
 
     public function dashboard()
     {
-        return view('pages.admin.dashboard');
+        return view('admin.dashboard');
     }
 
     public function menuItems()
     {
-        return view('pages.admin.menu-items');
+        return view('admin.menu-items.index');
     }
 
     public function categories()
     {
-        return view('pages.admin.categories');
+        return view('admin.categories.index');
     }
 
     public function reports()
     {
-        return view('pages.admin.reports');
+        return view('admin.reports.index');
     }
 
     public function users()
     {
-        return view('pages.admin.users');
+        return view('admin.users.index');
     }
 
     public function inventory()
     {
-        return view('pages.admin.inventory');
+        return view('admin.inventory.index');
     }
 }
