@@ -17,17 +17,17 @@ class PublicPageController extends Controller
 
     public function accueil()
     {
-        return view('pages.accueil');
+        return view('customer.pages.accueil');
     }
 
     public function menu()
     {
         $categories = $this->menuService->getMenuData();
-        return view('pages.menu', compact('categories'));
+        return view('customer.menu.index', compact('categories'));
     }
 
     public function contact()
     {
-        return view('pages.contact');
+        return view('customer.pages.contact');
     }
 }

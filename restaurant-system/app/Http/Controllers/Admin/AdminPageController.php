@@ -19,26 +19,26 @@ class AdminPageController extends Controller
 
     public function menuItems()
     {
-        return view('admin.menu-items');
+        return view('admin.menu-items.index');
     }
 
     public function categories()
     {
-        return view('admin.categories');
+        return view('admin.categories.index');
     }
 
     public function reports()
     {
-        return view('admin.reports');
+        return view('admin.reports.index');
     }
 
     public function users()
     {
-        return view('admin.users');
+        return view('admin.users.index');
     }
 
     public function inventory()
     {
-        return view('admin.inventory');
+        return view('admin.inventory.index');
     }
 }
