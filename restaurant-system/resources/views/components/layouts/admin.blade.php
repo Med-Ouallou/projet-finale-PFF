@@ -38,15 +38,6 @@
 
     @stack('scripts')
 
-    <script>
-        function adminLayout() {
-            return {
-                sidebarOpen: false,
-                toggleSidebar() {
-                    this.sidebarOpen = !this.sidebarOpen;
-                }
-            }
-        }
-    </script>
+
 </body>
 </html>
