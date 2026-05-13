@@ -23,6 +23,8 @@ Route::prefix('client')->name('client.')->middleware(['auth', 'role:customer'])-
     Route::get('/dashboard', function () {
         return view('customer.dashboard');
     })->name('dashboard');
+
+    Route::post('/orders', [\App\Http\Controllers\Customer\OrderController::class, 'store'])->name('orders.store');
 });
 
 
