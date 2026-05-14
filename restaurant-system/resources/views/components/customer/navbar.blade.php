@@ -30,10 +30,10 @@
                 <div class="sm:ps-4 pb-4 sm:border-s border-gray-200">
                     @guest
                         <div class="flex items-center gap-2">
-                            <a href="{{ route('client.login') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all">
+                            <a href="{{ route('login') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all">
                                 Connexion
                             </a>
-                            <a href="{{ route('client.register') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5">
+                            <a href="{{ route('register') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5">
                                 S'inscrire
                             </a>
                         </div>

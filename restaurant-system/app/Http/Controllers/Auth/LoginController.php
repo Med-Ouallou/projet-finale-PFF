@@ -27,10 +27,11 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        if (auth()->user()->is_admin) {
-            return '/admin/dashboard';
+        $user = auth()->user();
+        if ($user->isAdmin() || $user->isEmployee()) {
+            return route('admin.dashboard');
         }
-        return '/';
+        return route('accueil');
     }
 
     /**
