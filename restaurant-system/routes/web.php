@@ -20,10 +20,9 @@ Auth::routes();
 
 // Protected Customer Routes
 Route::prefix('client')->name('client.')->middleware(['auth', 'role:customer'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('customer.dashboard');
-    })->name('dashboard');
-
+    Route::get('/profile', [\App\Http\Controllers\Customer\ClientProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [\App\Http\Controllers\Customer\ClientProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/password', [\App\Http\Controllers\Customer\ClientProfileController::class, 'updatePassword'])->name('password.update');
     Route::post('/orders', [\App\Http\Controllers\Customer\OrderController::class, 'store'])->name('orders.store');
 });
 

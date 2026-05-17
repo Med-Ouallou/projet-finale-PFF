@@ -64,7 +64,16 @@
                                     <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
                                 </div>
                                 
-                                @if(!Auth::user()->isCustomer())
+                                @if(Auth::user()->isCustomer())
+                                    {{-- Customer Profile Link --}}
+                                    <a href="{{ route('client.profile') }}"
+                                       class="flex items-center gap-2 px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 transition-colors">
+                                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                                        </svg>
+                                        Mon profil
+                                    </a>
+                                @else
                                     {{-- Admin/Employee Dashboard Link --}}
                                     <a href="{{ route('admin.dashboard') }}"
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 transition-colors">
