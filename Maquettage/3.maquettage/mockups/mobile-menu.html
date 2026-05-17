@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-white">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Menu Mobile - RestoManager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50/50 min-h-screen pb-28">
+
+    <!-- Header / Sticky NavBar -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100">
+        <div class="px-6 py-4 flex items-center justify-between">
+            <h1 class="font-heading font-black text-xl text-slate-900 tracking-tight">Notre <span
+                    class="text-emerald-600">Menu</span></h1>
+
+            <button type="button" data-hs-overlay="#hs-overlay-cart"
+                class="relative group active:scale-95 transition-transform p-3 bg-emerald-50 rounded-2xl shadow-sm">
+                <svg class="size-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.5"
+                    viewBox="0 0 24 24">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                    <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                <span id="cart-count-badge"
+                    class="absolute -top-1 -right-1 size-5 bg-emerald-600 text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-white shadow-lg transition-all duration-300">0</span>
+            </button>
+        </div>
+
+        <!-- Categories Filter -->
+        <div class="flex gap-3 overflow-x-auto px-6 pb-4 scrollbar-hide">
+            <button
+                class="flex-shrink-0 px-5 py-2.5 bg-emerald-600 text-white text-xs font-bold rounded-2xl shadow-lg shadow-emerald-200 uppercase tracking-wider">Tout</button>
+            <button
+                class="flex-shrink-0 px-5 py-2.5 bg-white border border-gray-100 text-gray-400 text-xs font-bold rounded-2xl uppercase tracking-wider">Plats</button>
+            <button
+                class="flex-shrink-0 px-5 py-2.5 bg-white border border-gray-100 text-gray-400 text-xs font-bold rounded-2xl uppercase tracking-wider">Entrées</button>
+            <button
+                class="flex-shrink-0 px-5 py-2.5 bg-white border border-gray-100 text-gray-400 text-xs font-bold rounded-2xl uppercase tracking-wider">Pizzas</button>
+            <button
+                class="flex-shrink-0 px-5 py-2.5 bg-white border border-gray-100 text-gray-400 text-xs font-bold rounded-2xl uppercase tracking-wider">Softs</button>
+        </div>
+    </header>
+
+    <main class="p-6">
+        <!-- Product List (Mobile Column) -->
+        <div class="space-y-6">
+
+            <!-- Product Item 1 -->
+            <div data-id="m1" data-name="Bowl Santé Mobile" data-price="65"
+                class="flex flex-col bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm active:scale-[0.98] transition-all duration-300">
+                <div class="relative h-44">
+                    <img class="w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" alt="">
+                    <span
+                        class="absolute top-3 left-3 py-1 px-3 bg-emerald-600 text-white text-[10px] font-black rounded-full shadow-lg">Chef
+                        Pick</span>
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start">
+                        <h3
+                            class="font-heading font-black text-gray-900 group-hover:text-emerald-700 transition-colors">
+                            Bowl Santé Signature</h3>
+                        <span class="text-emerald-700 font-black font-heading">65 DH</span>
+                    </div>
+                    <p class="text-[11px] text-gray-400 mt-2 mb-5 leading-relaxed">Quinoa bio, avocat frais, grenade et
+                        légumes de saison croquants.</p>
+                    <button type="button" onclick="addToCart(this)"
+                        class="w-full py-3 bg-emerald-600 text-white text-xs font-black rounded-2xl shadow-lg shadow-emerald-200 transition-all active:scale-95 group/btn flex items-center justify-center gap-2">
+                        <svg class="size-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                            <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product Item 2 -->
+            <div data-id="m2" data-name="Burger Angus Mobile" data-price="85"
+                class="flex flex-col bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm active:scale-[0.98] transition-all duration-300">
+                <div class="relative h-44">
+                    <img class="w-full h-full object-cover"
+                        src="https://images.unsplash.com/photo-1571091718767-18b5c1457add?w=400" alt="">
+                    <span
+                        class="absolute top-3 left-3 py-1 px-3 bg-amber-500 text-white text-[10px] font-black rounded-full shadow-lg text-start">Populaire</span>
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start">
+                        <h3
+                            class="font-heading font-black text-gray-900 group-hover:text-emerald-700 transition-colors">
+                            Burger Black Angus</h3>
+                        <span class="text-emerald-700 font-black font-heading">85 DH</span>
+                    </div>
+                    <p class="text-[11px] text-gray-400 mt-2 mb-5 leading-relaxed">Steak wagyu, comté affiné, oignons
+                        caramélisés et frites.</p>
+                    <button type="button" onclick="addToCart(this)"
+                        class="w-full py-3 bg-emerald-600 text-white text-xs font-black rounded-2xl shadow-lg shadow-emerald-200 transition-all active:scale-95 group/btn flex items-center justify-center gap-2">
+                        <svg class="size-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                            <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- BOTTOM NAV (PERSISTENT) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 px-4 pb-6 pt-2">
+        <div
+            class="max-w-md mx-auto bg-white/80 backdrop-blur-xl border border-white/40 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] rounded-[32px] flex items-center justify-around p-2">
+            <a href="mobile-index.html"
+                class="flex flex-col items-center justify-center py-2 px-6 rounded-2xl group relative transition-all">
+                <div
+                    class="absolute inset-0 bg-emerald-50 rounded-2xl scale-0 group-[.active]:scale-100 transition-transform">
+                </div>
+                <svg class="size-6 text-gray-400 group-[.active]:text-emerald-600 relative z-10 transition-colors"
+                    fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+                <span
+                    class="text-[9px] font-bold mt-1 text-gray-400 group-[.active]:text-emerald-700 relative z-10 uppercase tracking-tight">Accueil</span>
+            </a>
+            <a href="mobile-menu.html"
+                class="active flex flex-col items-center justify-center py-2 px-6 rounded-2xl group relative transition-all text-center">
+                <div
+                    class="absolute inset-0 bg-emerald-50 rounded-2xl scale-0 group-[.active]:scale-100 transition-transform">
+                </div>
+                <svg class="size-6 text-gray-400 group-[.active]:text-emerald-600 relative z-10 transition-colors"
+                    fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M3 3h18v18H3zM3 9h18M9 3v18" />
+                </svg>
+                <span
+                    class="text-[9px] font-bold mt-1 text-gray-400 group-[.active]:text-emerald-700 relative z-10 uppercase tracking-tight">Menu</span>
+            </a>
+            <a href="mobile-contact.html"
+                class="flex flex-col items-center justify-center py-2 px-6 rounded-2xl group relative transition-all">
+                <div
+                    class="absolute inset-0 bg-emerald-50 rounded-2xl scale-0 group-[.active]:scale-100 transition-transform">
+                </div>
+                <svg class="size-6 text-gray-400 group-[.active]:text-emerald-600 relative z-10 transition-colors"
+                    fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <span
+                    class="text-[9px] font-bold mt-1 text-gray-400 group-[.active]:text-emerald-700 relative z-10 uppercase tracking-tight">Contact</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== CART DRAWER (PRELINE OVERLAY) ===== -->
+    <div id="hs-overlay-cart"
+        class="hs-overlay hs-overlay-open:translate-x-0 translate-x-full fixed top-0 end-0 transition-all duration-300 transform h-full max-w-sm w-full z-[90] bg-white border-s border-gray-100 shadow-2xl hidden"
+        tabindex="-1">
+        <div class="flex justify-between items-center px-6 py-8 border-b border-gray-100 h-28">
+            <div>
+                <h3 class="font-heading font-black text-slate-800 text-xl uppercase tracking-tighter">Mon Panier</h3>
+                <p id="item-count-label" class="text-xs text-gray-400 font-bold">0 article</p>
+            </div>
+            <button type="button"
+                class="size-11 flex justify-center items-center rounded-2xl bg-gray-50 text-gray-400 active:bg-red-50 active:text-red-500 transition-all"
+                data-hs-overlay="#hs-overlay-cart">
+                <svg class="size-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="cart-items-container" class="p-6 space-y-4 overflow-y-auto h-[calc(100%-340px)] scrollbar-hide">
+            <div id="empty-cart-state"
+                class="flex flex-col items-center justify-center h-full py-10 opacity-40 grayscale">
+                <div class="size-24 bg-gray-50 rounded-[40px] flex items-center justify-center mb-6">🥗</div>
+                <p class="text-sm font-black text-gray-400 uppercase tracking-widest">Panier vide</p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 w-full px-6 pb-12 pt-6 border-t border-gray-100 bg-white/90 backdrop-blur-md">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Total</span>
+                <span id="cart-total-price" class="text-3xl font-black font-heading text-emerald-700">0.00 DH</span>
+            </div>
+            <button id="whatsapp-order-btn" type="button" disabled
+                class="w-full py-5 bg-emerald-600 text-white text-sm font-black rounded-3xl shadow-2xl shadow-emerald-200 transition-all active:scale-95 disabled:opacity-30 disabled:grayscale">Commander
+                (WhatsApp)</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        let cart = [];
+        function updateCart() {
+            const container = document.getElementById('cart-items-container');
+            const emptyState = document.getElementById('empty-cart-state');
+            const badge = document.getElementById('cart-count-badge');
+            const totalLabel = document.getElementById('cart-total-price');
+            const countLabel = document.getElementById('item-count-label');
+            const orderBtn = document.getElementById('whatsapp-order-btn');
+
+            if (cart.length === 0) {
+                emptyState.style.display = 'flex';
+                container.querySelectorAll('.cart-item').forEach(it => it.remove());
+                badge.innerText = '0';
+                totalLabel.innerText = '0.00 DH';
+                countLabel.innerText = '0 article';
+                orderBtn.disabled = true;
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            badge.innerText = cart.reduce((acc, it) => acc + it.quantity, 0);
+            countLabel.innerText = `${cart.length} article(s)`;
+            orderBtn.disabled = false;
+            container.querySelectorAll('.cart-item').forEach(it => it.remove());
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item flex items-center gap-4 bg-gray-50/50 border border-gray-100 p-4 rounded-3xl';
+                itemDiv.innerHTML = `
+                    <div class="size-14 rounded-2xl bg-emerald-100 flex items-center justify-center font-black text-emerald-800 text-sm overflow-hidden flex-shrink-0">${item.name[0]}</div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-black text-gray-800 truncate">${item.name}</p>
+                        <p class="text-xs text-emerald-600 font-black">${item.price.toFixed(2)} DH</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="changeQty(${index}, -1)" class="size-8 rounded-full bg-white border border-gray-200 text-gray-600 flex items-center justify-center font-black transition-all">-</button>
+                        <span class="text-sm font-black text-gray-800 w-4 text-center">${item.quantity}</span>
+                        <button onclick="changeQty(${index}, 1)" class="size-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black shadow-sm">+</button>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
+            totalLabel.innerText = `${total.toFixed(2)} DH`;
+        }
+
+        function addToCart(btn) {
+            const card = btn.closest('[data-id]');
+            const id = card.getAttribute('data-id');
+            const name = card.getAttribute('data-name');
+            const price = parseFloat(card.getAttribute('data-price'));
+            const existing = cart.find(it => it.id === id);
+            if (existing) existing.quantity++;
+            else cart.push({ id, name, price, quantity: 1 });
+            const badge = document.getElementById('cart-count-badge');
+            badge.classList.add('scale-150');
+            setTimeout(() => badge.classList.remove('scale-150'), 300);
+            updateCart();
+        }
+
+        function changeQty(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) cart.splice(index, 1);
+            updateCart();
+        }
+
+        document.getElementById('whatsapp-order-btn').addEventListener('click', () => {
+            const phoneNumber = "212600000000";
+            let message = "🍱 *MOBILE WEB APP - COMMANDE*\n\n";
+            let total = 0;
+            cart.forEach(item => {
+                message += `• *${item.quantity}x* ${item.name} (${(item.price * item.quantity).toFixed(2)} DH)\n`;
+                total += item.price * item.quantity;
+            });
+            message += `\n💰 *Total : ${total.toFixed(2)} DH*`;
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        });
+
+        window.addEventListener('load', () => { if (window.HSStaticMethods) window.HSStaticMethods.autoInit(); });
+    </script>
+</body>
+
+</html>

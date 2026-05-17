@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Resto Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 h-full">
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="hs-application-sidebar"
+        class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full duration-300 transform fixed top-0 start-0 bottom-0 z-[60] w-[260px] bg-white border-e border-gray-100 overflow-y-auto lg:block lg:translate-x-0 shadow-lg"
+        aria-label="Sidebar">
+        <div class="flex flex-col h-full">
+            <!-- Logo -->
+            <div class="px-6 py-5 bg-emerald-900">
+                <a class="flex items-center gap-2.5 font-bold font-heading text-lg text-white" href="index.html">
+                    <div class="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    Resto<span class="text-emerald-300">Admin</span>
+                </a>
+            </div>
+            <nav class="flex flex-col flex-1 p-3 pt-4 gap-0.5 overflow-y-auto" id="sidebar-nav-standard">
+                <p class="text-[10px] font-bold uppercase text-gray-400 tracking-widest px-2 mb-1">Principal</p>
+                <a href="admin-dashboard.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75" />
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="menu-crud.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                    </svg>
+                    Gestion du Menu
+                </a>
+                <a href="category-crud.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                    </svg>
+                    Catégories
+                </a>
+                <a href="admin-reports.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                    </svg>
+                    Rapports & Stats
+                </a>
+                <a href="#"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
+                    </svg>
+                    Commandes
+                    <span class="ms-auto py-0.5 px-2 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">6</span>
+                </a>
+                <a href="admin-users.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                    </svg>
+                    Utilisateurs
+                </a>
+                <a href="admin-inventory.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                    </svg>
+                    Inventaire
+                </a>
+                <!-- User Profile -->
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <div class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all">
+                        <img class="w-8 h-8 rounded-full object-cover shrink-0" src="https://i.pravatar.cc/32?img=8" alt="Admin">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-bold text-gray-800 truncate">Admin</p>
+                            <p class="text-xs text-gray-400 truncate">admin@restomanager.fr</p>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="w-full lg:ps-[260px] min-h-full flex flex-col">
+        <!-- Top Bar -->
+        <div
+            class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm px-6 py-3.5 flex items-center justify-between">
+            <div>
+                <h1 class="text-base font-bold font-heading text-gray-800">Tableau de bord</h1>
+                <p class="text-xs text-gray-400">Mercredi 4 Mars 2026</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                </button>
+                <img class="w-8 h-8 rounded-full object-cover cursor-pointer border-2 border-emerald-500"
+                    src="https://i.pravatar.cc/36?img=8" alt="Admin">
+            </div>
+        </div>
+
+        <div class="p-6 lg:p-8 space-y-6 flex-1">
+            <!-- Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Stat 1 -->
+                <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <div
+                            class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+                            <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                                <polyline points="16 7 22 7 22 13" />
+                            </svg>
+                            +12%
+                        </span>
+                    </div>
+                    <p class="text-2xl font-bold font-heading text-gray-800">1,250 €</p>
+                    <p class="text-xs text-gray-400 mt-0.5 font-medium">Revenus du jour</p>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                            </svg>
+                        </div>
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">
+                            6 en cours
+                        </span>
+                    </div>
+                    <p class="text-2xl font-bold font-heading text-gray-800">24</p>
+                    <p class="text-xs text-gray-400 mt-0.5 font-medium">Commandes aujourd'hui</p>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                            </svg>
+                        </div>
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">+8%</span>
+                    </div>
+                    <p class="text-2xl font-bold font-heading text-gray-800">156</p>
+                    <p class="text-xs text-gray-400 mt-0.5 font-medium">Clients uniques</p>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                        </div>
+                        <span
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">Excellent</span>
+                    </div>
+                    <p class="text-2xl font-bold font-heading text-gray-800">98%</p>
+                    <p class="text-xs text-gray-400 mt-0.5 font-medium">Taux de satisfaction</p>
+                </div>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+                <div class="px-6 py-4 flex justify-between items-center border-b border-gray-100">
+                    <div>
+                        <h2 class="text-base font-bold font-heading text-gray-800">Commandes récentes</h2>
+                        <p class="text-xs text-gray-400">Mises à jour en temps réel</p>
+                    </div>
+                    <button type="button"
+                        class="py-2 px-4 inline-flex items-center gap-x-2 text-xs font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                        Voir tout
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50 border-b border-gray-100">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                    Client</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                    Plats commandés</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                    Heure</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                    Statut</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-right text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                    Montant</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-50">
+                            <tr class="hover:bg-gray-50/50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <img class="w-8 h-8 rounded-full object-cover"
+                                            src="https://i.pravatar.cc/32?img=1" alt="">
+                                        <span class="text-sm font-medium text-gray-800">Ayoube Jamali</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">Bowl Santé × 2</td>
+                                <td class="px-6 py-4 text-sm text-gray-400">15:42</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold bg-emerald-100 text-emerald-800 rounded-full">Livrée</span>
+                                </td>
+                                <td class="px-6 py-4 text-right text-sm font-bold text-gray-800">45.00 €</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <img class="w-8 h-8 rounded-full object-cover"
+                                            src="https://i.pravatar.cc/32?img=5" alt="">
+                                        <span class="text-sm font-medium text-gray-800">Marie Durand</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">Pancakes Gourmands × 1</td>
+                                <td class="px-6 py-4 text-sm text-gray-400">15:51</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full">En
+                                        cours</span>
+                                </td>
+                                <td class="px-6 py-4 text-right text-sm font-bold text-gray-800">9.00 €</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <img class="w-8 h-8 rounded-full object-cover"
+                                            src="https://i.pravatar.cc/32?img=9" alt="">
+                                        <span class="text-sm font-medium text-gray-800">Fatima Zahra</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500">Tajine Poulet × 1, Salade × 1</td>
+                                <td class="px-6 py-4 text-sm text-gray-400">16:02</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-full">Confirmée</span>
+                                </td>
+                                <td class="px-6 py-4 text-right text-sm font-bold text-gray-800">32.50 €</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

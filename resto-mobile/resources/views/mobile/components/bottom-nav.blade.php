@@ -1,0 +1,43 @@
+<nav class="fixed bottom-0 left-0 right-0 z-50 px-4 pb-6 pt-2">
+    <div
+        class="max-w-md mx-auto bg-white/80 backdrop-blur-xl border border-white/40 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] rounded-[32px] flex items-center justify-around p-2">
+        <a href="{{ route('mobile.accueil') }}"
+            class="flex flex-col items-center justify-center py-2 px-6 rounded-2xl group relative transition-all {{ $activePage === 'accueil' ? 'active' : '' }}">
+            <div
+                class="absolute inset-0 bg-emerald-50 rounded-2xl scale-0 group-[.active]:scale-100 transition-transform">
+            </div>
+            <svg class="size-6 text-gray-400 group-[.active]:text-emerald-600 relative z-10 transition-colors"
+                fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            <span
+                class="text-[9px] font-bold mt-1 text-gray-400 group-[.active]:text-emerald-700 relative z-10 uppercase tracking-tight">Accueil</span>
+        </a>
+        <a href="{{ route('mobile.menu') }}"
+            class="flex flex-col items-center justify-center py-2 px-6 rounded-2xl group relative transition-all {{ $activePage === 'menu' ? 'active' : '' }}">
+            <div
+                class="absolute inset-0 bg-emerald-50 rounded-2xl scale-0 group-[.active]:scale-100 transition-transform">
+            </div>
+            <svg class="size-6 text-gray-400 group-[.active]:text-emerald-600 relative z-10 transition-colors"
+                fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M3 3h18v18H3zM3 9h18M9 3v18" />
+            </svg>
+            <span
+                class="text-[9px] font-bold mt-1 text-gray-400 group-[.active]:text-emerald-700 relative z-10 uppercase tracking-tight text-center">Menu</span>
+        </a>
+        <a href="{{ route('mobile.contact') }}"
+            class="flex flex-col items-center justify-center py-2 px-6 rounded-2xl group relative transition-all {{ $activePage === 'contact' ? 'active' : '' }}">
+            <div
+                class="absolute inset-0 bg-emerald-50 rounded-2xl scale-0 group-[.active]:scale-100 transition-transform">
+            </div>
+            <svg class="size-6 text-gray-400 group-[.active]:text-emerald-600 relative z-10 transition-colors"
+                fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            <span
+                class="text-[9px] font-bold mt-1 text-gray-400 group-[.active]:text-emerald-700 relative z-10 uppercase tracking-tight">Contact</span>
+        </a>
+    </div>
+</nav>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component: Category Table</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline/dist/preline.css">
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 p-8">
+
+    <!-- MOLECULE : category-table -->
+    <div class="flex flex-col bg-white border border-gray-100 shadow-sm rounded-3xl overflow-hidden">
+        <!-- Header Table -->
+        <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-100">
+            <div>
+                <h2 class="text-xl font-bold font-heading text-gray-800">Liste des Catégories</h2>
+                <p class="text-sm text-gray-500">Gérez l'organisation de votre carte restaurant.</p>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-100">
+                <thead class="bg-gray-50/50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-start">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Catégorie</span>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-start">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Description</span>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-start">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Plats</span>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-end">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Actions</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    <!-- Row 1 -->
+                    <tr class="hover:bg-gray-50/80 transition-colors group">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">
+                                    🥗
+                                </div>
+                                <div>
+                                    <span class="block text-sm font-bold text-gray-900">Entrées</span>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <div class="size-1.5 rounded-full bg-emerald-500"></div>
+                                        <span
+                                            class="text-[10px] font-bold text-gray-400 uppercase tracking-tight">Actif</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="text-sm text-gray-600 max-w-xs truncate">Salades fraîches et amuse-bouches pour
+                                bien commencer.</p>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-bold bg-gray-100 text-gray-800">
+                                12 plats
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-end">
+                            <div
+                                class="flex justify-end gap-2 translate-x-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
+                                <button type="button"
+                                    class="size-8 inline-flex justify-center items-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all">
+                                    <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <button type="button"
+                                    class="size-8 inline-flex justify-center items-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all">
+                                    <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Row 2 -->
+                    <tr class="hover:bg-gray-50/80 transition-colors group">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-xl">
+                                    🍽️
+                                </div>
+                                <div>
+                                    <span class="block text-sm font-bold text-gray-900">Plats Principaux</span>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <div class="size-1.5 rounded-full bg-blue-500"></div>
+                                        <span
+                                            class="text-[10px] font-bold text-gray-400 uppercase tracking-tight">Actif</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="text-sm text-gray-600 max-w-xs truncate">Nos meilleures sélections de viandes et
+                                poissons.</p>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-bold bg-gray-100 text-gray-800">
+                                24 plats
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-end">
+                            <div
+                                class="flex justify-end gap-2 translate-x-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
+                                <button type="button"
+                                    class="size-8 inline-flex justify-center items-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200 transition-all">
+                                    <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <button type="button"
+                                    class="size-8 inline-flex justify-center items-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-all">
+                                    <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination (Mini) -->
+        <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Affichage de 1-10 sur 12</span>
+            <div class="inline-flex gap-x-1">
+                <button type="button"
+                    class="py-1.5 px-3 text-xs font-bold text-gray-300 pointer-events-none rounded-lg border border-gray-100 bg-white transition cursor-not-allowed">←</button>
+                <button type="button"
+                    class="py-1.5 px-3 text-xs font-bold text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition">→</button>
+            </div>
+        </div>
+    </div>
+    <!-- / MOLECULE : category-table -->
+
+</body>
+
+</html>

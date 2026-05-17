@@ -23,9 +23,9 @@ style: |
     right: 60px;
   }
   .logo-header img { height: 140px; margin: 0; margin-left:10px; margin-right:10px }
-  h1 { color: #088dc7; font-size: 2.8em; margin-top: 100px; text-align: left; }
-  h2 { color: #088dc7; font-size: 2em; border-bottom: 2px solid #088dc7; margin-bottom: 40px;}
-  h3 { text-align: left; color: #444; margin-top: 0; }
+  h1 { color: #029fcaff; font-size: 2.8em; margin-top: 100px; text-align: left; }
+  h2 { color: #029fcaff; font-size: 2em; border-bottom: 2px solid #029fcaff; margin-bottom: 40px;}
+  h3 { text-align: left; color: #029fcaff; margin-top: 0; }
 
   .sommaire-grid {
     display: grid;
@@ -36,43 +36,55 @@ style: |
   .sommaire-item {
     display: flex;
     align-items: center;
-    background: #f4faff;
+    background: #f2fafcff;
     border-radius: 12px;
     padding: 15px 20px;
-    border-left: 5px solid #088dc7;
+    border-left: 5px solid #029fcaff;
   }
   .sommaire-num {
-    background: #088dc7; color: white; width: 35px; height: 35px;
+    background: #029fcaff;; color: white; width: 35px; height: 35px;
     display: flex; justify-content: center; align-items: center;
     border-radius: 50%; font-weight: bold; margin-right: 15px; flex-shrink: 0;
   }
   
   .img-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: 100%;
+    width: 100%;
+    height: 420px; /* Fixed height to prevent overflow */
+    margin-top: 10px;
+    overflow: hidden;
   }
+
   .img-methodo {
-    width: 85%;
-    height: auto;
-    max-height: 450px;
+    max-width: 85%;
+    max-height: 100%;
     object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   }
 
+  .img-usecase {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  }
+
   .dt-card {
-    background: #f0f7fa;
+    background: #f2fafcff;
     padding: 30px;
     border-radius: 10px;
-    border-top: 6px solid #088dc7;
+    border-top: 6px solid #029fcaff;
     text-align: left;
     margin-top: 20px;
     width: 100%;
   }
 
-  /* --- FIX COULEURS TECH STACK --- */
   .tech-container {
     display: flex;
     flex-wrap: wrap;
@@ -83,7 +95,7 @@ style: |
     padding: 8px 18px;
     border-radius: 6px;
     font-weight: 600;
-    background-color: #545353ff; /* Gris foncé unique */
+    background-color: #545353ff;
     color: #ffffff !important;
     font-size: 0.85em;
     border: 1px solid #222;
@@ -92,8 +104,8 @@ style: |
     display: flex;
     gap: 15px;
     justify-content: center;
-    align-items: flex-start;
-    height: 350px;
+    align-items: center;
+    height: 400px;
   }
 
 ---
@@ -103,11 +115,11 @@ style: |
   <img src="images/logo-solicode.png" alt="Logo Right">
 </div>
 
-# **Projet de Fin de Formation**
-### **Digitalisation des Services de Coaching : Développement d’une Solution Web Intégrée de Gestion et de Branding**
+# Projet de Fin de Formation
+### Digitalisation des Services de Mini Restaurant : Développement d’une Solution Web Intégrée de Gestion
 
-**Réalisé par :** Mehdi Bentaleb  
-**Encadré par :** M. ESSARRAJ Fouad  
+**Réalisé par :** <span class="highlight">Mohamed Ouallou</span>  
+**Encadré par :** <span class="highlight">M. ESSARRAJ Fouad</span>  
 **Filière :** Développement Mobile et Web
 
 ---
@@ -120,18 +132,19 @@ style: |
   <div class="sommaire-item"><div class="sommaire-num">3</div><div class="sommaire-text">Branche Fonctionnelle</div></div>
   <div class="sommaire-item"><div class="sommaire-num">4</div><div class="sommaire-text">Branche Technique</div></div>
   <div class="sommaire-item"><div class="sommaire-num">5</div><div class="sommaire-text">Conception</div></div>
-  <div class="sommaire-item"><div class="sommaire-num">6</div><div class="sommaire-text">Démonstration</div></div>
-  <div class="sommaire-item"><div class="sommaire-num">7</div><div class="sommaire-text">Conclusion</div></div>
+  <div class="sommaire-item"><div class="sommaire-num">6</div><div class="sommaire-text">Conclusion</div></div>
 </div>
 
 ---
 ## 1. Contexte du projet
 
+<div class="img-container">
+  <img src="images/context.png" class="img-methodo" alt="Contexte du projet">
+</div>
+
 ---
 
 ## 2. Méthodologie : Design Thinking
-
-
 
 <div class="img-container">
   <img src="images/designThinking.png" class="img-methodo" alt="Design Thinking">
@@ -141,55 +154,30 @@ style: |
 
 ## Méthodologie : Scrum (Agile)
 
-
-
 <div class="img-container">
   <img src="images/scrum.jpg" class="img-methodo" alt="Scrum">
 </div>
 
 ---
 
-
-
-## 3. Branche Fonctionnelle : Design Thinking
-### 1. EMPATHIE
+## 3. Branche Fonctionnelle : Carte Empathie
 
 <div class="img-container">
-  <div class="dt-card" style="border-top-color: #f39c12;">
-    <h4>Comprendre l'utilisateur</h4>
-    <blockquote style="font-style: italic; background: white; padding: 15px; border-radius: 8px;">
-      "Observation des difficultés réelles des étudiants lors des examens : stress du temps, erreurs de lecture et attente des résultats."
-    </blockquote>
-  </div>
+  <img src="images/empathie_map_mindmap.png" class="img-methodo" alt="Carte Empathie">
 </div>
 
 ---
 
-## Branche Fonctionnelle : Design Thinking
-### 2. DÉFINITION
+## Branche Fonctionnelle : DÉFINITION
 
-<div class="img-container">
-  <div class="dt-card" style="border-top-color: #f39c12;">
-    <h4>Cadrage du problème</h4>
-    <blockquote style="font-style: italic; background: white; padding: 15px; border-radius: 8px;">
-      "Comment simplifier l'évaluation tout en offrant un feedback immédiat ?"
-    </blockquote>
-    <p>Focus sur : L'accessibilité, la rapidité et la fiabilité des données.</p>
-  </div>
-</div>
-
----
-
-## Branche Fonctionnelle : Design Thinking
-### 3. IDÉATION
-
-<div class="img-container">
-  <div class="dt-card" style="border-top-color: #f39c12;">
-    <h4>Solutions retenues</h4>
-    <p>• Interface <strong>"Single Question"</strong> pour éviter la surcharge cognitive.</p>
-    <p>• <strong>Timer dynamique</strong> par catégorie de question.</p>
-    <p>• <strong>Dashboard</strong> temps réel pour le suivi des formateurs.</p>
-  </div>
+<div class="dt-card" style="border-top-color: #f39c12;">
+  <h4>Cadrage du problème</h4>
+  <blockquote style="font-style: italic; background: white; padding: 15px; border-radius: 8px;">
+    Les tâches sont réalisées manuellement avec plusieurs outils, ce qui cause : <br>
+    - perte de temps <br>
+    - manque d’efficacité <br>
+    - image professionnelle faible. <br>
+  </blockquote>
 </div>
 
 ---
@@ -197,83 +185,94 @@ style: |
 ## Branche Fonctionnelle : Cas d'utilisation
 
 
-
+### Cas d'utilisation : Client
 <div class="img-container">
-  <h3>Interaction Utilisateur (UML)</h3>
-  <img src="images/use-case.png" class="img-methodo" alt="Use Case">
+  <img src="images/usecase-customer.png" class="img-usecase" alt="Use Case Client">
 </div>
 
 ---
+
+### Cas d'utilisation : Employé
+<div class="img-container">
+  <img src="images/usecase-employer.png" class="img-usecase" alt="Use Case Employé">
+</div>
+
+---
+
+### Cas d'utilisation : Admin
+<div class="img-container">
+  <img src="images/usecase-admin.png" class="img-usecase" alt="Use Case Admin">
+</div>
+
+---
+
+## Branche Fonctionnelle : Cas d'utilisation
+
+### Sprint 1 : Gestion de Base
+<div class="img-container">
+  <img src="images/sprint-1.png" class="img-usecase" alt="Sprint 1 Use Case">
+</div>
+
+---
+
+## Branche Fonctionnelle : Cas d'utilisation
+
+### Sprint 2 : Nutrition
+<div class="img-container">
+  <img src="images/sprint-2.png" class="img-usecase" alt="Sprint 2 Use Case">
+</div>
+
+---
+
 ## Branche Fonctionnelle : Maquettes (UI/UX)
 
 <div class="maquette-grid">
-  <div style="text-align: center;">
-    <img src="images/maquette.png" alt="Maquette" style="max-height: 350px;">
-  </div>
+  <img src="images/img-1.png" class="img-usecase" alt="Maquette 1">
+  <img src="images/img-2.png" class="img-usecase" style="width: 200px;" alt="Maquette 2">
+  <img src="images/img-3.png" class="img-usecase" style="width: 200px;" alt="Maquette 3">
 </div>
 
 ---
 
 ## 4. Branche Technique : Tech Stack
+
 <div class="sommaire-grid">
-  <div class="dt-card" style="margin-top:0;">
-    <h4>Les technologies à utiliser</h4>
-    <ul>
-      <li><strong>Base de données:</strong> MySQL</li>
-      <li><strong>Framework:</strong> Laravel 12</li>
-      <li><strong>Architecture N-Tiers:</strong>
-        <ul style="margin-top: 5px;">
-          <li>Controller: Requêtes HTTP</li>
-          <li>Service: Logique métier</li>
-          <li>Model: Base de données</li>
-        </ul>
-      </li>
-      <li><strong>Architecture MVC</strong></li>
-      <li><strong>Blade:</strong> Templates réutilisables</li>
+  
+  <div class="dt-card" style="margin-top:0; border-top-color: #029fcaff;">
+    <h4 style="text-align: center; border-bottom: 2px solid #029fcaff; padding-bottom: 8px;">Back-end & Architecture</h4>
+    <div style="text-align: center; margin: 30px 0;">
+        <p style="font-size: 1.2em; font-weight: bold; color: #444; letter-spacing: 1px;">
+            PHP <span style="color: #029fcaff;">•</span> Laravel <span style="color: #029fcaff;">•</span> MySQL
+        </p>
+    </div>
+    <ul style="list-style: none; padding: 15px 0 0 0; font-size: 0.9em; border-top: 1px solid #eee;">
+      <li><strong>Architecture :</strong> N-Tiers (Service Layer)</li>
+      <li><strong>Spatie :</strong> Rôles & Permissions</li>
+      <li><strong>Moteur :</strong> Eloquent ORM</li>
     </ul>
   </div>
+
   <div class="dt-card" style="margin-top:0; border-top-color: #27ae60;">
-    <ul>
-      <li><strong>AJAX:</strong> Interactions dynamiques sans rechargement</li>
-      <li><strong>Alpine.js:</strong> Librairie JavaScript dynamique</li>
-      <li><strong>Spatie:</strong> Gestion permissions et rôles</li>
-      <li><strong>Vite:</strong> Outil de build rapide</li>
-      <li><strong>Lucide:</strong> Librairie d'icônes</li>
-      <li><strong>Tailwind CSS:</strong> Développement responsive</li>
+    <h4 style="text-align: center; border-bottom: 2px solid #27ae60; padding-bottom: 8px;">Front-end & Outils</h4> 
+    <div style="text-align: center; margin: 30px 0;">
+        <p style="font-size: 1.2em; font-weight: bold; color: #444; letter-spacing: 1px;">
+            Tailwind CSS <span style="color: #27ae60;">•</span> Alpine.js <span style="color: #27ae60;">•</span> Vite
+        </p>
+    </div>
+    <ul style="list-style: none; padding: 15px 0 0 0; font-size: 0.9em; border-top: 1px solid #eee;">
+      <li><strong>UI :</strong> Preline UI & Lucide Icons</li>
+      <li><strong>Communication :</strong> AJAX / Axios</li>
+      <li><strong>Assets :</strong> Vite Bundler</li>
     </ul>
   </div>
+
 </div>
 
 ---
+## 5. Conception : Modélisation des données
 
-
-## 5. Conception : Diagramme de classe
-
-<h3>Modélisation des données (MLD)</h3>
 <div class="img-container">
-  <img src="images/diagramme-class.png" class="img-methodo" alt="Diagramme de classe">
-</div>
-
----
-
-## 6. Démonstration : Environnement & Outils
-
-<div class="sommaire-grid">
-  <div class="dt-card" style="margin-top:0;">
-    <h4>Environnement de Développement</h4>
-    <ul>
-      <li><strong>IDE:</strong> VS Code & Antigravity</li>
-      <li><strong>Monitoring DB:</strong> Workbench SQL</li>
-    </ul>
-  </div>
-  <div class="dt-card" style="margin-top:0; border-top-color: #27ae60;">
-    <h4>Gestion & Déploiement</h4>
-    <ul>
-      <li><strong>Modélisation UML:</strong> Mermaid/PlantUML</li>
-      <li><strong>Gestion de version:</strong> Git (GitHub)</li>
-      <li><strong>Navigateur:</strong> Chrome DevTools</li>
-    </ul>
-  </div>
+ <img src="../Presentation/images/class_diagram.png" alt="Maquette" width="45%" />
 </div>
 
 ---
@@ -281,3 +280,4 @@ style: |
 ## 7. Conclusion
 
 ### Merci pour votre attention !
+**Questions ?**

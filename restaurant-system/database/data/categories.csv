@@ -1,0 +1,7 @@
+menu_id,name,description,parent_id,display_order,icon_url,is_active,created_at,updated_at
+1,Starters,Appetizers,,1,,1,2026-01-01,2026-01-01
+1,Main Courses,Main dishes,,2,,1,2026-01-01,2026-01-01
+1,Desserts,Sweet desserts,,3,,1,2026-01-01,2026-01-01
+2,Beverages,All drinks,,1,,1,2026-01-01,2026-01-01
+2,Hot Drinks,Coffee and tea,4,2,,1,2026-01-01,2026-01-01
+2,Cold Drinks,Soft drinks,4,3,,1,2026-01-01,2026-01-01

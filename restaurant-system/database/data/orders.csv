@@ -1,0 +1,5 @@
+customer_id,subtotal,discount_amount,total_amount,status,payment_method,notes,promotion_id,created_at,updated_at
+1,110,10,100,paid,cash,,1,2026-01-02,2026-01-02
+2,65,0,65,preparing,card,, ,2026-01-02,2026-01-02
+3,70,0,70,served,cash,, ,2026-01-02,2026-01-02
+4,85,5,80,paid,card,,3,2026-01-03,2026-01-03

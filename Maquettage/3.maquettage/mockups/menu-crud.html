@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Menu - Resto Manager Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline/dist/preline.css">
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 h-full">
+
+    <!-- ===== SIDEBAR ===== -->
+    <div id="hs-application-sidebar"
+        class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full duration-300 transform fixed top-0 start-0 bottom-0 z-[60] w-[260px] bg-white border-e border-gray-100 overflow-y-auto lg:block lg:translate-x-0 shadow-lg"
+        aria-label="Sidebar">
+        <div class="flex flex-col h-full">
+            <!-- Logo -->
+            <div class="px-6 py-5 bg-emerald-900">
+                <a class="flex items-center gap-2.5 font-bold font-heading text-lg text-white" href="index.html">
+                    <div class="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    Resto<span class="text-emerald-300">Admin</span>
+                </a>
+            </div>
+            <!-- Nav Links -->
+            <nav class="flex flex-col flex-1 p-3 pt-4 gap-0.5 overflow-y-auto" id="sidebar-nav-standard">
+                <p class="text-[10px] font-bold uppercase text-gray-400 tracking-widest px-2 mb-1">Principal</p>
+                <a href="admin-dashboard.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75" />
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="menu-crud.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                    </svg>
+                    Gestion du Menu
+                    <span
+                        class="ms-auto py-0.5 px-2 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-600">12</span>
+                </a>
+                <a href="category-crud.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                    </svg>
+                    Catégories
+                </a>
+                <a href="admin-reports.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                    </svg>
+                    Rapports & Stats
+                </a>
+                <a href="#"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
+                    </svg>
+                    Commandes
+                    <span
+                        class="ms-auto py-0.5 px-2 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">6</span>
+                </a>
+                <a href="admin-users.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                    </svg>
+                    Utilisateurs
+                </a>
+                <a href="admin-inventory.html"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                    </svg>
+                    Inventaire
+                </a>
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <div
+                        class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all">
+                        <img class="w-8 h-8 rounded-full object-cover shrink-0" src="https://i.pravatar.cc/32?img=8"
+                            alt="Admin">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-bold text-gray-800 truncate">Admin</p>
+                            <p class="text-xs text-gray-400 truncate">admin@restomanager.fr</p>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ===== MAIN ===== -->
+    <div class="w-full lg:ps-[260px] min-h-screen flex flex-col">
+        <!-- Topbar -->
+        <header
+            class="sticky top-0 z-30 bg-white border-b border-gray-100 shadow-sm px-6 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <button type="button" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 text-gray-500"
+                    data-hs-overlay="#hs-application-sidebar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <nav class="flex items-center gap-1.5 text-sm text-gray-500">
+                    <a href="admin.html" class="hover:text-emerald-600 font-medium transition-colors">Admin</a>
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="font-bold text-gray-800">Gestion du Menu</span>
+                </nav>
+            </div>
+            <div class="flex items-center gap-2">
+                <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-xl transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
+                </button>
+                <button type="button"
+                    class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200/50 transition-all hover:-translate-y-0.5"
+                    data-hs-overlay="#hs-modal-menu-item">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Ajouter un plat
+                </button>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="flex-1 p-6 lg:p-8 space-y-6">
+
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+                    <div class="w-9 h-9 bg-slate-100 rounded-xl flex items-center justify-center mb-2"><svg
+                            class="w-5 h-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                        </svg></div>
+                    <p class="text-3xl font-extrabold font-heading text-gray-900">24</p>
+                    <p class="text-xs text-gray-400 font-medium">Total plats</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+                    <div class="w-9 h-9 bg-emerald-50 rounded-xl flex items-center justify-center mb-2"><svg
+                            class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg></div>
+                    <p class="text-3xl font-extrabold font-heading text-emerald-600">20</p>
+                    <p class="text-xs text-gray-400 font-medium">Disponibles</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+                    <div class="w-9 h-9 bg-red-50 rounded-xl flex items-center justify-center mb-2"><svg
+                            class="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                        </svg></div>
+                    <p class="text-3xl font-extrabold font-heading text-red-500">4</p>
+                    <p class="text-xs text-gray-400 font-medium">En rupture</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-1">
+                    <div class="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center mb-2"><svg
+                            class="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                        </svg></div>
+                    <p class="text-3xl font-extrabold font-heading text-gray-900">5</p>
+                    <p class="text-xs text-gray-400 font-medium">Catégories</p>
+                </div>
+            </div>
+
+            <!-- Filters Bar -->
+            <div
+                class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+                <div class="relative flex-1 max-w-xs">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <input type="text"
+                        class="py-2.5 ps-10 pe-4 block w-full bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-emerald-500 transition-shadow"
+                        placeholder="Rechercher un plat...">
+                </div>
+                <div class="flex gap-2">
+                    <!-- Catégorie Dropdown -->
+                    <div class="hs-dropdown relative inline-flex">
+                        <button id="hs-dd-cat" type="button"
+                            class="hs-dropdown-toggle py-2.5 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Catégorie
+                            <svg class="hs-dropdown-open:rotate-180 w-3.5 h-3.5 text-gray-400 transition-transform"
+                                fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[190px] bg-white shadow-xl rounded-2xl border border-gray-100 mt-2 z-[80] p-2"
+                            aria-labelledby="hs-dd-cat">
+                            <a href="#"
+                                class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                                <span class="w-2 h-2 bg-gray-400 rounded-full"></span>Toutes les catégories
+                            </a>
+                            <div class="my-1 border-t border-gray-100"></div>
+                            <a href="#"
+                                class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                                <span class="w-2 h-2 bg-blue-400 rounded-full"></span>Entrées
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                                <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>Plats principaux
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                                <span class="w-2 h-2 bg-pink-400 rounded-full"></span>Desserts
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full"></span>Boissons
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Statut Dropdown -->
+                    <div class="hs-dropdown relative inline-flex">
+                        <button id="hs-dd-stat" type="button"
+                            class="hs-dropdown-toggle py-2.5 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Statut
+                            <svg class="hs-dropdown-open:rotate-180 w-3.5 h-3.5 text-gray-400 transition-transform"
+                                fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[160px] bg-white shadow-xl rounded-2xl border border-gray-100 mt-2 z-[80] p-2"
+                            aria-labelledby="hs-dd-stat">
+                            <a href="#"
+                                class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"><span
+                                    class="w-2 h-2 bg-gray-400 rounded-full"></span>Tous</a>
+                            <a href="#"
+                                class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-emerald-50 text-emerald-700 transition-colors"><span
+                                    class="w-2 h-2 bg-emerald-500 rounded-full"></span>Disponible</a>
+                            <a href="#"
+                                class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-red-50 text-red-700 transition-colors"><span
+                                    class="w-2 h-2 bg-red-500 rounded-full"></span>Rupture</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50/80 border-b border-gray-100">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3.5 text-start text-[10px] font-bold uppercase text-gray-400 tracking-widest">
+                                    Plat</th>
+                                <th scope="col"
+                                    class="px-6 py-3.5 text-start text-[10px] font-bold uppercase text-gray-400 tracking-widest">
+                                    Catégorie</th>
+                                <th scope="col"
+                                    class="px-6 py-3.5 text-start text-[10px] font-bold uppercase text-gray-400 tracking-widest">
+                                    Prix</th>
+                                <th scope="col"
+                                    class="px-6 py-3.5 text-start text-[10px] font-bold uppercase text-gray-400 tracking-widest">
+                                    Statut</th>
+                                <th scope="col"
+                                    class="px-6 py-3.5 text-end text-[10px] font-bold uppercase text-gray-400 tracking-widest">
+                                    Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-50">
+                            <tr class="hover:bg-emerald-50/20 transition-colors group">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3.5">
+                                        <img class="w-12 h-12 rounded-xl object-cover shadow-sm shrink-0"
+                                            src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop"
+                                            alt="">
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Bowl Santé Quinoa</p>
+                                            <p class="text-xs text-gray-400 mt-0.5">Quinoa, avocat, légumes frais</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4"><span
+                                        class="inline-flex items-center gap-1 py-1 px-2.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700"><span
+                                            class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>Plat Principal</span>
+                                </td>
+                                <td class="px-6 py-4"><span class="text-sm font-bold text-gray-800">14.50 €</span></td>
+                                <td class="px-6 py-4"><span
+                                        class="inline-flex items-center gap-x-1.5 py-1 px-2.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700"><span
+                                            class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Disponible</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div
+                                        class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button type="button" title="Modifier"
+                                            class="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition"
+                                            data-hs-overlay="#hs-modal-menu-item">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" title="Dupliquer"
+                                            class="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" title="Supprimer"
+                                            class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/20 transition-colors group">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3.5">
+                                        <img class="w-12 h-12 rounded-xl object-cover shadow-sm shrink-0"
+                                            src="https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?w=100&h=100&fit=crop"
+                                            alt="">
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Pancakes aux Fruits</p>
+                                            <p class="text-xs text-gray-400 mt-0.5">Fruits rouges, sirop d'érable</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4"><span
+                                        class="inline-flex items-center gap-1 py-1 px-2.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700"><span
+                                            class="w-1.5 h-1.5 bg-amber-400 rounded-full"></span>Petit Déj.</span></td>
+                                <td class="px-6 py-4"><span class="text-sm font-bold text-gray-800">9.00 €</span></td>
+                                <td class="px-6 py-4"><span
+                                        class="inline-flex items-center gap-x-1.5 py-1 px-2.5 rounded-full text-xs font-bold bg-red-100 text-red-700"><span
+                                            class="w-1.5 h-1.5 rounded-full bg-red-500"></span>Rupture</span></td>
+                                <td class="px-6 py-4">
+                                    <div
+                                        class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button type="button"
+                                            class="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition"
+                                            data-hs-overlay="#hs-modal-menu-item">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                        <button type="button"
+                                            class="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                        <button type="button"
+                                            class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/20 transition-colors group">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3.5">
+                                        <img class="w-12 h-12 rounded-xl object-cover shadow-sm shrink-0"
+                                            src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=100&h=100&fit=crop"
+                                            alt="">
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Pizza Margherita</p>
+                                            <p class="text-xs text-gray-400 mt-0.5">Tomate, mozzarella, basilic</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4"><span
+                                        class="inline-flex items-center gap-1 py-1 px-2.5 rounded-full text-[11px] font-bold bg-red-50 text-red-600"><span
+                                            class="w-1.5 h-1.5 bg-red-400 rounded-full"></span>Plats</span></td>
+                                <td class="px-6 py-4"><span class="text-sm font-bold text-gray-800">12.00 €</span></td>
+                                <td class="px-6 py-4"><span
+                                        class="inline-flex items-center gap-x-1.5 py-1 px-2.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700"><span
+                                            class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Disponible</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div
+                                        class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button type="button"
+                                            class="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition"
+                                            data-hs-overlay="#hs-modal-menu-item">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                        <button type="button"
+                                            class="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                        <button type="button"
+                                            class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                <div
+                    class="px-6 py-4 bg-gray-50/60 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-3">
+                    <span class="text-xs text-gray-500 font-medium">Affichage <span
+                            class="font-bold text-gray-700">1-3</span> sur <span
+                            class="font-bold text-gray-700">12</span> résultats</span>
+                    <nav class="flex items-center gap-1">
+                        <button
+                            class="py-1.5 px-3 text-xs font-bold text-gray-400 rounded-lg border border-gray-200 bg-white disabled:opacity-50 transition"
+                            disabled>←</button>
+                        <button
+                            class="py-1.5 px-3 text-xs font-bold text-white rounded-lg bg-emerald-600 shadow-sm shadow-emerald-200">1</button>
+                        <button
+                            class="py-1.5 px-3 text-xs font-bold text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition">2</button>
+                        <button
+                            class="py-1.5 px-3 text-xs font-bold text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition">3</button>
+                        <button
+                            class="py-1.5 px-3 text-xs font-bold text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition">→</button>
+                    </nav>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== MODAL ADD / EDIT (From Molecule: menu-item-modal) ===== -->
+    <div id="hs-modal-menu-item"
+        class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
+        <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500
+                    sm:max-w-xl sm:w-full m-3 sm:mx-auto
+                    min-h-[calc(100%-3.5rem)] flex items-center">
+            <div
+                class="w-full flex flex-col bg-white border border-gray-100 shadow-2xl rounded-3xl pointer-events-auto">
+
+                <!-- Header -->
+                <div class="flex justify-between items-center py-5 px-6 border-b border-gray-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
+                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold font-heading text-gray-900 leading-none">Ajouter un plat</h3>
+                            <p class="text-xs text-gray-400 mt-0.5">Remplissez les informations ci-dessous.</p>
+                        </div>
+                    </div>
+                    <button type="button" data-hs-overlay="#hs-modal-menu-item"
+                        class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Body -->
+                <div class="p-6 space-y-5 overflow-y-auto max-h-[70vh]">
+
+                    <!-- Image Upload -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-2">Photo du plat</label>
+                        <div class="flex items-center gap-4">
+                            <label class="w-20 h-20 rounded-2xl bg-gray-50 flex flex-col gap-1 items-center justify-center
+                                          border-2 border-dashed border-gray-200 hover:border-emerald-400 hover:bg-emerald-50
+                                          hover:text-emerald-500 text-gray-400 transition-all cursor-pointer group">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <input type="file" class="hidden" accept="image/*">
+                            </label>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-700">Cliquez pour uploader</p>
+                                <p class="text-xs text-gray-400 mt-1">PNG, JPG, WebP — max 2MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Grid -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="col-span-2">
+                            <label class="block text-sm font-bold text-gray-800 mb-1.5">
+                                Nom du plat <span class="text-red-400">*</span>
+                            </label>
+                            <input type="text"
+                                class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm
+                                       focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition"
+                                placeholder="Ex: Pizza Margherita">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-800 mb-1.5">
+                                Catégorie <span class="text-red-400">*</span>
+                            </label>
+                            <div class="hs-dropdown relative w-full">
+                                <button type="button"
+                                    class="hs-dropdown-toggle py-3 px-4 inline-flex items-center justify-between w-full gap-x-2
+                                           text-sm font-medium rounded-xl border border-gray-200 bg-gray-50 text-gray-700
+                                           hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition">
+                                    <span class="modal-cat-label">Sélectionner...</span>
+                                    <svg class="hs-dropdown-open:rotate-180 w-4 h-4 text-gray-400 transition-transform shrink-0"
+                                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <div
+                                    class="hs-dropdown-menu transition-[opacity,margin] hs-dropdown-open:opacity-100 opacity-0 hidden
+                                            w-full bg-white shadow-xl rounded-2xl border border-gray-100 mt-1 z-[90] p-2">
+                                    <a href="#" onclick="selectCat(this,'🥗 Entrées');return false"
+                                        class="flex items-center py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">🥗
+                                        Entrées</a>
+                                    <a href="#" onclick="selectCat(this,'🍽️ Plats principaux');return false"
+                                        class="flex items-center py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">🍽️
+                                        Plats principaux</a>
+                                    <a href="#" onclick="selectCat(this,'🍰 Desserts');return false"
+                                        class="flex items-center py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">🍰
+                                        Desserts</a>
+                                    <a href="#" onclick="selectCat(this,'🥤 Boissons');return false"
+                                        class="flex items-center py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">🥤
+                                        Boissons</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-800 mb-1.5">
+                                Prix <span class="text-red-400">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <span class="text-sm font-bold text-gray-400">€</span>
+                                </div>
+                                <input type="number" step="0.01" min="0"
+                                    class="py-3 ps-9 px-4 block w-full border border-gray-200 rounded-xl text-sm
+                                           focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="0.00">
+                            </div>
+                        </div>
+
+                        <div class="col-span-2">
+                            <label class="block text-sm font-bold text-gray-800 mb-1.5">Description</label>
+                            <textarea
+                                class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm
+                                       focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition"
+                                rows="3" placeholder="Ingrédients, allergènes, remarques..."></textarea>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex items-center justify-between p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100">
+                        <div>
+                            <p class="text-sm font-bold text-gray-800">Disponible immédiatement</p>
+                            <p class="text-xs text-gray-400 mt-0.5">Visible dans le menu client en temps réel.</p>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="modal-avail-toggle" type="checkbox" class="relative w-11 h-6 bg-gray-200 border-transparent text-transparent rounded-full cursor-pointer
+                                       transition-colors ease-in-out duration-200 focus:ring-emerald-600
+                                       checked:bg-none checked:text-emerald-600 checked:border-emerald-600
+                                       before:inline-block before:size-5 before:bg-white checked:before:bg-white
+                                       before:translate-x-0 checked:before:translate-x-full
+                                       before:rounded-full before:shadow before:transform before:ring-0
+                                       before:transition before:ease-in-out before:duration-200" checked>
+                            <label for="modal-avail-toggle" class="sr-only">Disponible</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="flex justify-end items-center gap-3 px-6 py-5 border-t border-gray-100">
+                    <button type="button" data-hs-overlay="#hs-modal-menu-item"
+                        class="py-2.5 px-5 text-sm font-semibold text-gray-500 hover:bg-gray-100 rounded-xl transition-colors">
+                        Annuler
+                    </button>
+                    <button type="button" class="py-2.5 px-6 text-sm font-bold inline-flex items-center gap-x-2 rounded-xl
+                               bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-200/50
+                               transition-all hover:-translate-y-0.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path d="M4.5 12.75l6 6 9-13.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Enregistrer le plat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectCat(el, label) {
+            el.closest('.hs-dropdown').querySelector('.modal-cat-label').textContent = label;
+        }
+
+        // Force Preline Init for dynamic environments
+        function initPreline() {
+            if (window.HSStaticMethods && typeof window.HSStaticMethods.autoInit === 'function') {
+                window.HSStaticMethods.autoInit();
+                console.log('Preline initialized');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initPreline);
+        window.addEventListener('load', initPreline);
+
+        // Polling as a safety measure for iffy loaders
+        let checks = 0;
+        const interval = setInterval(() => {
+            initPreline();
+            if (++checks > 5) clearInterval(interval);
+        }, 500);
+    </script>
+    <script>
+        function setActivePage() {
+            const currentPath = window.location.pathname;
+            const links = document.querySelectorAll('.nav-link');
+
+            links.forEach(link => {
+                if (currentPath.includes(link.getAttribute('href'))) {
+                    link.classList.remove('text-gray-600', 'font-medium', 'hover:bg-gray-100');
+                    link.classList.add('text-emerald-700', 'font-bold', 'bg-emerald-50', 'border', 'border-emerald-100');
+
+                    const svg = link.querySelector('svg');
+                    if (svg) {
+                        svg.classList.remove('text-gray-400');
+                        svg.classList.add('text-emerald-600');
+                    }
+                }
+            });
+        }
+        document.addEventListener('DOMContentLoaded', setActivePage);
+    </script>
+</body>
+
+</html>

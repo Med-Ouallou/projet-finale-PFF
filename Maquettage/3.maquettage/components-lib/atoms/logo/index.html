@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 p-10 space-y-10">
+    <div class="pb-6 border-b border-gray-200">
+        <p class="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-1">Atom</p>
+        <h1 class="text-2xl font-bold font-heading text-gray-900">Logo</h1>
+        <p class="text-sm text-gray-400 mt-1">Variantes du logo RestoManager selon le contexte.</p>
+    </div>
+
+    <!-- Light Background -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 space-y-8">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Sur fond clair</p>
+        <a class="flex items-center gap-3 w-fit text-2xl font-bold font-heading text-slate-900 focus:outline-none"
+            href="#">
+            <div
+                class="flex items-center justify-center w-10 h-10 bg-emerald-600 rounded-xl shadow-lg shadow-emerald-200">
+                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+            </div>
+            Resto<span class="text-emerald-600">Manager</span>
+        </a>
+    </div>
+
+    <!-- Dark Background -->
+    <div class="bg-emerald-900 rounded-2xl shadow-sm p-10 space-y-8">
+        <p class="text-xs font-bold text-emerald-600/60 uppercase tracking-widest">Sur fond sombre (Header Admin)</p>
+        <a class="flex items-center gap-3 w-fit text-2xl font-bold font-heading text-white focus:outline-none" href="#">
+            <div class="flex items-center justify-center w-10 h-10 bg-emerald-500 rounded-xl">
+                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+            </div>
+            Resto<span class="text-emerald-300">Admin</span>
+        </a>
+    </div>
+
+    <!-- Compact -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 space-y-8">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Variante Compacte (Icon seul)</p>
+        <div class="flex items-center gap-6">
+            <div
+                class="flex items-center justify-center w-10 h-10 bg-emerald-600 rounded-xl shadow-lg shadow-emerald-200">
+                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+            </div>
+            <div
+                class="flex items-center justify-center w-12 h-12 bg-emerald-600 rounded-2xl shadow-xl shadow-emerald-200">
+                <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

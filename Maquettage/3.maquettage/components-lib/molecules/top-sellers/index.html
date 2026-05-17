@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecule: Top Sellers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 p-8">
+
+    <!-- MOLECULE : top-sellers -->
+    <div class="flex flex-col bg-white border border-gray-100 shadow-sm rounded-3xl overflow-hidden p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-lg font-bold font-heading text-gray-800">Top des Ventes</h3>
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Ce mois</span>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Item 1 -->
+            <div
+                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group">
+                <div class="relative">
+                    <img class="w-12 h-12 rounded-xl object-cover shadow-sm group-hover:scale-105 transition-transform"
+                        src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&h=100&fit=crop" alt="Plat">
+                    <span
+                        class="absolute -top-2 -right-2 w-6 h-6 bg-emerald-600 text-white text-[10px] font-bold rounded-full border-2 border-white flex items-center justify-center shadow-lg">1</span>
+                </div>
+                <div class="flex-1 min-w-0 text-start">
+                    <h4 class="text-sm font-bold text-gray-900 truncate">Salade César Premium</h4>
+                    <p class="text-xs text-gray-400">142 unités vendues</p>
+                </div>
+                <div class="text-end">
+                    <p class="text-sm font-bold text-emerald-700">12,070 DH</p>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase">Revenu</p>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div
+                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group">
+                <div class="relative">
+                    <img class="w-12 h-12 rounded-xl object-cover shadow-sm group-hover:scale-105 transition-transform"
+                        src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=100&h=100&fit=crop"
+                        alt="Plat">
+                    <span
+                        class="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500 text-white text-[10px] font-bold rounded-full border-2 border-white flex items-center justify-center shadow-lg">2</span>
+                </div>
+                <div class="flex-1 min-w-0 text-start">
+                    <h4 class="text-sm font-bold text-gray-900 truncate">Pizza Quattro Stagioni</h4>
+                    <p class="text-xs text-gray-400">98 unités vendues</p>
+                </div>
+                <div class="text-end">
+                    <p class="text-sm font-bold text-emerald-700">11,270 DH</p>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase">Revenu</p>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div
+                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group">
+                <div class="relative">
+                    <img class="w-12 h-12 rounded-xl object-cover shadow-sm group-hover:scale-105 transition-transform"
+                        src="https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?w=100&h=100&fit=crop"
+                        alt="Plat">
+                    <span
+                        class="absolute -top-2 -right-2 w-6 h-6 bg-emerald-400 text-white text-[10px] font-bold rounded-full border-2 border-white flex items-center justify-center shadow-lg">3</span>
+                </div>
+                <div class="flex-1 min-w-0 text-start">
+                    <h4 class="text-sm font-bold text-gray-900 truncate">Pancakes Myrtilles</h4>
+                    <p class="text-xs text-gray-400">85 unités vendues</p>
+                </div>
+                <div class="text-end">
+                    <p class="text-sm font-bold text-emerald-700">4,250 DH</p>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase">Revenu</p>
+                </div>
+            </div>
+        </div>
+
+        <button
+            class="mt-4 w-full py-2 text-xs font-bold text-gray-400 hover:text-emerald-600 transition-colors uppercase tracking-widest bg-gray-50 rounded-xl">
+            Voir le classement complet
+        </button>
+    </div>
+    <!-- / MOLECULE : top-sellers -->
+
+</body>
+
+</html>

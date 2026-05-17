@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component: Admin Sidebar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline/dist/preline.css">
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- MOLECULE : sidebar -->
+    <div id="hs-application-sidebar"
+        class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full duration-300 transform fixed top-0 start-0 bottom-0 z-[60] w-[260px] bg-white border-e border-gray-100 overflow-y-auto lg:block lg:translate-x-0 shadow-lg"
+        aria-label="Sidebar">
+        <div class="flex flex-col h-full">
+            <!-- Logo -->
+            <div class="px-6 py-5 bg-emerald-900">
+                <a class="flex items-center gap-2.5 font-bold font-heading text-lg text-white" href="index.html">
+                    <div class="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    Resto<span class="text-emerald-300">Admin</span>
+                </a>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="flex flex-col flex-1 p-3 pt-4 gap-0.5 overflow-y-auto" id="sidebar-nav-standard">
+                <p class="text-[10px] font-bold uppercase text-gray-400 tracking-widest px-2 mb-1">Principal</p>
+
+                <!-- Dashboard -->
+                <a href="admin-dashboard.html" data-page="dashboard"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75" />
+                    </svg>
+                    Dashboard
+                </a>
+
+                <!-- Gestion Menu -->
+                <a href="menu-crud.html" data-page="menu"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                    </svg>
+                    Gestion du Menu
+                </a>
+
+                <!-- Catégories -->
+                <a href="category-crud.html" data-page="categories"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                    </svg>
+                    Catégories
+                </a>
+
+                <!-- Rapports -->
+                <a href="admin-reports.html" data-page="reports"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                    </svg>
+                    Rapports & Stats
+                </a>
+
+                <!-- Commandes -->
+                <a href="#" data-page="orders"
+                    class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all group">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition" fill="none"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
+                    </svg>
+                    Commandes
+                    <span
+                        class="ms-auto py-0.5 px-2 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">6</span>
+                </a>
+
+                <!-- User Profile -->
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <div
+                        class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-gray-50 cursor-pointer transition-all">
+                        <img class="w-8 h-8 rounded-full object-cover shrink-0" src="https://i.pravatar.cc/32?img=8"
+                            alt="Admin">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-bold text-gray-800 truncate">Admin</p>
+                            <p class="text-xs text-gray-400 truncate">admin@restomanager.fr</p>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- / MOLECULE : sidebar -->
+
+    <script>
+        // Script pour gérer l'état actif (utile pour les mockups statiques)
+        function setActivePage() {
+            const currentPath = window.location.pathname;
+            const links = document.querySelectorAll('.nav-link');
+
+            links.forEach(link => {
+                if (currentPath.includes(link.getAttribute('href'))) {
+                    link.classList.remove('text-gray-600', 'font-medium', 'hover:bg-gray-100');
+                    link.classList.add('text-emerald-700', 'font-bold', 'bg-emerald-50', 'border', 'border-emerald-100');
+
+                    // Update icon color
+                    const svg = link.querySelector('svg');
+                    if (svg) {
+                        svg.classList.remove('text-gray-400');
+                        svg.classList.add('text-emerald-600');
+                    }
+                }
+            });
+        }
+        document.addEventListener('DOMContentLoaded', setActivePage);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecule: Chart Card</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 p-8">
+
+    <!-- MOLECULE : chart-card -->
+    <div class="flex flex-col bg-white border border-gray-100 shadow-sm rounded-3xl overflow-hidden p-6">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h3 class="text-lg font-bold font-heading text-gray-800">Évolution du Chiffre d'Affaires</h3>
+                <p class="text-sm text-gray-500">Revenus générés sur les 30 derniers jours</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span
+                    class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-600">
+                    +12.5%
+                </span>
+            </div>
+        </div>
+
+        <!-- Placeholder for Chart (Preline style) -->
+        <div class="relative h-64 w-full bg-gray-50 rounded-2xl flex items-end justify-between p-4 gap-2">
+            <!-- Simulated Area Chart / Bars -->
+            <div class="w-full h-1/3 bg-emerald-200 rounded-t-md opacity-40"></div>
+            <div class="w-full h-1/2 bg-emerald-300 rounded-t-md opacity-40"></div>
+            <div class="w-full h-2/3 bg-emerald-400 rounded-t-md opacity-40"></div>
+            <div class="w-full h-1/2 bg-emerald-500 rounded-t-md opacity-60"></div>
+            <div class="w-full h-4/5 bg-emerald-600 rounded-t-md opacity-80"></div>
+            <div class="w-full h-full bg-emerald-700 rounded-t-md"></div>
+            <div class="w-full h-3/4 bg-emerald-600 rounded-t-md opacity-80"></div>
+            <div class="w-full h-1/2 bg-emerald-400 rounded-t-md opacity-40"></div>
+
+            <!-- Axis lines overlay -->
+            <div class="absolute inset-0 border-b border-l border-gray-200 pointer-events-none m-4"></div>
+
+            <div
+                class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-white/10 backdrop-blur-[1px] cursor-crosshair">
+                <span class="bg-emerald-900 text-white text-[10px] font-bold py-1 px-2 rounded-lg shadow-xl">850.00 DH -
+                    24 Mars</span>
+            </div>
+        </div>
+
+        <div class="mt-4 flex justify-between text-[10px] font-bold text-gray-400 uppercase tracking-widest px-2">
+            <span>01 Mar</span>
+            <span>15 Mar</span>
+            <span>30 Mar</span>
+        </div>
+    </div>
+    <!-- / MOLECULE : chart-card -->
+
+</body>
+
+</html>

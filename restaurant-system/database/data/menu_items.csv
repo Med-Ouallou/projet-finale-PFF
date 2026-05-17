@@ -1,0 +1,11 @@
+category_id,name,description,price,unit,status,image_url,created_at,updated_at
+1,Chicken Wings,Fried chicken wings,35,portion,available,,2026-01-01,2026-01-01
+1,Garlic Bread,Bread with garlic butter,20,portion,available,,2026-01-01,2026-01-01
+2,Beef Burger,Grilled beef burger,55,portion,available,,2026-01-01,2026-01-01
+2,Chicken Pizza,Chicken pizza with cheese,65,portion,available,,2026-01-01,2026-01-01
+3,Chocolate Cake,Chocolate dessert,30,portion,available,,2026-01-01,2026-01-01
+3,Ice Cream,Vanilla ice cream,25,portion,available,,2026-01-01,2026-01-01
+5,Espresso,Strong coffee,12,glass,available,,2026-01-01,2026-01-01
+5,Cappuccino,Coffee with milk,18,glass,available,,2026-01-01,2026-01-01
+6,Coca Cola,Soft drink,10,glass,available,,2026-01-01,2026-01-01
+6,Orange Juice,Fresh juice,15,glass,available,,2026-01-01,2026-01-01

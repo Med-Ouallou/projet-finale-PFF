@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 p-10 space-y-10">
+    <!-- Header -->
+    <div class="pb-6 border-b border-gray-200">
+        <p class="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-1">Atom</p>
+        <h1 class="text-2xl font-bold font-heading text-gray-900">Buttons</h1>
+        <p class="text-sm text-gray-400 mt-1">Tous les variants officiels Preline UI. Couleur primaire : Emerald.</p>
+    </div>
+
+    <!-- Solid -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 space-y-4">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Solid (Primaire)</p>
+        <div class="flex flex-wrap gap-3 items-center">
+            <button type="button"
+                class="py-2 px-4 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-emerald-600 text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                Small
+            </button>
+            <button type="button"
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-emerald-600 text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-md shadow-emerald-200">
+                Default
+            </button>
+            <button type="button"
+                class="py-3.5 px-6 inline-flex items-center gap-x-2 text-base font-semibold rounded-xl border border-transparent bg-emerald-600 text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-lg shadow-emerald-200">
+                Large
+            </button>
+            <button type="button" disabled
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-emerald-600 text-white disabled:opacity-40 disabled:pointer-events-none">
+                Disabled
+            </button>
+        </div>
+    </div>
+
+    <!-- Outline -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 space-y-4">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Outline</p>
+        <div class="flex flex-wrap gap-3 items-center">
+            <button type="button"
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-emerald-300 text-emerald-700 bg-white hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                Outline Emerald
+            </button>
+            <button type="button"
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all">
+                Outline Gray
+            </button>
+        </div>
+    </div>
+
+    <!-- Soft -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 space-y-4">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Soft</p>
+        <div class="flex flex-wrap gap-3 items-center">
+            <button type="button"
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-emerald-100 text-emerald-800 hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                Soft Emerald
+            </button>
+            <button type="button"
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-amber-100 text-amber-800 hover:bg-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all">
+                Soft Amber
+            </button>
+            <button type="button"
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all">
+                Soft Red
+            </button>
+        </div>
+    </div>
+
+    <!-- Ghost -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 space-y-4">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Ghost</p>
+        <div class="flex flex-wrap gap-3 items-center">
+            <button type="button"
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-emerald-600 hover:bg-emerald-50 hover:text-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                Ghost Emerald
+            </button>
+        </div>
+    </div>
+
+    <!-- With Icons -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 space-y-4">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Avec Icônes</p>
+        <div class="flex flex-wrap gap-3 items-center">
+            <button type="button"
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-emerald-600 text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-md shadow-emerald-200">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                </svg>
+                Démarrer
+            </button>
+            <button type="button"
+                class="py-3 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Voir la démo
+            </button>
+            <button type="button"
+                class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-emerald-100 text-emerald-800 hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18" />
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                </svg>
+                Supprimer
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

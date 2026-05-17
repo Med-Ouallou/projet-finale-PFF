@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component: Modal Ajout Plat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline/dist/preline.css">
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-8">
+
+    <!-- Trigger (Preview Only) -->
+    <div class="text-center space-y-4">
+        <p class="text-xs font-bold uppercase text-gray-400 tracking-widest">Composant : Modal Ajout / Édition Plat</p>
+        <button type="button" data-hs-overlay="#hs-modal-menu-item"
+            class="py-2.5 px-6 inline-flex items-center gap-x-2 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-200/60 transition-all hover:-translate-y-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Ajouter un plat (Demo)
+        </button>
+    </div>
+
+    <!--
+    =========================================================
+    MOLECULE : menu-item-modal
+    Usage    : data-hs-overlay="#hs-modal-menu-item"
+    Dépend de : Preline UI ( hs-overlay, hs-dropdown, checkbox toggle )
+    =========================================================
+    -->
+    <div id="hs-modal-menu-item"
+        class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
+        <div class="hs-overlay-open:opacity-100 hs-overlay-open:duration-500
+                    sm:max-w-xl sm:w-full m-3 sm:mx-auto
+                    min-h-[calc(100%-3.5rem)] flex items-center">
+            <div
+                class="w-full flex flex-col bg-white border border-gray-100 shadow-2xl rounded-3xl pointer-events-auto">
+
+                <!-- Header -->
+                <div class="flex justify-between items-center py-5 px-6 border-b border-gray-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
+                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold font-heading text-gray-900 leading-none">Ajouter un plat</h3>
+                            <p class="text-xs text-gray-400 mt-0.5">Remplissez les informations ci-dessous.</p>
+                        </div>
+                    </div>
+                    <button type="button" data-hs-overlay="#hs-modal-menu-item"
+                        class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Body -->
+                <div class="p-6 space-y-5 overflow-y-auto max-h-[70vh]">
+
+                    <!-- Image Upload -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-2">Photo du plat</label>
+                        <div class="flex items-center gap-4">
+                            <label class="w-20 h-20 rounded-2xl bg-gray-50 flex flex-col gap-1 items-center justify-center
+                                          border-2 border-dashed border-gray-200 hover:border-emerald-400 hover:bg-emerald-50
+                                          hover:text-emerald-500 text-gray-400 transition-all cursor-pointer group">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <input type="file" class="hidden" accept="image/*">
+                            </label>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-700">Cliquez pour uploader</p>
+                                <p class="text-xs text-gray-400 mt-1">PNG, JPG, WebP — max 2MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Grid -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Nom -->
+                        <div class="col-span-2">
+                            <label class="block text-sm font-bold text-gray-800 mb-1.5">
+                                Nom du plat <span class="text-red-400">*</span>
+                            </label>
+                            <input type="text"
+                                class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm
+                                       focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition"
+                                placeholder="Ex: Pizza Margherita">
+                        </div>
+
+                        <!-- Catégorie (Preline Dropdown) -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-800 mb-1.5">
+                                Catégorie <span class="text-red-400">*</span>
+                            </label>
+                            <div class="hs-dropdown relative w-full">
+                                <button type="button"
+                                    class="hs-dropdown-toggle py-3 px-4 inline-flex items-center justify-between w-full gap-x-2
+                                           text-sm font-medium rounded-xl border border-gray-200 bg-gray-50 text-gray-700
+                                           hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition">
+                                    <span class="modal-cat-label">Sélectionner...</span>
+                                    <svg class="hs-dropdown-open:rotate-180 w-4 h-4 text-gray-400 transition-transform shrink-0"
+                                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <div
+                                    class="hs-dropdown-menu transition-[opacity,margin] hs-dropdown-open:opacity-100 opacity-0 hidden
+                                            w-full bg-white shadow-xl rounded-2xl border border-gray-100 mt-1 z-[90] p-2">
+                                    <a href="#" onclick="selectCat(this,'🥗 Entrées');return false"
+                                        class="flex items-center py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">🥗
+                                        Entrées</a>
+                                    <a href="#" onclick="selectCat(this,'🍽️ Plats principaux');return false"
+                                        class="flex items-center py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">🍽️
+                                        Plats principaux</a>
+                                    <a href="#" onclick="selectCat(this,'🍰 Desserts');return false"
+                                        class="flex items-center py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">🍰
+                                        Desserts</a>
+                                    <a href="#" onclick="selectCat(this,'🥤 Boissons');return false"
+                                        class="flex items-center py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">🥤
+                                        Boissons</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Prix -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-800 mb-1.5">
+                                Prix <span class="text-red-400">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <span class="text-sm font-bold text-gray-400">€</span>
+                                </div>
+                                <input type="number" step="0.01" min="0"
+                                    class="py-3 ps-9 px-4 block w-full border border-gray-200 rounded-xl text-sm
+                                           focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" placeholder="0.00">
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-span-2">
+                            <label class="block text-sm font-bold text-gray-800 mb-1.5">Description</label>
+                            <textarea
+                                class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm
+                                       focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition"
+                                rows="3" placeholder="Ingrédients, allergènes, remarques..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Disponibilité Toggle -->
+                    <div
+                        class="flex items-center justify-between p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100">
+                        <div>
+                            <p class="text-sm font-bold text-gray-800">Disponible immédiatement</p>
+                            <p class="text-xs text-gray-400 mt-0.5">Visible dans le menu client en temps réel.</p>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="modal-avail-toggle" type="checkbox" class="relative w-11 h-6 bg-gray-200 border-transparent text-transparent rounded-full cursor-pointer
+                                       transition-colors ease-in-out duration-200 focus:ring-emerald-600
+                                       checked:bg-none checked:text-emerald-600 checked:border-emerald-600
+                                       before:inline-block before:size-5 before:bg-white checked:before:bg-white
+                                       before:translate-x-0 checked:before:translate-x-full
+                                       before:rounded-full before:shadow before:transform before:ring-0
+                                       before:transition before:ease-in-out before:duration-200" checked>
+                            <label for="modal-avail-toggle" class="sr-only">Disponible</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="flex justify-end items-center gap-3 px-6 py-5 border-t border-gray-100">
+                    <button type="button" data-hs-overlay="#hs-modal-menu-item"
+                        class="py-2.5 px-5 text-sm font-semibold text-gray-500 hover:bg-gray-100 rounded-xl transition-colors">
+                        Annuler
+                    </button>
+                    <button type="button" class="py-2.5 px-6 text-sm font-bold inline-flex items-center gap-x-2 rounded-xl
+                               bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-200/50
+                               transition-all hover:-translate-y-0.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path d="M4.5 12.75l6 6 9-13.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Enregistrer le plat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / MOLECULE : menu-item-modal -->
+
+    <script>
+        function selectCat(el, label) {
+            el.closest('.hs-dropdown').querySelector('.modal-cat-label').textContent = label;
+        }
+
+        // Force Preline Init for dynamic environments (UI Kit)
+        function initPreline() {
+            if (window.HSStaticMethods && typeof window.HSStaticMethods.autoInit === 'function') {
+                window.HSStaticMethods.autoInit();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initPreline);
+        window.addEventListener('load', initPreline);
+
+        // Polling as a safety measure for iffy loaders
+        let checks = 0;
+        const interval = setInterval(() => {
+            initPreline();
+            if (++checks > 5) clearInterval(interval);
+        }, 500);
+    </script>
+</body>
+
+</html>

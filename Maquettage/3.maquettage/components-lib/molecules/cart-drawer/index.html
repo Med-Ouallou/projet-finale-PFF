@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 p-8 flex items-center justify-center min-h-screen">
+
+    <!-- MOLECULE : cart-drawer -->
+    <div class="text-center">
+        <button type="button"
+            class="py-3 px-6 inline-flex items-center gap-x-2 text-sm font-bold rounded-2xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all hover:-translate-y-0.5"
+            data-hs-overlay="#hs-overlay-cart">
+            <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            Voir mon panier
+        </button>
+    </div>
+
+    <div id="hs-overlay-cart"
+        class="hs-overlay hs-overlay-open:translate-x-0 translate-x-full fixed top-0 end-0 transition-all duration-300 transform h-full max-w-sm w-full z-[90] bg-white border-s border-gray-100 shadow-2xl hidden"
+        tabindex="-1">
+        <!-- Header -->
+        <div class="flex justify-between items-center px-6 py-5 border-b border-gray-100 text-start">
+            <div>
+                <h3 class="font-bold font-heading text-gray-800 text-lg uppercase tracking-tight">Mon Panier</h3>
+                <p id="item-count-label" class="text-xs text-gray-400 font-bold">0 article</p>
+            </div>
+            <button type="button"
+                class="size-9 flex justify-center items-center rounded-xl bg-gray-50 hover:bg-red-50 text-gray-400 hover:text-red-500 transition-all"
+                data-hs-overlay="#hs-overlay-cart">
+                <svg class="size-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M18 6 6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Scrollable content -->
+        <div id="cart-items-container"
+            class="p-6 space-y-4 overflow-y-auto h-[calc(100%-240px)] text-start scrollbar-thin scrollbar-thumb-gray-200">
+            <!-- State vide -->
+            <div id="empty-cart-state"
+                class="flex flex-col items-center justify-center h-full py-10 text-center select-none">
+                <div class="size-20 bg-gray-50 rounded-3xl flex items-center justify-center mb-4">
+                    <svg class="size-10 text-gray-200" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                </div>
+                <p class="text-sm font-bold text-gray-400 uppercase tracking-widest">Panier vide</p>
+                <p class="text-[11px] text-gray-300 mt-1">Ajoutez des délices de notre menu</p>
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="absolute bottom-0 w-full px-6 py-6 border-t border-gray-100 bg-white/80 backdrop-blur-md">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-sm font-bold text-gray-400 uppercase tracking-widest">Total à payer</span>
+                <span id="cart-total-price" class="text-2xl font-black font-heading text-emerald-700 leading-none">0.00
+                    DH</span>
+            </div>
+
+            <button id="whatsapp-order-btn" type="button" disabled
+                class="w-full py-4 px-6 inline-flex justify-center items-center gap-x-3 text-sm font-bold rounded-2xl bg-emerald-600 text-white hover:bg-emerald-800 transition-all shadow-xl shadow-emerald-200/50 active:scale-95 disabled:opacity-40 disabled:grayscale disabled:scale-100 disabled:shadow-none">
+                <svg class="size-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.171.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.538-2.961-2.654-.087-.116-.708-.941-.708-1.795 0-.855.449-1.277.608-1.45.159-.174.348-.217.464-.217.116 0 .232.001.333.006.106.005.249-.04.391.305.144.35.492 1.203.535 1.29.043.087.072.188.014.305-.058.116-.087.188-.174.29-.087.101-.183.225-.261.305-.087.087-.179.183-.077.358.101.174.451.745.966 1.204.664.591 1.224.774 1.398.86.174.087.275.072.376-.044.101-.116.435-.508.55-.682.116-.174.232-.145.391-.087.159.058 1.014.478 1.187.565.174.087.29.131.334.203.04.072.04.417-.104.821zM12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1z" />
+                </svg>
+                Réserver via WhatsApp
+            </button>
+            <p class="text-[9px] text-center text-gray-400 mt-4 uppercase font-bold tracking-widest leading-relaxed">
+                Validation & Livraison assurée par <span class="text-emerald-600">WhatsApp</span>
+            </p>
+        </div>
+    </div>
+    <!-- / MOLECULE : cart-drawer -->
+
+    <script>
+        window.addEventListener('load', () => {
+            if (window.HSStaticMethods) window.HSStaticMethods.autoInit();
+        });
+    </script>
+</body>
+
+</html>

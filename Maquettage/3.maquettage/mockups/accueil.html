@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Resto Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #fff7ed 100%);
+        }
+
+        .badge-pill {
+            letter-spacing: 0.08em;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <!-- NAVBAR -->
+    <header
+        class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-100 text-sm py-2 sm:py-0 sticky top-0 shadow-sm">
+        <nav class="relative max-w-[1200px] w-full mx-auto px-6 sm:flex sm:items-center sm:justify-between"
+            aria-label="Global">
+            <div class="flex items-center justify-between h-16">
+                <a class="flex items-center gap-2.5 text-xl font-bold font-heading text-slate-900 focus:outline-none"
+                    href="#">
+                    <div
+                        class="flex items-center justify-center w-9 h-9 bg-emerald-600 rounded-xl shadow-lg shadow-emerald-200">
+                        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    Resto<span class="text-emerald-600">Manager</span>
+                </a>
+                <div class="sm:hidden">
+                    <button type="button"
+                        class="hs-collapse-toggle w-9 h-9 flex justify-center items-center rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50"
+                        data-hs-collapse="#navbar-collapse" aria-controls="navbar-collapse"
+                        aria-label="Toggle navigation">
+                        <svg class="hs-collapse-open:hidden w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                        <svg class="hs-collapse-open:block hidden w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="navbar-collapse"
+                class="hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
+                <div
+                    class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-8 sm:mt-0 sm:ps-7">
+                    <a class="font-medium text-emerald-600 border-b-2 border-emerald-500 pb-4 text-sm" href="#"
+                        aria-current="page">Accueil</a>
+                    <a class="font-medium text-gray-500 hover:text-gray-800 text-sm pb-4 border-b-2 border-transparent hover:border-gray-300 transition-colors"
+                        href="menu.html">Menu</a>
+                    <a class="font-medium text-gray-500 hover:text-gray-800 text-sm pb-4 border-b-2 border-transparent hover:border-gray-300 transition-colors"
+                        href="admin-dashboard.html">Dashboard</a>
+                    <div class="sm:ps-4 pb-4 sm:border-s border-gray-200">
+                        <button type="button"
+                            class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5">
+                            Connexion
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-gradient relative overflow-hidden">
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-emerald-200 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-20 w-96 h-96 bg-amber-100 rounded-full blur-3xl"></div>
+        </div>
+        <div class="relative max-w-[1200px] mx-auto px-6 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div>
+                    <span
+                        class="badge-pill inline-flex items-center gap-x-2 py-1.5 px-4 text-xs font-semibold bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200 mb-6">
+                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                        Solution de gestion No.1 en France
+                    </span>
+                    <h1
+                        class="text-4xl lg:text-5xl xl:text-6xl font-extrabold font-heading text-gray-900 leading-tight">
+                        La gestion de votre restaurant,<br>
+                        <span class="text-emerald-600 relative inline-block">enfin simplifiée.</span>
+                    </h1>
+                    <p class="mt-6 text-lg text-gray-500 leading-relaxed max-w-lg">
+                        Commandes, menu, revenus et personnel — tout centralisé dans une interface intuitive conçue pour
+                        les restaurateurs ambitieux.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                        <button type="button"
+                            class="py-3.5 px-7 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-200/60 transition-all hover:shadow-xl hover:shadow-emerald-300/50 hover:-translate-y-0.5">
+                            Démarrer gratuitement
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="m12 5 7 7-7 7" />
+                            </svg>
+                        </button>
+                        <button type="button"
+                            class="py-3.5 px-7 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 shadow-sm transition-all hover:border-gray-300">
+                            <svg class="w-4 h-4 text-emerald-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3" />
+                            </svg>
+                            Voir la démo
+                        </button>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-gray-100 flex items-center gap-6 text-sm">
+                        <div class="flex -space-x-2">
+                            <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm"
+                                src="https://i.pravatar.cc/32?img=1" alt="">
+                            <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm"
+                                src="https://i.pravatar.cc/32?img=5" alt="">
+                            <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm"
+                                src="https://i.pravatar.cc/32?img=9" alt="">
+                        </div>
+                        <span class="text-gray-500">Rejoignez <strong class="text-gray-800">2,400+</strong>
+                            restaurateurs satisfaits</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="relative z-10 rounded-2xl overflow-hidden shadow-2xl shadow-slate-200 border border-gray-100">
+                        <img class="w-full"
+                            src="https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=90"
+                            alt="Interface RestoManager">
+                    </div>
+                    <!-- Floating card -->
+                    <div
+                        class="absolute -bottom-5 -left-6 z-20 bg-white rounded-2xl p-4 shadow-xl border border-gray-100 flex items-center gap-3 w-52">
+                        <div
+                            class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                                <polyline points="16 7 22 7 22 13" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Revenus du mois</p>
+                            <p class="text-base font-bold font-heading text-gray-800">+18,420 €</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="bg-gray-50 border-y border-gray-100 py-8">
+        <div class="max-w-[1200px] mx-auto px-6 text-center">
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">Utilisé par les meilleurs
+                établissements</p>
+            <div
+                class="flex flex-wrap justify-center items-center gap-8 lg:gap-12 text-gray-400 font-bold font-heading text-lg opacity-60">
+                <span>Le Jardin Vert</span>
+                <span>Chez Aziz</span>
+                <span>La Table Dorée</span>
+                <span>Casa Blanca</span>
+                <span>Saveurs d'Ici</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="max-w-[1200px] mx-auto px-6 py-20 lg:py-28">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span
+                class="badge-pill inline-flex items-center py-1.5 px-4 text-xs font-semibold bg-amber-50 text-amber-700 rounded-full border border-amber-200 mb-4">
+                Fonctionnalités clés
+            </span>
+            <h2 class="text-3xl lg:text-4xl font-extrabold font-heading text-gray-900">Tout ce dont votre restaurant a
+                besoin</h2>
+            <p class="mt-4 text-gray-500 text-lg">Des outils puissants, une interface simple — concentrez-vous sur la
+                cuisine.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+                class="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-emerald-100 transition-all hover:-translate-y-1">
+                <div
+                    class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold font-heading text-gray-800 mb-2">Gestion des Commandes</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Recevez, traitez et suivez toutes vos commandes en
+                    temps réel depuis un tableau de bord unifié.</p>
+            </div>
+
+            <div
+                class="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-emerald-100 transition-all hover:-translate-y-1">
+                <div
+                    class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold font-heading text-gray-800 mb-2">Menu Dynamique</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Modifiez votre menu, ajoutez des photos, gérez vos
+                    catégories et vos prix en quelques secondes.</p>
+            </div>
+
+            <div
+                class="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-emerald-100 transition-all hover:-translate-y-1">
+                <div
+                    class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                        <polyline points="16 7 22 7 22 13" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold font-heading text-gray-800 mb-2">Analytiques Avancées</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Visualisez vos revenus, vos plats les plus vendus et
+                    vos périodes de pointe pour mieux planifier.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="bg-emerald-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div
+                class="absolute top-0 right-0 w-96 h-96 bg-emerald-400 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-72 h-72 bg-amber-300 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2">
+            </div>
+        </div>
+        <div class="relative max-w-[1200px] mx-auto px-6 py-20 text-center">
+            <h2 class="text-3xl lg:text-4xl font-extrabold font-heading text-white mb-4">Prêt à transformer votre
+                restaurant ?</h2>
+            <p class="text-emerald-200 text-lg mb-8 max-w-xl mx-auto">Commencez gratuitement et découvrez pourquoi 2,400
+                restaurants nous font confiance.</p>
+            <button type="button"
+                class="py-4 px-8 inline-flex justify-center items-center gap-x-2 text-sm font-bold rounded-xl bg-white text-emerald-900 hover:bg-emerald-50 shadow-xl transition-all hover:-translate-y-1">
+                Essai gratuit — 14 jours
+            </button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white">
+        <div class="max-w-[1200px] mx-auto px-6 py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="col-span-2 lg:col-span-1">
+                    <a class="text-xl font-bold font-heading" href="#">Resto<span
+                            class="text-emerald-400">Manager</span></a>
+                    <p class="mt-3 text-sm text-slate-400 leading-relaxed">La plateforme idéale pour digitaliser la
+                        gestion de votre restaurant.</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Produit</h4>
+                    <div class="space-y-2 text-sm text-slate-400">
+                        <p><a href="menu.html" class="hover:text-emerald-400 transition-colors">Menu Online</a></p>
+                        <p><a href="admin-dashboard.html" class="hover:text-emerald-400 transition-colors">Dashboard
+                                Admin</a></p>
+                        <p><a href="#" class="hover:text-emerald-400 transition-colors">Tarifs</a></p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Support</h4>
+                    <div class="space-y-2 text-sm text-slate-400">
+                        <p><a href="#" class="hover:text-emerald-400 transition-colors">Documentation</a></p>
+                        <p><a href="#" class="hover:text-emerald-400 transition-colors">Contact</a></p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Légal</h4>
+                    <div class="space-y-2 text-sm text-slate-400">
+                        <p><a href="#" class="hover:text-emerald-400 transition-colors">Mentions légales</a></p>
+                        <p><a href="#" class="hover:text-emerald-400 transition-colors">Confidentialité</a></p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-slate-500">© 2026 RestoManager. Tous droits réservés.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-slate-500 hover:text-emerald-400 transition-colors"><svg class="w-5 h-5"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                        </svg></a>
+                    <a href="#" class="text-slate-500 hover:text-emerald-400 transition-colors"><svg class="w-5 h-5"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                        </svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

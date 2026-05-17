@@ -1,0 +1,80 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+' ===== STYLE =====
+skinparam backgroundColor #FFFFFF
+skinparam usecase {
+    BackgroundColor #F7F7F7
+    BorderColor #333333
+    ArrowColor #333333
+}
+skinparam actor {
+    BorderColor #000000
+}
+skinparam package {
+    BackgroundColor #FFFFFF
+    BorderColor #666666
+}
+
+' ===== COMPACT LAYOUT =====
+skinparam nodesep 15
+skinparam ranksep 20
+skinparam padding 3
+skinparam packagePadding 5
+skinparam usecasePadding 5
+skinparam wrapWidth 120
+
+' ===== ACTOR =====
+actor "Admin" as Admin
+
+' ===== SYSTEM =====
+rectangle "Admin Use Cases" {
+
+    usecase "Authentication" as AuthUC
+
+    package "User Management" {
+        usecase "Manage Users" as UA1
+    }
+
+    package "Menu Management" {
+        usecase "Manage Menus" as UA2
+        usecase "Manage Categories" as UA3
+        usecase "Manage Promotions" as UA7
+    }
+
+    package "Dashboard & Analytics" {
+        usecase "View Dashboard" as UA4
+        usecase "View Revenue Reports" as UA5
+    }
+
+    package "Inventory Control" {
+        usecase "Manage Inventory" as UA6
+        usecase "Check Low Stock" as UA6INC
+    }
+
+    ' ── Authentication includes ──
+    UA1 ..> AuthUC : <<include>>
+    UA2 ..> AuthUC : <<include>>
+    UA3 ..> AuthUC : <<include>>
+    UA4 ..> AuthUC : <<include>>
+    UA5 ..> AuthUC : <<include>>
+    UA6 ..> AuthUC : <<include>>
+    UA7 ..> AuthUC : <<include>>
+    
+    ' ── Other relationships ──
+    UA6 ..> UA6INC : <<include>>
+}
+
+' ===== ACTOR CONNECTIONS =====
+Admin -- UA1
+Admin -- UA2
+Admin -- UA3
+Admin -- UA4
+Admin -- UA5
+Admin -- UA6
+Admin -- UA7
+Admin -- AuthUC
+
+@enduml

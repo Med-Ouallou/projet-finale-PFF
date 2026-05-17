@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commander en Ligne - Resto Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline/dist/preline.css">
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-active {
+            background-color: #059669;
+            color: white !important;
+            border-color: #059669 !important;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 h-full">
+
+    <!-- ===== HEADER / NAVBAR ===== -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-[1200px] mx-auto px-6 h-18 flex items-center justify-between py-3">
+            <a class="flex items-center gap-2.5 font-bold font-heading text-xl text-slate-900" href="accueil.html">
+                <div
+                    class="flex items-center justify-center size-10 bg-emerald-600 rounded-2xl shadow-lg shadow-emerald-200">
+                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+                Resto<span class="text-emerald-600">Manager</span>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <div class="hidden md:block relative w-64 group">
+                    <input type="text"
+                        class="py-2.5 px-4 ps-11 block w-full border-gray-100 bg-gray-50 rounded-2xl text-sm focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition-all"
+                        placeholder="Rechercher un plat...">
+                    <div
+                        class="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none text-gray-400 group-focus-within:text-emerald-500 transition-colors">
+                        <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                    </div>
+                </div>
+
+                <button type="button"
+                    class="relative py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-bold rounded-2xl border border-emerald-100 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-all hover:scale-105 active:scale-95"
+                    data-hs-overlay="#hs-overlay-cart">
+                    <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    <span class="hidden sm:inline">Mon panier</span>
+                    <span id="cart-count-badge"
+                        class="absolute -top-1.5 -right-1.5 size-5 flex items-center justify-center bg-emerald-600 text-white text-[10px] font-black rounded-full shadow-lg shadow-emerald-200 border-2 border-white">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="bg-emerald-900 relative overflow-hidden text-start">
+        <!-- Abstract Shapes -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute -top-20 -right-20 size-80 bg-emerald-400 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-20 -left-20 size-64 bg-amber-400 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-[1200px] mx-auto px-6 py-12 lg:py-16 relative">
+            <h1 class="text-4xl lg:text-5xl font-black font-heading text-white max-w-2xl leading-tight">Explorez nos
+                saveurs authentiques <span class="text-emerald-400">faites maison</span></h1>
+            <p class="mt-4 text-emerald-200/80 text-lg max-w-xl font-medium">Découvrez notre carte renouvelée chaque
+                saison avec des produits frais du terroir.</p>
+
+            <div class="mt-8 flex flex-wrap gap-4 text-[10px] font-bold uppercase tracking-widest text-emerald-100/60">
+                <span class="flex items-center gap-2"><span class="size-1.5 bg-emerald-400 rounded-full"></span> Fast
+                    Delivery</span>
+                <span class="flex items-center gap-2"><span class="size-1.5 bg-emerald-400 rounded-full"></span> Fresh
+                    Products</span>
+                <span class="flex items-center gap-2"><span class="size-1.5 bg-emerald-400 rounded-full"></span> Best
+                    Price</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="max-w-[1200px] mx-auto px-6 py-12 text-start">
+
+        <!-- Category Pills -->
+        <div
+            class="sticky top-[72px] z-40 bg-gray-50/80 backdrop-blur-sm -mx-6 px-6 py-2 mb-10 border-b border-gray-200 overflow-x-auto hide-scrollbar flex gap-2">
+            <button
+                class="tab-active shrink-0 py-2.5 px-6 text-xs font-bold rounded-full border border-gray-200 shadow-sm transition-all focus:outline-none">Tout
+                voir</button>
+            <button
+                class="shrink-0 py-2.5 px-6 text-xs font-bold rounded-full border border-gray-200 bg-white text-gray-500 hover:border-emerald-300 hover:text-emerald-700 transition-all focus:outline-none">Pizzas</button>
+            <button
+                class="shrink-0 py-2.5 px-6 text-xs font-bold rounded-full border border-gray-200 bg-white text-gray-500 hover:border-emerald-300 hover:text-emerald-700 transition-all focus:outline-none">Burgers</button>
+            <button
+                class="shrink-0 py-2.5 px-6 text-xs font-bold rounded-full border border-gray-200 bg-white text-gray-500 hover:border-emerald-300 hover:text-emerald-700 transition-all focus:outline-none">Tajines</button>
+            <button
+                class="shrink-0 py-2.5 px-6 text-xs font-bold rounded-full border border-gray-200 bg-white text-gray-500 hover:border-emerald-300 hover:text-emerald-700 transition-all focus:outline-none">Boissons</button>
+            <button
+                class="shrink-0 py-2.5 px-6 text-xs font-bold rounded-full border border-gray-200 bg-white text-gray-500 hover:border-emerald-300 hover:text-emerald-700 transition-all focus:outline-none">Desserts</button>
+        </div>
+
+        <!-- Products Grid -->
+        <h2 class="text-xl font-black font-heading text-gray-900 mb-8 border-l-4 border-emerald-600 pl-4">Nos
+            Incontournables</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
+
+            <!-- Card 1 -->
+            <div data-id="1" data-name="Bowl Santé Signature" data-price="65"
+                class="group flex flex-col bg-white border border-gray-100 shadow-sm rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="relative h-48 overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600" alt="">
+                    <div class="absolute top-3 left-3 flex flex-col gap-1">
+                        <span
+                            class="py-1 px-3 text-[10px] font-bold bg-emerald-600 text-white rounded-full shadow-lg backdrop-blur-sm self-start uppercase tracking-wider">Populaire</span>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1 text-start">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3
+                            class="text-base font-bold font-heading text-gray-900 group-hover:text-emerald-700 transition-colors">
+                            Bowl Santé Signature</h3>
+                    </div>
+                    <p class="text-[11px] text-gray-400 leading-relaxed line-clamp-2 mt-1 mb-4 flex-1">Quinoa bio,
+                        avocat
+                        frais, grenade et légumes de saison croquants.</p>
+                    <div class="flex justify-between items-center pt-2 mt-auto">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-black font-heading text-emerald-700 leading-none">65.00 DH</span>
+                            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">TTC</span>
+                        </div>
+                        <button type="button" onclick="addToCart(this)"
+                            class="py-2.5 px-5 inline-flex items-center gap-x-1.5 text-xs font-bold rounded-2xl bg-emerald-600 text-white hover:bg-emerald-900 transition-all shadow-lg shadow-emerald-200 active:scale-95 group/btn">
+                            <svg class="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div data-id="2" data-name="Burger Black Angus" data-price="85"
+                class="group flex flex-col bg-white border border-gray-100 shadow-sm rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="relative h-48 overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        src="https://images.unsplash.com/photo-1571091718767-18b5c1457add?w=600" alt="">
+                    <div class="absolute top-3 left-3 flex flex-col gap-1">
+                        <span
+                            class="py-1 px-3 text-[10px] font-bold bg-amber-500 text-white rounded-full shadow-lg backdrop-blur-sm self-start uppercase tracking-wider">Chef
+                            Pick</span>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1 text-start">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3
+                            class="text-base font-bold font-heading text-gray-900 group-hover:text-emerald-700 transition-colors">
+                            Burger Black Angus</h3>
+                    </div>
+                    <p class="text-[11px] text-gray-400 leading-relaxed line-clamp-2 mt-1 mb-4 flex-1">Steak wagyu,
+                        comté
+                        affiné, oignons caramélisés et frites maison.</p>
+                    <div class="flex justify-between items-center pt-2 mt-auto">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-black font-heading text-emerald-700 leading-none">85.00 DH</span>
+                            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">TTC</span>
+                        </div>
+                        <button type="button" onclick="addToCart(this)"
+                            class="py-2.5 px-5 inline-flex items-center gap-x-1.5 text-xs font-bold rounded-2xl bg-emerald-600 text-white hover:bg-emerald-900 transition-all shadow-lg shadow-emerald-200 active:scale-95 group/btn">
+                            <svg class="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div data-id="3" data-name="Tajine Agneau" data-price="95"
+                class="group flex flex-col bg-white border border-gray-100 shadow-sm rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="relative h-48 overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        src="https://images.unsplash.com/photo-1585238341267-1cfec2046a55?w=600" alt="">
+                </div>
+                <div class="p-5 flex flex-col flex-1 text-start">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3
+                            class="text-base font-bold font-heading text-gray-900 group-hover:text-emerald-700 transition-colors">
+                            Tajine Agneau Pruneaux</h3>
+                    </div>
+                    <p class="text-[11px] text-gray-400 leading-relaxed line-clamp-2 mt-1 mb-4 flex-1">Cuit lentement au
+                        feu de
+                        bois avec des amandes grillées.</p>
+                    <div class="flex justify-between items-center pt-2 mt-auto">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-black font-heading text-emerald-700 leading-none">95.00 DH</span>
+                            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">TTC</span>
+                        </div>
+                        <button type="button" onclick="addToCart(this)"
+                            class="py-2.5 px-5 inline-flex items-center gap-x-1.5 text-xs font-bold rounded-2xl bg-emerald-600 text-white hover:bg-emerald-900 transition-all shadow-lg shadow-emerald-200 active:scale-95 group/btn">
+                            <svg class="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div data-id="4" data-name="Pancakes Myrtilles" data-price="45"
+                class="group flex flex-col bg-white border border-gray-100 shadow-sm rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="relative h-48 overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        src="https://images.unsplash.com/photo-1528207776546-365bb710ed9a?w=600" alt="">
+                </div>
+                <div class="p-5 flex flex-col flex-1 text-start">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3
+                            class="text-base font-bold font-heading text-gray-900 group-hover:text-emerald-700 transition-colors">
+                            Pancakes Myrtilles</h3>
+                    </div>
+                    <p class="text-[11px] text-gray-400 leading-relaxed line-clamp-2 mt-1 mb-4 flex-1">Servis avec sirop
+                        d'érable du Canada et crème fouettée.</p>
+                    <div class="flex justify-between items-center pt-2 mt-auto">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-black font-heading text-emerald-700 leading-none">45.00 DH</span>
+                            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">TTC</span>
+                        </div>
+                        <button type="button" onclick="addToCart(this)"
+                            class="py-2.5 px-5 inline-flex items-center gap-x-1.5 text-xs font-bold rounded-2xl bg-emerald-600 text-white hover:bg-emerald-900 transition-all shadow-lg shadow-emerald-200 active:scale-95 group/btn">
+                            <svg class="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-white border-t border-gray-100 py-10">
+        <div class="max-w-[1200px] mx-auto px-6 text-center">
+            <p class="text-sm text-gray-400">© 2026 RestoManager. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- ===== CART DRAWER (PRELINE OVERLAY) ===== -->
+    <div id="hs-overlay-cart"
+        class="hs-overlay hs-overlay-open:translate-x-0 translate-x-full fixed top-0 end-0 transition-all duration-300 transform h-full max-w-sm w-full z-[90] bg-white border-s border-gray-100 shadow-2xl hidden"
+        tabindex="-1">
+        <!-- Header -->
+        <div class="flex justify-between items-center px-6 py-5 border-b border-gray-100 text-start">
+            <div>
+                <h3 class="font-bold font-heading text-gray-800 text-lg uppercase tracking-tight">Mon Panier</h3>
+                <p id="item-count-label" class="text-xs text-gray-400 font-bold">0 article</p>
+            </div>
+            <button type="button"
+                class="size-9 flex justify-center items-center rounded-xl bg-gray-50 hover:bg-red-50 text-gray-400 hover:text-red-500 transition-all"
+                data-hs-overlay="#hs-overlay-cart">
+                <svg class="size-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M18 6 6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Scrollable content -->
+        <div id="cart-items-container"
+            class="p-6 space-y-4 overflow-y-auto h-[calc(100%-240px)] text-start scrollbar-thin scrollbar-thumb-gray-200">
+            <!-- State vide -->
+            <div id="empty-cart-state"
+                class="flex flex-col items-center justify-center h-full py-10 text-center select-none">
+                <div class="size-20 bg-gray-50 rounded-3xl flex items-center justify-center mb-4">
+                    <svg class="size-10 text-gray-200" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                </div>
+                <p class="text-sm font-bold text-gray-400 uppercase tracking-widest">Panier vide</p>
+                <p class="text-[11px] text-gray-300 mt-1">Ajoutez des délices de notre menu</p>
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="absolute bottom-0 w-full px-6 py-6 border-t border-gray-100 bg-white/80 backdrop-blur-md">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-sm font-bold text-gray-400 uppercase tracking-widest">Total à payer</span>
+                <span id="cart-total-price" class="text-2xl font-black font-heading text-emerald-700 leading-none">0.00
+                    DH</span>
+            </div>
+
+            <button id="whatsapp-order-btn" type="button" disabled
+                class="w-full py-4 px-6 inline-flex justify-center items-center gap-x-3 text-sm font-bold rounded-2xl bg-emerald-600 text-white hover:bg-emerald-800 transition-all shadow-xl shadow-emerald-200/50 active:scale-95 disabled:opacity-40 disabled:grayscale disabled:scale-100 disabled:shadow-none">
+                <svg class="size-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.171.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.538-2.961-2.654-.087-.116-.708-.941-.708-1.795 0-.855.449-1.277.608-1.45.159-.174.348-.217.464-.217.116 0 .232.001.333.006.106.005.249-.04.391.305.144.35.492 1.203.535 1.29.043.087.072.188.014.305-.058.116-.087.188-.174.29-.087.101-.183.225-.261.305-.087.087-.179.183-.077.358.101.174.451.745.966 1.204.664.591 1.224.774 1.398.86.174.087.275.072.376-.044.101-.116.435-.508.55-.682.116-.174.232-.145.391-.087.159.058 1.014.478 1.187.565.174.087.29.131.334.203.04.072.04.417-.104.821zM12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1z" />
+                </svg>
+                Réserver via WhatsApp
+            </button>
+            <p class="text-[9px] text-center text-gray-400 mt-4 uppercase font-bold tracking-widest leading-relaxed">
+                Validation & Livraison assurée par <span class="text-emerald-600">WhatsApp</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // --- Cart Management Logic ---
+        let cart = [];
+
+        function updateCart() {
+            const container = document.getElementById('cart-items-container');
+            const emptyState = document.getElementById('empty-cart-state');
+            const badge = document.getElementById('cart-count-badge');
+            const totalLabel = document.getElementById('cart-total-price');
+            const countLabel = document.getElementById('item-count-label');
+            const orderBtn = document.getElementById('whatsapp-order-btn');
+
+            // Save old HTML if needed? No, let's just rebuild.
+            if (cart.length === 0) {
+                emptyState.style.display = 'flex';
+                // Remove existing items
+                const items = container.querySelectorAll('.cart-item');
+                items.forEach(it => it.remove());
+                badge.innerText = '0';
+                totalLabel.innerText = '0.00 DH';
+                countLabel.innerText = '0 article';
+                orderBtn.disabled = true;
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            badge.innerText = cart.reduce((acc, it) => acc + it.quantity, 0);
+            countLabel.innerText = `${cart.length} article(s)`;
+            orderBtn.disabled = false;
+
+            // Rebuild items
+            const existingItems = container.querySelectorAll('.cart-item');
+            existingItems.forEach(it => it.remove());
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item flex items-center gap-4 bg-gray-50/50 border border-gray-100 p-3 rounded-2xl relative group';
+                itemDiv.innerHTML = `
+                    <div class="size-12 rounded-xl bg-gray-200 overflow-hidden flex-shrink-0">
+                         <div class="w-full h-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-800 text-xs">${item.name[0]}</div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-bold text-gray-800 truncate">${item.name}</p>
+                        <p class="text-xs text-emerald-600 font-bold">${item.price.toFixed(2)} DH</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="changeQty(${index}, -1)" class="size-6 rounded-full bg-white border border-gray-200 text-gray-600 flex items-center justify-center text-xs hover:bg-red-50 hover:text-red-500 hover:border-red-100 transition-all font-bold">×</button>
+                        <span class="text-sm font-black text-gray-800 w-4 text-center">${item.quantity}</span>
+                        <button onclick="changeQty(${index}, 1)" class="size-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs hover:bg-emerald-700 transition-all shadow-sm font-bold">+</button>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
+
+            totalLabel.innerText = `${total.toFixed(2)} DH`;
+        }
+
+        function addToCart(btn) {
+            const card = btn.closest('[data-id]');
+            const id = card.getAttribute('data-id');
+            const name = card.getAttribute('data-name');
+            const price = parseFloat(card.getAttribute('data-price'));
+
+            const existing = cart.find(it => it.id === id);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+
+            // Visual feedback on badge
+            const badge = document.getElementById('cart-count-badge');
+            badge.classList.add('scale-150', 'bg-emerald-400');
+            setTimeout(() => {
+                badge.classList.remove('scale-150', 'bg-emerald-400');
+            }, 300);
+
+            updateCart();
+        }
+
+        function changeQty(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCart();
+        }
+
+        // WhatsApp Generation
+        document.getElementById('whatsapp-order-btn').addEventListener('click', () => {
+            const phoneNumber = "212600000000"; // Remplacez par le vrai numéro
+            let message = "🍱 *NOUVELLE COMMANDE - RESTOMANAGER*\n\n";
+            let total = 0;
+
+            cart.forEach(item => {
+                const sub = item.price * item.quantity;
+                message += `• *${item.quantity}x* ${item.name} (_${sub.toFixed(2)} DH_)\n`;
+                total += sub;
+            });
+
+            message += `\n💰 *Total : ${total.toFixed(2)} DH*\n\n`;
+            message += "📍 _Je souhaite commander ces articles pour une livraison à domicile._\n";
+            message += "📞 _Merci de me confirmer la réception._";
+
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encoded}`, '_blank');
+        });
+
+        // Initialize Preline
+        window.addEventListener('load', () => {
+            if (window.HSStaticMethods) {
+                window.HSStaticMethods.autoInit();
+                console.log('Preline: Auto-init triggered');
+            }
+        });
+
+        // Forced refresh for dynamic overlay
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (window.HSStaticMethods) window.HSStaticMethods.autoInit();
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>

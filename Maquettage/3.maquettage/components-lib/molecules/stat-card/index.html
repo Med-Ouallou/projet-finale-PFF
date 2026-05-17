@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 p-10">
+    <div class="pb-6 border-b border-gray-200 mb-8">
+        <p class="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-1">Molecule</p>
+        <h1 class="text-2xl font-bold font-heading text-gray-900">Stat Cards</h1>
+        <p class="text-sm text-gray-400 mt-1">Indicateurs clés du tableau de bord Admin.</p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Revenue -->
+        <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-3">
+                <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23" />
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </svg>
+                </div>
+                <span
+                    class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">
+                    <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                        <polyline points="16 7 22 7 22 13" />
+                    </svg>
+                    +12%
+                </span>
+            </div>
+            <p class="text-2xl font-bold font-heading text-gray-800">1,250 €</p>
+            <p class="text-xs text-gray-400 mt-1 font-medium">Revenus du jour</p>
+            <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-emerald-500 rounded-full" style="width: 72%"></div>
+            </div>
+        </div>
+
+        <!-- Orders -->
+        <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-3">
+                <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                    </svg>
+                </div>
+                <span
+                    class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-1 rounded-full">6
+                    en cours</span>
+            </div>
+            <p class="text-2xl font-bold font-heading text-gray-800">24</p>
+            <p class="text-xs text-gray-400 mt-1 font-medium">Commandes aujourd'hui</p>
+            <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-amber-400 rounded-full" style="width: 55%"></div>
+            </div>
+        </div>
+
+        <!-- Clients -->
+        <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-3">
+                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                    </svg>
+                </div>
+                <span
+                    class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">+8%</span>
+            </div>
+            <p class="text-2xl font-bold font-heading text-gray-800">156</p>
+            <p class="text-xs text-gray-400 mt-1 font-medium">Clients uniques</p>
+            <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-400 rounded-full" style="width: 88%"></div>
+            </div>
+        </div>
+
+        <!-- Satisfaction -->
+        <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-3">
+                <div class="w-10 h-10 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                </div>
+                <span
+                    class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">Excellent</span>
+            </div>
+            <p class="text-2xl font-bold font-heading text-gray-800">98%</p>
+            <p class="text-xs text-gray-400 mt-1 font-medium">Taux de satisfaction</p>
+            <div class="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-violet-400 rounded-full" style="width: 98%"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
