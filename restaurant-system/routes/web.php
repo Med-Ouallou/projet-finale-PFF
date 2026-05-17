@@ -33,6 +33,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin|employee
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Notifications API
+    Route::get('/api/notifications', [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('api.notifications');
+
     // Menus
     Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
     Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
