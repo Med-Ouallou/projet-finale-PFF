@@ -1,0 +1,48 @@
+gantt
+    title Projet Finale PFF - Restaurant Management System (Gantt Timeline)
+    dateFormat YYYY-MM-DD
+    
+    section Planning & Design
+    Design Thinking & Empathy           :design, 2026-02-26, 30d
+    Requirements Analysis               :req, after design, 14d
+    UI/UX Mockups                       :mockup, after req, 21d
+    Database Modeling                   :dbmodel, after mockup, 14d
+    
+    section Sprint 1 - Foundation
+    Sprint 1: Base Management           :sprint1, after dbmodel, 21d
+    - Auth & Role Management           :auth, after dbmodel, 21d
+    - Dashboard Setup                  :dash1, after dbmodel, 21d
+    - Menu Management                  :menu, after dbmodel, 21d
+    - Category Management              :cat, after dbmodel, 21d
+    
+    section Sprint 2 - Client & Orders
+    Sprint 2: Real-time Features        :sprint2, after sprint1, 21d
+    - Client System                    :client, after sprint1, 21d
+    - Order Management                 :order, after sprint1, 21d
+    - Real-time Notifications          :realtime, after sprint1, 21d
+    - Order Tracking                   :track, after sprint1, 21d
+    
+    section Backend Development
+    Laravel Setup & Architecture        :laravel, after dbmodel, 45d
+    Service Layer Implementation        :service, after laravel, 30d
+    API Development                    :api, after service, 35d
+    Spatie Roles & Permissions         :spatie, after laravel, 30d
+    
+    section Frontend Development
+    Tailwind CSS Setup                 :tailwind, after dbmodel, 45d
+    Alpine.js Components              :alpine, after tailwind, 35d
+    AJAX/Axios Integration            :ajax, after alpine, 21d
+    Vite Bundling & Optimization      :vite, after ajax, 14d
+    UI Components (Preline)           :preline, after tailwind, 40d
+    
+    section Database & ORM
+    Database Schema Creation           :schema, after dbmodel, 10d
+    Eloquent Models                   :eloquent, after schema, 21d
+    Migrations & Seeders              :migrations, after eloquent, 14d
+    
+    section Testing & Deployment
+    Unit & Feature Testing            :test, after api, 21d
+    Integration Testing               :inttest, after test, 14d
+    Performance Optimization          :perf, after inttest, 14d
+    Deployment Setup                  :deploy, after perf, 7d
+    Live Launch                       :live, after deploy, 1d
