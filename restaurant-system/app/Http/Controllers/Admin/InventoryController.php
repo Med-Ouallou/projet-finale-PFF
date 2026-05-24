@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreInventoryRequest;
 use App\Http\Requests\Admin\UpdateInventoryRequest;
 use App\Models\InventoryItem;
 use Illuminate\Http\Request;
+use Spatie\SimpleExcel\SimpleExcelWriter;
 
 class InventoryController extends Controller
 {
@@ -40,6 +41,26 @@ class InventoryController extends Controller
         }
 
         return view('admin.inventory.index', compact('items', 'filters', 'lowStockCount'));
+    }
+
+    public function export()
+    {
+        $items = InventoryItem::all();
+        $writer = SimpleExcelWriter::streamDownload('inventaire_' . now()->format('Y-m-d') . '.xlsx');
+        
+        foreach ($items as $item) {
+            $writer->addRow([
+                'ID' => $item->id,
+                'Nom de l\'ingrédient' => $item->name,
+                'Quantité Actuelle' => $item->quantity_in_stock,
+                'Unité' => $item->unit,
+                'Seuil d\'Alerte' => $item->min_threshold,
+                'Dernière Mise à Jour' => $item->updated_at->format('d/m/Y H:i'),
+                'Quantité Réelle (À remplir)' => ''
+            ]);
+        }
+
+        return $writer->toBrowser();
     }
 
     public function store(StoreInventoryRequest $request)
