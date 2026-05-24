@@ -158,13 +158,13 @@
                             <div class="space-y-2 text-start">
                                 <label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400">Sujet du Message</label>
                                 <div class="relative">
-                                    <select name="subject"
+                                    <x-ui.select name="subject"
                                         class="w-full bg-[#FDFBF7] border border-stone-200 focus:border-emerald-600 focus:ring-emerald-600 rounded-2xl py-3.5 px-4 text-xs font-medium text-stone-800 transition-all appearance-none cursor-pointer">
                                         <option>Question générale</option>
                                         <option>Réservation spéciale</option>
                                         <option>Événementiel</option>
                                         <option>Recrutement</option>
-                                    </select>
+                                    </x-ui.select>
                                 </div>
                             </div>
 

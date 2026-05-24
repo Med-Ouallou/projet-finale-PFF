@@ -41,12 +41,12 @@
 
                     <div>
                         <label class="block text-sm font-bold text-gray-800 mb-1.5">Catégorie <span class="text-red-400">*</span></label>
-                        <select name="category_id" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                        <x-ui.select name="category_id" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
                             <option value="">Sélectionner...</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ old('category_id', $item->category_id) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
-                        </select>
+                        </x-ui.select>
                     </div>
 
                     <div>
@@ -71,10 +71,10 @@
                         <p class="text-sm font-bold text-gray-800">Statut</p>
                         <p class="text-xs text-gray-400 mt-0.5">Visibilité dans le menu client.</p>
                     </div>
-                    <select name="status" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
+                    <x-ui.select name="status" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
                         <option value="available" {{ old('status', $item->status) == 'available' ? 'selected' : '' }}>Disponible</option>
                         <option value="unavailable" {{ old('status', $item->status) == 'unavailable' ? 'selected' : '' }}>Indisponible</option>
-                    </select>
+                    </x-ui.select>
                 </div>
 
                 <div class="flex gap-3 pt-2">

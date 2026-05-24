@@ -62,9 +62,8 @@
         <main class="max-w-[1240px] mx-auto px-6 py-10">
 
             <!-- MOBILE ACCORDION CATEGORY FILTER (Visible on Mobile Only) -->
-            <div class="lg:hidden relative mb-6">
-                <button @click="categoryDropdownOpen = !categoryDropdownOpen" 
-                        class="w-full bg-white border border-stone-200 rounded-2xl py-3.5 px-5 flex items-center justify-between text-xs font-extrabold text-stone-750 shadow-sm active:scale-[0.99] transition-all">
+            <div class="hs-dropdown relative w-full lg:hidden mb-6 [--placement:bottom-left]">
+                <button id="hs-dropdown-mobile-category" type="button" class="hs-dropdown-toggle w-full bg-white border border-stone-200 rounded-2xl py-3.5 px-5 flex items-center justify-between text-xs font-extrabold text-stone-750 shadow-sm transition-all" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                     <span class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-emerald-700"></span>
                         <span class="uppercase tracking-wider">
@@ -74,28 +73,22 @@
                             @endforeach
                         </span>
                     </span>
-                    <svg class="w-4 h-4 text-stone-400 transition-transform duration-200" :class="categoryDropdownOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <svg class="hs-dropdown-open:rotate-180 w-4 h-4 text-stone-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path d="m19.5 8.25-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
                 
                 <!-- Dropdown List Overlay -->
-                <div x-show="categoryDropdownOpen" 
-                     @click.away="categoryDropdownOpen = false"
-                     x-transition:enter="transition ease-out duration-100"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     class="absolute left-0 right-0 mt-2 z-50 bg-white border border-stone-200 rounded-2xl shadow-xl max-h-64 overflow-y-auto p-2 space-y-1"
-                     style="display: none;">
+                <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 z-50 w-full bg-white border border-stone-200 rounded-2xl shadow-xl max-h-64 overflow-y-auto p-2 space-y-1" aria-labelledby="hs-dropdown-mobile-category">
                     
-                    <button @click="activeCategory = 'all'; categoryDropdownOpen = false" 
+                    <button @click="activeCategory = 'all'" 
                             class="w-full text-start py-2.5 px-4 text-xs font-bold rounded-xl transition-all"
                             :class="activeCategory === 'all' ? 'bg-emerald-50 text-emerald-800' : 'text-stone-600 hover:bg-stone-50'">
                         Tout voir
                     </button>
                     
                     @foreach($categories as $category)
-                        <button @click="activeCategory = '{{ $category->id }}'; categoryDropdownOpen = false" 
+                        <button @click="activeCategory = '{{ $category->id }}'" 
                                 class="w-full text-start py-2.5 px-4 text-xs font-bold rounded-xl transition-all"
                                 :class="activeCategory === '{{ $category->id }}' ? 'bg-emerald-50 text-emerald-800' : 'text-stone-600 hover:bg-stone-50'">
                             {{ $category->name }}

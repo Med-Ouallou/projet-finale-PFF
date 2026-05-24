@@ -13,17 +13,19 @@
     <!-- Filters Bar -->
     <form method="GET" action="{{ route('admin.orders.index') }}" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
         <div class="flex gap-2">
-            <select name="status" onchange="this.form.submit()"
+            <x-ui.select name="status" onchange="this.form.submit()"
                 class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
                 <option value="">Tous les statuts</option>
                 @foreach($statusLabels as $key => $label)
                     <option value="{{ $key }}" {{ ($filters['status'] ?? '') == $key ? 'selected' : '' }}>{{ $label[0] }}</option>
                 @endforeach
-            </select>
-            <input type="date" name="date_from" value="{{ $filters['date_from'] ?? '' }}" onchange="this.form.submit()"
-                class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
-            <input type="date" name="date_to" value="{{ $filters['date_to'] ?? '' }}" onchange="this.form.submit()"
-                class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+            </x-ui.select>
+            <div class="w-40">
+                <x-ui.datepicker name="date_from" value="{{ $filters['date_from'] ?? '' }}" placeholder="Date de début" onchange="this.form.submit()" />
+            </div>
+            <div class="w-40">
+                <x-ui.datepicker name="date_to" value="{{ $filters['date_to'] ?? '' }}" placeholder="Date de fin" onchange="this.form.submit()" />
+            </div>
         </div>
     </form>
 

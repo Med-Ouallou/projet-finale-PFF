@@ -5,7 +5,7 @@
 <header class="sticky top-0 z-30 bg-white border-b border-gray-100 shadow-sm px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
     <div class="flex items-center gap-3">
         <!-- Mobile sidebar toggle -->
-        <button type="button" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 text-gray-500 transition-colors" @click="toggleSidebar()" aria-label="Ouvrir le menu">
+        <button type="button" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 text-gray-500 transition-colors" data-hs-overlay="#application-sidebar" aria-controls="application-sidebar" aria-label="Ouvrir le menu">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
@@ -39,8 +39,8 @@
         </a>
 
         <!-- Notification dropdown container -->
-        <div class="relative" @click.outside="notificationsOpen = false">
-            <button @click="toggleNotifications()" class="relative p-2.5 text-gray-500 hover:text-emerald-600 hover:bg-gray-50 rounded-xl transition-all" aria-label="Notifications">
+        <div class="hs-dropdown relative [--placement:bottom-right]">
+            <button id="hs-dropdown-notifications" type="button" class="hs-dropdown-toggle relative p-2.5 text-gray-500 hover:text-emerald-600 hover:bg-gray-50 rounded-xl transition-all" aria-label="Notifications" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
                     <path d="M13.73 21a2 2 0 0 1-3.46 0" />
@@ -51,16 +51,7 @@
             </button>
 
             <!-- Dropdown Menu -->
-            <div x-show="notificationsOpen" 
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 scale-95 translate-y-1"
-                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-                 x-transition:leave="transition ease-in duration-150"
-                 x-transition:leave-start="opacity-100 scale-100 translate-y-0"
-                 x-transition:leave-end="opacity-0 scale-95 translate-y-1"
-                 x-cloak
-                 class="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl border border-gray-100 shadow-xl z-50 overflow-hidden"
-                 style="display: none;">
+            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 w-80 sm:w-96 bg-white rounded-2xl border border-gray-100 shadow-xl z-50 overflow-hidden" aria-labelledby="hs-dropdown-notifications">
                 
                 <!-- Dropdown Header -->
                 <div class="px-5 py-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white flex items-center justify-between">
@@ -172,13 +163,13 @@
         </div>
 
         <!-- Avatar with Dropdown -->
-        <div class="relative" x-data="{ open: false }" @click.outside="open = false">
-            <button @click="open = !open" class="flex items-center focus:outline-none">
+        <div class="hs-dropdown relative [--placement:bottom-right]">
+            <button id="hs-dropdown-admin-profile" type="button" class="hs-dropdown-toggle flex items-center focus:outline-none" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                 <img class="w-8 h-8 rounded-full object-cover cursor-pointer ring-2 ring-emerald-500 hover:ring-emerald-600 transition" src="https://i.pravatar.cc/36?img=8" alt="Admin">
             </button>
 
             <!-- Dropdown Menu -->
-            <div x-show="open" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded-xl border border-gray-100 shadow-lg py-1 z-50">
+            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 w-48 bg-white rounded-xl border border-gray-100 shadow-lg py-1 z-50" aria-labelledby="hs-dropdown-admin-profile">
                 <div class="px-4 py-2 border-b border-gray-100">
                     <p class="text-sm font-semibold text-gray-900">{{ auth()->user()->name ?? 'Admin' }}</p>
                     <p class="text-xs text-gray-500">{{ auth()->user()->email ?? 'admin@resto.com' }}</p>

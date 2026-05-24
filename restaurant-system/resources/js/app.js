@@ -1,5 +1,6 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
+import 'preline';
 import cartManager from './public/cart';
 import categoriesApp from './admin/categories';
 import menuItemsApp from './admin/menu-items';
@@ -20,3 +21,21 @@ Alpine.data('adminLayout', adminLayout);
 Alpine.data('menusApp', menusApp);
 
 Alpine.start();
+
+// Ensure Preline UI initializes properly, especially useful with Vite HMR
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.HSStaticMethods && typeof window.HSStaticMethods.autoInit === 'function') {
+        window.HSStaticMethods.autoInit();
+    }
+});
+
+// Re-initialize Preline components after Vite Hot Module Replacement
+if (import.meta.hot) {
+    import.meta.hot.accept(() => {
+        setTimeout(() => {
+            if (window.HSStaticMethods && typeof window.HSStaticMethods.autoInit === 'function') {
+                window.HSStaticMethods.autoInit();
+            }
+        }, 100);
+    });
+}

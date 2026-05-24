@@ -20,11 +20,11 @@
 
                     <div class="col-span-2">
                         <label class="block text-sm font-bold text-gray-800 mb-1.5">Menu <span class="text-red-400">*</span></label>
-                        <select name="menu_id" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                        <x-ui.select name="menu_id" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
                             @foreach($menus as $menu)
                                 <option value="{{ $menu->id }}" {{ old('menu_id', $category->menu_id) == $menu->id ? 'selected' : '' }}>{{ $menu->name }}</option>
                             @endforeach
-                        </select>
+                        </x-ui.select>
                     </div>
 
                     <div class="col-span-2">
@@ -40,10 +40,10 @@
 
                     <div>
                         <label class="block text-sm font-bold text-gray-800 mb-1.5">Actif</label>
-                        <select name="is_active" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                        <x-ui.select name="is_active" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
                             <option value="1" {{ old('is_active', $category->is_active) ? 'selected' : '' }}>Oui</option>
                             <option value="0" {{ !old('is_active', $category->is_active) ? 'selected' : '' }}>Non</option>
-                        </select>
+                        </x-ui.select>
                     </div>
                 </div>
 

@@ -1,7 +1,7 @@
 <x-customer.layouts.app>
     <x-slot:title>Mon Profil - Resto Manager</x-slot:title>
 
-    <div class="bg-gray-50/50 min-h-screen py-8" x-data="{ activeTab: 'profile', showActiveOrder: true }">
+    <div class="bg-gray-50/50 min-h-screen py-8" x-data="{ showActiveOrder: true }">
         <div class="max-w-[1140px] mx-auto px-6">
             
             <!-- Clean Premium Header Card -->
@@ -49,29 +49,23 @@
                 
                 <!-- Sidebar Tabs Navigation -->
                 <div class="lg:col-span-1">
-                    <div class="bg-white border border-gray-150 rounded-2xl p-4 shadow-sm space-y-1 sticky top-24">
+                    <nav class="flex flex-col space-y-1 bg-white border border-gray-150 rounded-2xl p-4 shadow-sm sticky top-24" aria-label="Tabs" role="tablist">
                         
-                        <button @click="activeTab = 'profile'" 
-                            :class="activeTab === 'profile' ? 'bg-emerald-600 text-white font-bold shadow-md shadow-emerald-600/10' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'"
-                            class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-start transition-all duration-150">
+                        <button type="button" class="hs-tab-active:bg-emerald-600 hs-tab-active:text-white hs-tab-active:font-bold hs-tab-active:shadow-md hs-tab-active:shadow-emerald-600/10 text-gray-500 hover:bg-gray-50 hover:text-gray-800 w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-start transition-all duration-150 active" id="profile-tab" data-hs-tab="#profile-panel" aria-controls="profile-panel" role="tab">
                             <svg class="w-4.5 h-4.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
                             </svg>
                             Mes Informations
                         </button>
 
-                        <button @click="activeTab = 'security'" 
-                            :class="activeTab === 'security' ? 'bg-emerald-600 text-white font-bold shadow-md shadow-emerald-600/10' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'"
-                            class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-start transition-all duration-150">
+                        <button type="button" class="hs-tab-active:bg-emerald-600 hs-tab-active:text-white hs-tab-active:font-bold hs-tab-active:shadow-md hs-tab-active:shadow-emerald-600/10 text-gray-500 hover:bg-gray-50 hover:text-gray-800 w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-start transition-all duration-150" id="security-tab" data-hs-tab="#security-panel" aria-controls="security-panel" role="tab">
                             <svg class="w-4.5 h-4.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
                             </svg>
                             Sécurité & Accès
                         </button>
 
-                        <button @click="activeTab = 'orders'" 
-                            :class="activeTab === 'orders' ? 'bg-emerald-600 text-white font-bold shadow-md shadow-emerald-600/10' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'"
-                            class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-start transition-all duration-150 relative">
+                        <button type="button" class="hs-tab-active:bg-emerald-600 hs-tab-active:text-white hs-tab-active:font-bold hs-tab-active:shadow-md hs-tab-active:shadow-emerald-600/10 text-gray-500 hover:bg-gray-50 hover:text-gray-800 w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-start transition-all duration-150 relative" id="orders-tab" data-hs-tab="#orders-panel" aria-controls="orders-panel" role="tab">
                             <svg class="w-4.5 h-4.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
                             </svg>
@@ -80,14 +74,14 @@
                                 <span class="absolute right-4 w-2 h-2 bg-emerald-500 border border-white rounded-full animate-ping"></span>
                             @endif
                         </button>
-                    </div>
+                    </nav>
                 </div>
 
                 <!-- Main Content Panel -->
                 <div class="lg:col-span-3">
                     
                     <!-- TAB 1: PROFILE EDIT -->
-                    <div x-show="activeTab === 'profile'" x-transition:enter="transition ease-out duration-150" class="space-y-6">
+                    <div id="profile-panel" role="tabpanel" aria-labelledby="profile-tab" class="space-y-6">
                         <div class="bg-white border border-gray-150 rounded-2xl p-6 lg:p-8 shadow-sm text-start">
                             
                             <div class="flex items-center gap-2 border-b border-gray-100 pb-4 mb-6">
@@ -163,7 +157,7 @@
                     </div>
 
                     <!-- TAB 2: SECURITY -->
-                    <div x-show="activeTab === 'security'" x-transition:enter="transition ease-out duration-150" class="space-y-6" style="display: none;">
+                    <div id="security-panel" role="tabpanel" aria-labelledby="security-tab" class="hidden space-y-6">
                         <div class="bg-white border border-gray-150 rounded-2xl p-6 lg:p-8 shadow-sm text-start">
                             
                             <div class="flex items-center gap-2 border-b border-gray-100 pb-4 mb-6">
@@ -230,7 +224,7 @@
                     </div>
 
                     <!-- TAB 3: COMMANDES -->
-                    <div x-show="activeTab === 'orders'" x-transition:enter="transition ease-out duration-150" class="space-y-6" style="display: none;">
+                    <div id="orders-panel" role="tabpanel" aria-labelledby="orders-tab" class="hidden space-y-6">
                         
                         <!-- 1. Sleek Order Status Timeline -->
                         @if($activeOrder)
