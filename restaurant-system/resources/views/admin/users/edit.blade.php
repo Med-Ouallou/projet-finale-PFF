@@ -44,11 +44,11 @@
 
                     <div class="col-span-2">
                         <label class="block text-sm font-bold text-gray-800 mb-1.5">Rôle</label>
-                        <select name="role" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                        <x-ui.select name="role" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
                             <option value="admin" {{ old('role', $user->role_name) == 'admin' ? 'selected' : '' }}>Administrateur</option>
                             <option value="employee" {{ old('role', $user->role_name) == 'employee' ? 'selected' : '' }}>Employé</option>
                             <option value="customer" {{ old('role', $user->role_name) == 'customer' ? 'selected' : '' }}>Client</option>
-                        </select>
+                        </x-ui.select>
                     </div>
                 </div>
 

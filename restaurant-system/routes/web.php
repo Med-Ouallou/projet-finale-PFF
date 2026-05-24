@@ -20,10 +20,9 @@ Auth::routes();
 
 // Protected Customer Routes
 Route::prefix('client')->name('client.')->middleware(['auth', 'role:customer'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('customer.dashboard');
-    })->name('dashboard');
-
+    Route::get('/profile', [\App\Http\Controllers\Customer\ClientProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [\App\Http\Controllers\Customer\ClientProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/password', [\App\Http\Controllers\Customer\ClientProfileController::class, 'updatePassword'])->name('password.update');
     Route::post('/orders', [\App\Http\Controllers\Customer\OrderController::class, 'store'])->name('orders.store');
 });
 
@@ -33,6 +32,9 @@ Route::prefix('client')->name('client.')->middleware(['auth', 'role:customer'])-
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin|employee'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Notifications API
+    Route::get('/api/notifications', [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('api.notifications');
 
     // Menus
     Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');

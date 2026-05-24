@@ -38,11 +38,11 @@
 
                     <div>
                         <label class="block text-sm font-bold text-gray-800 mb-1.5">Unité <span class="text-red-400">*</span></label>
-                        <select name="unit" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                        <x-ui.select name="unit" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
                             @foreach(['kg', 'g', 'l', 'ml', 'unité', 'pièce', 'botte'] as $unit)
                                 <option value="{{ $unit }}" {{ old('unit', $item->unit) == $unit ? 'selected' : '' }}>{{ $unit }}</option>
                             @endforeach
-                        </select>
+                        </x-ui.select>
                     </div>
 
                     <div>

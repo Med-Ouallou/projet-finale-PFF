@@ -60,26 +60,26 @@
                 placeholder="Rechercher un plat...">
         </div>
         <div class="flex gap-2">
-            <button type="button" @click="showCreateModal = true"
+            <button type="button" data-hs-overlay="#create-modal"
                 class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200/50 transition-all">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 Ajouter
             </button>
-            <select x-model="categoryFilter" @change="applyFilters()"
+            <x-ui.select x-model="categoryFilter" @change="applyFilters()"
                 class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
                 <option value="">Toutes les catégories</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
-            </select>
-            <select x-model="statusFilter" @change="applyFilters()"
+            </x-ui.select>
+            <x-ui.select x-model="statusFilter" @change="applyFilters()"
                 class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
                 <option value="">Tous les statuts</option>
                 <option value="available">Disponible</option>
                 <option value="unavailable">Indisponible</option>
-            </select>
+            </x-ui.select>
         </div>
     </div>
 
@@ -171,9 +171,8 @@
 
 
     <!-- Create Modal -->
-    <div x-show="showCreateModal" x-cloak style="display: none;" class="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto">
-        <div class="fixed inset-0 bg-black/40" @click="showCreateModal = false"></div>
-        <div class="relative min-h-[calc(100%-3.5rem)] flex items-center m-3 sm:mx-auto sm:max-w-xl sm:w-full">
+    <div id="create-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="create-modal-label">
+        <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-xl sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
                 <div class="w-full flex flex-col bg-white border border-gray-100 shadow-2xl rounded-3xl pointer-events-auto relative">
                     <div class="flex justify-between items-center py-5 px-6 border-b border-gray-100">
                         <div class="flex items-center gap-3">
@@ -187,7 +186,7 @@
                                 <p class="text-xs text-gray-400 mt-0.5">Remplissez les informations ci-dessous.</p>
                             </div>
                         </div>
-                        <button type="button" @click="showCreateModal = false" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
+                        <button type="button" data-hs-overlay="#create-modal" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
@@ -236,12 +235,12 @@
 
                             <div>
                                 <label class="block text-sm font-bold text-gray-800 mb-1.5">Catégorie <span class="text-red-400">*</span></label>
-                                <select name="category_id" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                                <x-ui.select name="category_id" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
                                     <option value="">Sélectionner...</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                     @endforeach
-                                </select>
+                                </x-ui.select>
                             </div>
 
                             <div>
@@ -267,14 +266,14 @@
                                 <p class="text-sm font-bold text-gray-800">Disponible immédiatement</p>
                                 <p class="text-xs text-gray-400 mt-0.5">Visible dans le menu client.</p>
                             </div>
-                            <select name="status" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
+                            <x-ui.select name="status" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
                                 <option value="available">Disponible</option>
                                 <option value="unavailable">Indisponible</option>
-                            </select>
+                            </x-ui.select>
                         </div>
 
                         <div class="flex gap-3 pt-2">
-                            <button type="button" @click="showCreateModal = false" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition">Annuler</button>
+                            <button type="button" data-hs-overlay="#create-modal" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition">Annuler</button>
                             <button type="submit" class="flex-1 py-3.5 px-4 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition">Créer le plat</button>
                         </div>
                     </form>
