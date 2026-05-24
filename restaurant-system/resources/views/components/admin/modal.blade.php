@@ -6,33 +6,14 @@
 ])
 
 <!-- Modal Overlay -->
-<div x-data="{ open: false }"
-     x-init="$watch('open', val => { if(val) document.body.style.overflow='hidden'; else document.body.style.overflow='' })"
-     id="{{ $id }}"
+<div id="{{ $id }}"
+     class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
      role="dialog"
-     aria-modal="true"
-     aria-labelledby="{{ $id }}-title"
-     class="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto"
-     :class="{ 'pointer-events-none': !open }">
-
-    <!-- Backdrop -->
-    <div x-show="open" x-cloak
-         x-transition:enter="transition-opacity ease-out duration-300"
-         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-         x-transition:leave="transition-opacity ease-in duration-200"
-         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-         @click="open = false"
-         class="fixed inset-0 bg-black/40"></div>
+     tabindex="-1"
+     aria-labelledby="{{ $id }}-title">
 
     <!-- Modal Content -->
-    <div x-show="open" x-cloak
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-         class="relative min-h-[calc(100%-3.5rem)] flex items-center m-3 sm:mx-auto sm:max-w-xl sm:w-full">
+    <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-xl sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
         <div class="w-full flex flex-col bg-white border border-gray-100 shadow-2xl rounded-3xl pointer-events-auto relative">
 
             <!-- Header -->
@@ -50,7 +31,7 @@
                         @endif
                     </div>
                 </div>
-                <button type="button" @click="open = false"
+                <button type="button" data-hs-overlay="#{{ $id }}"
                         class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />

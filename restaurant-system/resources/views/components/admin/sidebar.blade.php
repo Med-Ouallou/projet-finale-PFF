@@ -1,18 +1,7 @@
 @props([])
 
-<!-- Sidebar Overlay (mobile) -->
-<div x-show="sidebarOpen" x-cloak
-     x-transition:enter="transition-opacity ease-out duration-300"
-     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-     x-transition:leave="transition-opacity ease-in duration-200"
-     x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-     @click="sidebarOpen = false"
-     class="fixed inset-0 bg-black/30 z-50 lg:hidden" aria-hidden="true"></div>
-
 <!-- Sidebar -->
-<aside class="fixed top-0 start-0 bottom-0 z-[60] w-[260px] bg-white border-e border-gray-100 overflow-y-auto shadow-lg transition-transform duration-300 -translate-x-full lg:translate-x-0 lg:shadow-none"
-       :class="sidebarOpen ? 'translate-x-0' : ''"
-       aria-label="Sidebar">
+<aside id="application-sidebar" class="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-[260px] bg-white border-e border-gray-100 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0" role="dialog" tabindex="-1" aria-label="Sidebar">
     <div class="flex flex-col h-full">
         <!-- Logo -->
         <div class="px-6 py-5 bg-emerald-900">

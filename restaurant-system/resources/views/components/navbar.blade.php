@@ -1,5 +1,7 @@
 <header x-data="{ mobileMenuOpen: false }" class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-100 text-sm py-2 sm:py-0 sticky top-0 shadow-sm">
     <nav class="relative max-w-[1200px] w-full mx-auto px-6 sm:flex sm:items-center sm:justify-between" aria-label="Global">
+        
+        <!-- Navbar Logo & Mobile Controls -->
         <div class="flex items-center justify-between h-16">
             <a class="flex items-center gap-2.5 text-xl font-bold font-heading text-slate-900 focus:outline-none" href="{{ route('accueil') }}">
                 <div class="flex items-center justify-center w-9 h-9 bg-emerald-600 rounded-xl shadow-lg shadow-emerald-200">
@@ -9,7 +11,24 @@
                 </div>
                 Resto<span class="text-emerald-600">Manager</span>
             </a>
-            <div class="sm:hidden">
+            
+            <div class="flex items-center gap-3 sm:hidden">
+                <!-- Mobile Cart Icon (Visible on Mobile Header) -->
+                <button type="button" 
+                        @click="cartOpen = !cartOpen" 
+                        aria-label="Voir le panier"
+                        class="relative p-2 text-stone-650 hover:text-emerald-700 hover:bg-stone-50 rounded-xl transition-all focus:outline-none flex items-center justify-center">
+                    <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18m-5 4a4 4 0 1 1-8 0" />
+                    </svg>
+                    <span x-show="itemCount > 0" x-cloak
+                          class="absolute top-0.5 right-0.5 w-4.5 h-4.5 flex items-center justify-center bg-emerald-700 text-[#FAF9F6] text-[8px] font-black rounded-full border border-white animate-pulse"
+                          x-text="itemCount">
+                    </span>
+                </button>
+
+                <!-- Hamburger toggle -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="w-9 h-9 flex justify-center items-center rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50">
                     <svg x-show="!mobileMenuOpen" class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
@@ -21,19 +40,36 @@
             </div>
         </div>
         
+        <!-- Desktop Nav Links & Controls -->
         <div :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" class="hidden overflow-hidden sm:overflow-visible transition-all duration-300 basis-full grow sm:block">
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-8 sm:mt-0 sm:ps-7">
-                <a class="font-medium {{ request()->routeIs('accueil') ? 'text-emerald-600 border-b-2 border-emerald-500' : 'text-gray-500 hover:text-gray-800' }} pb-4 text-sm transition-colors" href="{{ route('accueil') }}">Accueil</a>
-                <a class="font-medium {{ request()->routeIs('menu') ? 'text-emerald-600 border-b-2 border-emerald-500' : 'text-gray-500 hover:text-gray-800' }} pb-4 text-sm transition-colors" href="{{ route('menu') }}">Menu</a>
-                <a class="font-medium {{ request()->routeIs('contact') ? 'text-emerald-600 border-b-2 border-emerald-500' : 'text-gray-500 hover:text-gray-800' }} pb-4 text-sm transition-colors" href="{{ route('contact') }}">Contact</a>
+                <a class="font-semibold {{ request()->routeIs('accueil') ? 'text-emerald-600 border-b-2 border-emerald-500' : 'text-gray-555 hover:text-gray-800' }} pb-4 text-sm transition-colors" href="{{ route('accueil') }}">Accueil</a>
+                <a class="font-semibold {{ request()->routeIs('menu') ? 'text-emerald-600 border-b-2 border-emerald-500' : 'text-gray-555 hover:text-gray-800' }} pb-4 text-sm transition-colors" href="{{ route('menu') }}">Menu</a>
+                <a class="font-semibold {{ request()->routeIs('contact') ? 'text-emerald-600 border-b-2 border-emerald-500' : 'text-gray-555 hover:text-gray-800' }} pb-4 text-sm transition-colors" href="{{ route('contact') }}">Contact</a>
                 
-                <div class="sm:ps-4 pb-4 sm:border-s border-gray-200">
+                <div class="sm:ps-4 pb-4 sm:border-s border-gray-200 flex items-center gap-3">
+                    
+                    <!-- Desktop Cart Icon Button -->
+                    <button type="button" 
+                            @click="cartOpen = !cartOpen" 
+                            aria-label="Voir le panier"
+                            class="relative p-2 text-stone-650 hover:text-emerald-700 hover:bg-stone-50 rounded-xl transition-all focus:outline-none flex items-center justify-center mr-1">
+                        <svg class="w-5.5 h-5.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                            <path d="M3 6h18m-5 4a4 4 0 1 1-8 0" />
+                        </svg>
+                        <span x-show="itemCount > 0" x-cloak
+                              class="absolute top-0.5 right-0.5 w-4.5 h-4.5 flex items-center justify-center bg-emerald-700 text-[#FAF9F6] text-[8px] font-black rounded-full border border-white animate-pulse"
+                              x-text="itemCount">
+                        </span>
+                    </button>
+
                     @guest
                         <div class="flex items-center gap-2">
-                            <a href="{{ route('login') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all">
+                            <a href="{{ route('login') }}" class="py-2 px-4.5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all">
                                 Connexion
                             </a>
-                            <a href="{{ route('register') }}" class="py-2.5 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5">
+                            <a href="{{ route('register') }}" class="py-2 px-4.5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5">
                                 S'inscrire
                             </a>
                         </div>

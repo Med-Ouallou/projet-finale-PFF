@@ -1,5 +1,5 @@
 <x-layouts.admin :title="'Gestion Menus - Resto Admin'" :breadcrumb="'Gestion des Menus'">
-    <div x-data="menusApp({ menus: @js($menus), filters: @js($filters) })" x-init="init()">
+    <div x-data="menusApp({ menus: @js($menus), filters: @js($filters), hasErrors: @js($errors->any()) })" x-init="init()">
     @php
         $totalMenus = $menus->count();
         $activeMenus = $menus->where('is_active', true)->count();
@@ -60,19 +60,19 @@
                 placeholder="Rechercher un menu...">
         </div>
         <div class="flex gap-2">
-            <button type="button" @click="showCreateModal = true"
+            <button type="button" data-hs-overlay="#create-modal"
                 class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200/50 transition-all">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 Ajouter
             </button>
-            <select x-model="statusFilter" @change="applyFilters()"
+            <x-ui.select x-model="statusFilter" @change="applyFilters()"
                 class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
                 <option value="">Tous les statuts</option>
                 <option value="1">Actif</option>
                 <option value="0">Inactif</option>
-            </select>
+            </x-ui.select>
         </div>
     </div>
 
@@ -156,87 +156,10 @@
         </div>
     </div>
 
-    <script>
-        function menusApp(initialData) {
-            return {
-                menus: initialData.menus || [],
-                allMenus: initialData.menus || [],
-                filters: initialData.filters || {},
-                search: '',
-                statusFilter: initialData.filters?.is_active !== null ? String(initialData.filters.is_active) : '',
-                showCreateModal: false,
-                filteredMenus: [],
-                
-                init() {
-                    this.applyFilters();
-                    @if($errors->any()) this.showCreateModal = true; @endif
-                },
-                
-                applyFilters() {
-                    this.filteredMenus = this.allMenus.filter(menu => {
-                        const matchesSearch = !this.search || 
-                            (menu.name && menu.name.toLowerCase().includes(this.search.toLowerCase()));
-                        const matchesStatus = this.statusFilter === '' || 
-                            menu.is_active === (this.statusFilter === '1');
-                        return matchesSearch && matchesStatus;
-                    });
-                },
-                
-                async toggleStatus(id) {
-                    try {
-                        const response = await fetch(`/admin/menus/${id}/toggle`, {
-                            method: 'PATCH',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
-                                'Accept': 'application/json',
-                            }
-                        });
-                        if (response.ok) {
-                            const data = await response.json();
-                            const menu = this.allMenus.find(m => m.id === id);
-                            if (menu) {
-                                menu.is_active = data.is_active;
-                                this.applyFilters();
-                            }
-                            showAlert('Statut modifié avec succès', 'success');
-                        }
-                    } catch (error) {
-                        console.error('Error toggling status:', error);
-                        showAlert('Erreur lors du changement de statut', 'error');
-                    }
-                },
-                
-                deleteMenu(id) {
-                    showConfirm('Supprimer ce menu ?', async () => {
-                        try {
-                            const response = await fetch(`/admin/menus/${id}`, {
-                                method: 'DELETE',
-                                headers: {
-                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
-                                    'Accept': 'application/json',
-                                }
-                            });
-                            const data = await response.json();
-                            if (response.ok && data.success) {
-                                this.allMenus = this.allMenus.filter(m => m.id !== id);
-                                this.applyFilters();
-                                showAlert('Menu supprimé avec succès', 'success');
-                            } else {
-                                showAlert(data.message || 'Erreur lors de la suppression', 'error');
-                            }
-                        } catch (error) {
-                            console.error('Error deleting menu:', error);
-                        }
-                    }, { type: 'warning', title: 'Confirmation de suppression' });
-                }
-            }
-        }
-    </script>
 
     <!-- Create Modal -->
-    <div x-show="showCreateModal" x-cloak style="display: none;" class="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto">
-        <div class="fixed inset-0 bg-black/40" @click="showCreateModal = false"></div>
-        <div class="relative min-h-[calc(100%-3.5rem)] flex items-center m-3 sm:mx-auto sm:max-w-xl sm:w-full">
+    <div id="create-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="create-modal-label">
+        <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-xl sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
             <div class="w-full flex flex-col bg-white border border-gray-100 shadow-2xl rounded-3xl pointer-events-auto relative">
                 <div class="flex justify-between items-center py-5 px-6 border-b border-gray-100">
                     <div class="flex items-center gap-3">
@@ -250,7 +173,7 @@
                             <p class="text-xs text-gray-400 mt-0.5">Remplissez les informations ci-dessous.</p>
                         </div>
                     </div>
-                    <button type="button" @click="showCreateModal = false" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
+                    <button type="button" data-hs-overlay="#create-modal" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
@@ -320,14 +243,14 @@
                             <p class="text-sm font-bold text-gray-800">Actif immédiatement</p>
                             <p class="text-xs text-gray-400 mt-0.5">Visible dans le menu client.</p>
                         </div>
-                        <select name="is_active" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
+                        <x-ui.select name="is_active" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
                             <option value="1" {{ old('is_active', '1') == '1' ? 'selected' : '' }}>Actif</option>
                             <option value="0" {{ old('is_active') == '0' ? 'selected' : '' }}>Inactif</option>
-                        </select>
+                        </x-ui.select>
                     </div>
 
                     <div class="flex gap-3 pt-2">
-                        <button type="button" @click="showCreateModal = false" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition">Annuler</button>
+                        <button type="button" data-hs-overlay="#create-modal" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition">Annuler</button>
                         <button type="submit" class="flex-1 py-3.5 px-4 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition">Créer le menu</button>
                     </div>
                 </form>

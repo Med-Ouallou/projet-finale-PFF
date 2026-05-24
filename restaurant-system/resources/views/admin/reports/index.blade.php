@@ -4,11 +4,13 @@
     <form method="GET" action="{{ route('admin.reports.index') }}" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
         <div class="flex gap-2 items-center">
             <span class="text-sm font-medium text-gray-600">Période :</span>
-            <input type="date" name="date_from" value="{{ $dateFrom }}"
-                class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+            <div class="w-40">
+                <x-ui.datepicker name="date_from" value="{{ $dateFrom }}" placeholder="Date de début" />
+            </div>
             <span class="text-sm text-gray-400">à</span>
-            <input type="date" name="date_to" value="{{ $dateTo }}"
-                class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+            <div class="w-40">
+                <x-ui.datepicker name="date_to" value="{{ $dateTo }}" placeholder="Date de fin" />
+            </div>
             <button type="submit" class="py-2.5 px-4 text-sm font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition">
                 Filtrer
             </button>
