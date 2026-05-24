@@ -11,19 +11,19 @@
             <input type="text" class="py-2.5 ps-10 pe-4 block w-full bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-emerald-500 transition-shadow" placeholder="Rechercher une commande...">
         </div>
         <div class="flex gap-2">
-            <div x-data="{ open: false, selected: 'Tous les statuts' }" class="relative inline-flex">
-                <button type="button" @click="open = !open" class="py-2.5 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50 transition-all">
+            <div x-data="{ selected: 'Tous les statuts' }" class="hs-dropdown relative inline-flex [--placement:bottom-right]">
+                <button id="hs-dropdown-orders-status" type="button" class="hs-dropdown-toggle py-2.5 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50 transition-all" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                     <span x-text="selected"></span>
-                    <svg class="w-3.5 h-3.5 text-gray-400 transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <svg class="hs-dropdown-open:rotate-180 w-3.5 h-3.5 text-gray-400 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
-                <div x-show="open" x-cloak @click.away="open = false" x-transition class="absolute end-0 min-w-[180px] bg-white shadow-xl rounded-2xl border border-gray-100 mt-2 z-[80] p-2">
-                    <button type="button" @click="selected = 'Tous les statuts'; open = false" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 w-full text-start">Tous</button>
-                    <button type="button" @click="selected = 'En attente'; open = false" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-amber-700 hover:bg-amber-50 w-full text-start">En attente</button>
-                    <button type="button" @click="selected = 'En préparation'; open = false" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-blue-700 hover:bg-blue-50 w-full text-start">En préparation</button>
-                    <button type="button" @click="selected = 'Prête'; open = false" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-emerald-700 hover:bg-emerald-50 w-full text-start">Prête</button>
-                    <button type="button" @click="selected = 'Livrée'; open = false" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 w-full text-start">Livrée</button>
+                <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[180px] bg-white shadow-xl rounded-2xl border border-gray-100 mt-2 z-[80] p-2" aria-labelledby="hs-dropdown-orders-status">
+                    <button type="button" @click="selected = 'Tous les statuts'" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 w-full text-start">Tous</button>
+                    <button type="button" @click="selected = 'En attente'" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-amber-700 hover:bg-amber-50 w-full text-start">En attente</button>
+                    <button type="button" @click="selected = 'En préparation'" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-blue-700 hover:bg-blue-50 w-full text-start">En préparation</button>
+                    <button type="button" @click="selected = 'Prête'" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-emerald-700 hover:bg-emerald-50 w-full text-start">Prête</button>
+                    <button type="button" @click="selected = 'Livrée'" class="flex items-center gap-2.5 py-2 px-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-100 w-full text-start">Livrée</button>
                 </div>
             </div>
         </div>

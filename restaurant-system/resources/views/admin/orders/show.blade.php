@@ -33,13 +33,13 @@
                         @csrf
                         @method('PATCH')
                         <label class="text-sm font-bold text-gray-800">Mettre à jour le statut :</label>
-                        <select name="status" onchange="this.form.submit()" class="py-2.5 px-4 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                        <x-ui.select name="status" onchange="this.form.submit()" class="py-2.5 px-4 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
                             @foreach($statusLabels as $key => $label)
                                 @if($key !== 'cancelled')
                                     <option value="{{ $key }}" {{ $order->status == $key ? 'selected' : '' }}>{{ $label[0] }}</option>
                                 @endif
                             @endforeach
-                        </select>
+                        </x-ui.select>
                     </form>
                 </div>
             @endif

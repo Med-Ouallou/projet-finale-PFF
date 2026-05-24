@@ -60,7 +60,7 @@
                 placeholder="Rechercher un article...">
         </div>
         <div class="flex gap-2">
-            <button type="button" @click="showCreateModal = true"
+            <button type="button" data-hs-overlay="#create-modal"
                 class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-200/50 transition-all">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
@@ -143,13 +143,12 @@
 
 
     <!-- Create Modal -->
-    <div id="create-modal" x-show="showCreateModal" x-cloak style="display: none;" class="fixed inset-0 z-[80]">
-        <div class="fixed inset-0 bg-black/40" @click="showCreateModal = false"></div>
-        <div class="relative min-h-[calc(100%-3.5rem)] flex items-center m-3 sm:mx-auto sm:max-w-lg sm:w-full">
+    <div id="create-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="create-modal-label">
+        <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
             <div class="w-full flex flex-col bg-white border border-gray-100 shadow-2xl rounded-3xl pointer-events-auto relative">
                 <div class="flex justify-between items-center py-5 px-6 border-b border-gray-100">
                     <h3 class="font-bold font-heading text-gray-900">Nouvel article</h3>
-                    <button type="button" @click="showCreateModal = false" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50">
+                    <button type="button" data-hs-overlay="#create-modal" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
@@ -188,7 +187,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-800 mb-1.5">Unité <span class="text-red-400">*</span></label>
-                            <select name="unit" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                            <x-ui.select name="unit" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
                                 <option value="kg">kg</option>
                                 <option value="g">g</option>
                                 <option value="l">l</option>
@@ -196,7 +195,7 @@
                                 <option value="unité">unité</option>
                                 <option value="pièce">pièce</option>
                                 <option value="botte">botte</option>
-                            </select>
+                            </x-ui.select>
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-800 mb-1.5">Prix unitaire <span class="text-red-400">*</span></label>
@@ -204,7 +203,7 @@
                         </div>
                     </div>
                     <div class="flex gap-3 pt-2">
-                        <button type="button" @click="showCreateModal = false" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition">Annuler</button>
+                        <button type="button" data-hs-overlay="#create-modal" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition">Annuler</button>
                         <button type="submit" class="flex-1 py-3.5 px-4 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition">Créer</button>
                     </div>
                 </form>

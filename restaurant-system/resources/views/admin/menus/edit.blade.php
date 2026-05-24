@@ -70,10 +70,10 @@
                         <p class="text-sm font-bold text-gray-800">Statut</p>
                         <p class="text-xs text-gray-400 mt-0.5">Visibilité dans le menu client.</p>
                     </div>
-                    <select name="is_active" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
+                    <x-ui.select name="is_active" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
                         <option value="1" {{ old('is_active', $menu->is_active) ? 'selected' : '' }}>Actif</option>
                         <option value="0" {{ old('is_active', $menu->is_active) ? '' : 'selected' }}>Inactif</option>
-                    </select>
+                    </x-ui.select>
                 </div>
 
                 <div class="flex gap-3 pt-2">
