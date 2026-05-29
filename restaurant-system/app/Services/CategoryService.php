@@ -6,9 +6,19 @@ use App\Models\Category;
 
 class CategoryService
 {
-    public function getAll()
+    public function getAll(array $filters = [])
     {
-        return Category::orderBy('display_order')->get();
+        $query = Category::orderBy('display_order');
+
+        if (!empty($filters['menu_id'])) {
+            $query->where('menu_id', $filters['menu_id']);
+        }
+
+        if (isset($filters['is_active']) && $filters['is_active'] !== null) {
+            $query->where('is_active', $filters['is_active']);
+        }
+
+        return $query->get();
     }
 
     public function getById(int $id)
@@ -40,5 +50,12 @@ class CategoryService
             ->where('is_active', true)
             ->orderBy('display_order')
             ->get();
+    }
+
+    public function toggleActive(int $id)
+    {
+        $category = $this->getById($id);
+        $category->update(['is_active' => !$category->is_active]);
+        return $category;
     }
 }

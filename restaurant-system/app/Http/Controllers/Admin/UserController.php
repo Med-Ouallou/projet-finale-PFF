@@ -20,20 +20,7 @@ class UserController extends Controller
             'search' => $request->search,
         ];
 
-        $query = User::with('roles');
-
-        if ($filters['role']) {
-            $query = $query->role($filters['role']);
-        }
-
-        if ($filters['search']) {
-            $query = $query->where(function ($q) use ($filters) {
-                $q->where('name', 'like', '%' . $filters['search'] . '%')
-                  ->orWhere('email', 'like', '%' . $filters['search'] . '%');
-            });
-        }
-
-        $users = $query->get();
+        $users = $this->userService->getAll($filters);
 
         if ($request->wantsJson() || $request->ajax()) {
             return response()->json([
@@ -52,8 +39,7 @@ class UserController extends Controller
         unset($data['role']);
         unset($data['phone']);
 
-        $user = $this->userService->create($data);
-        $user->assignRole($role);
+        $this->userService->create($data, $role);
 
         return redirect()->route('admin.users.index')->with('success', 'Utilisateur créé avec succès.');
     }
@@ -68,19 +54,10 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, int $id)
     {
         $data = $request->validated();
-
-        if (empty($data['password'])) {
-            unset($data['password']);
-        }
-
         $role = $data['role'] ?? null;
         unset($data['role']);
 
-        $user = $this->userService->update($id, $data);
-
-        if ($role) {
-            $user->syncRoles([$role]);
-        }
+        $this->userService->update($id, $data, $role);
 
         return redirect()->route('admin.users.index')->with('success', 'Utilisateur modifié avec succès.');
     }

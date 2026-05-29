@@ -25,29 +25,10 @@ class ReportController extends Controller
             ? Carbon::parse($request->date_to)
             : now();
 
-        $report = [
-            'revenue' => Order::whereBetween('created_at', [$from, $to])->sum('total_amount'),
-            'orders_count' => Order::whereBetween('created_at', [$from, $to])->count(),
-            'average_order' => Order::whereBetween('created_at', [$from, $to])->avg('total_amount') ?? 0,
-            'top_items' => DB::table('order_items')
-                ->join('menu_items', 'order_items.menu_item_id', '=', 'menu_items.id')
-                ->join('orders', 'order_items.order_id', '=', 'orders.id')
-                ->whereBetween('orders.created_at', [$from, $to])
-                ->select('menu_items.name', DB::raw('SUM(order_items.quantity) as total_sold'))
-                ->groupBy('menu_items.id', 'menu_items.name')
-                ->orderByDesc('total_sold')
-                ->take(5)
-                ->get(),
-            'daily_revenue' => Order::whereBetween('created_at', [$from, $to])
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total_amount) as revenue'))
-                ->groupBy('date')
-                ->orderBy('date')
-                ->get(),
-        ];
+        $report = $this->reportService->getRevenueReport($from, $to);
 
         return view('admin.reports.index', [
             'report' => $report,
-            'dateFrom' => $from->format('Y-m-d'),
             'dateFrom' => $from->format('Y-m-d'),
             'dateTo' => $to->format('Y-m-d'),
         ]);
@@ -61,11 +42,7 @@ class ReportController extends Controller
         $writer = SimpleExcelWriter::streamDownload('rapport_' . $from->format('Y-m-d') . '_au_' . $to->format('Y-m-d') . '.xlsx')
             ->nameCurrentSheet('Revenus par jour');
 
-        $dailyRevenue = Order::whereBetween('created_at', [$from, $to])
-            ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total_amount) as revenue'), DB::raw('COUNT(id) as orders_count'))
-            ->groupBy('date')
-            ->orderBy('date')
-            ->get();
+        $dailyRevenue = $this->reportService->getExportDailyRevenue($from, $to);
 
         foreach ($dailyRevenue as $day) {
             $writer->addRow([
@@ -77,14 +54,7 @@ class ReportController extends Controller
 
         $writer->addNewSheetAndMakeItCurrent()->nameCurrentSheet('Plats les plus vendus');
 
-        $topItems = DB::table('order_items')
-            ->join('menu_items', 'order_items.menu_item_id', '=', 'menu_items.id')
-            ->join('orders', 'order_items.order_id', '=', 'orders.id')
-            ->whereBetween('orders.created_at', [$from, $to])
-            ->select('menu_items.name', DB::raw('SUM(order_items.quantity) as total_sold'), DB::raw('SUM(order_items.price * order_items.quantity) as total_revenue'))
-            ->groupBy('menu_items.id', 'menu_items.name')
-            ->orderByDesc('total_sold')
-            ->get();
+        $topItems = $this->reportService->getExportTopItems($from, $to);
 
         foreach ($topItems as $item) {
             $writer->addRow([

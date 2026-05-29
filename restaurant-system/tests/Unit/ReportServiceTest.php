@@ -23,9 +23,13 @@ class ReportServiceTest extends TestCase
 
     public function test_it_can_get_employer_performance()
     {
-        $customer = Customer::create([
+        $user = \App\Models\User::create([
             'name' => 'Report Test',
-            'email' => 'report@example.com',
+            'email' => 'report' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $customer = Customer::create([
+            'user_id' => $user->id,
             'phone' => '123456',
             'address' => 'Report Address'
         ]);

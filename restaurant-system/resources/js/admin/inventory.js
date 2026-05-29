@@ -4,10 +4,31 @@ export default function inventoryApp(initialData) {
         search: '',
         lowStockOnly: initialData.filters?.low_stock || false,
         showCreateModal: false,
+        showEditModal: false,
+        editForm: {
+            id: null,
+            name: '',
+            reference: '',
+            quantity_in_stock: 0,
+            unit: '',
+            min_threshold: 0
+        },
         filteredItems: [],
-        
+
         init() {
             this.applyFilters();
+        },
+
+        openEditModal(item) {
+            this.editForm = {
+                id: item.id,
+                name: item.name,
+                reference: item.reference || '',
+                quantity_in_stock: item.quantity_in_stock || 0,
+                unit: item.unit || '',
+                min_threshold: item.min_threshold || 0
+            };
+            this.showEditModal = true;
         },
         
         applyFilters() {

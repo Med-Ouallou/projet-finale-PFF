@@ -126,11 +126,11 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <a :href="`/admin/inventory/${item.id}/edit`" class="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition">
+                                    <button type="button" @click="openEditModal(item)" class="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                             <path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                    </a>
+                                    </button>
                                     <button type="button" @click="deleteItem(item.id)" class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                             <path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" stroke-linecap="round" stroke-linejoin="round" />
@@ -216,6 +216,60 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div x-show="showEditModal" 
+        class="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-3"
+        style="display: none;">
+        <div @click.outside="showEditModal = false" class="w-full sm:max-w-lg bg-white border border-gray-100 shadow-2xl rounded-3xl overflow-hidden relative">
+            <div class="flex justify-between items-center py-5 px-6 border-b border-gray-100">
+                <h3 class="font-bold font-heading text-gray-900">Modifier l'article</h3>
+                <button type="button" @click="showEditModal = false" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <form method="POST" :action="`/admin/inventory/${editForm.id}`" class="p-6 space-y-4">
+                @csrf
+                @method('PUT')
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Nom <span class="text-red-400">*</span></label>
+                        <input type="text" name="name" required x-model="editForm.name" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Référence <span class="text-red-400">*</span></label>
+                        <input type="text" name="reference" required x-model="editForm.reference" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Quantité <span class="text-red-400">*</span></label>
+                        <input type="number" name="quantity_in_stock" min="0" required x-model="editForm.quantity_in_stock" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Seuil min <span class="text-red-400">*</span></label>
+                        <input type="number" name="min_threshold" min="0" required x-model="editForm.min_threshold" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Unité <span class="text-red-400">*</span></label>
+                        <x-ui.select name="unit" x-model="editForm.unit" required class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                            <option value="kg">kg</option>
+                            <option value="g">g</option>
+                            <option value="l">l</option>
+                            <option value="ml">ml</option>
+                            <option value="unité">unité</option>
+                            <option value="pièce">pièce</option>
+                            <option value="botte">botte</option>
+                        </x-ui.select>
+                    </div>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" @click="showEditModal = false" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition">Annuler</button>
+                    <button type="submit" class="flex-1 py-3.5 px-4 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition">Sauvegarder</button>
+                </div>
+            </form>
         </div>
     </div>
 

@@ -25,9 +25,13 @@ class OrderServiceTest extends TestCase
 
     public function test_it_can_create_an_order_with_items()
     {
-        $customer = Customer::create([
+        $user = \App\Models\User::create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'test' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $customer = Customer::create([
+            'user_id' => $user->id,
             'phone' => '123456',
             'address' => 'Test Address'
         ]);
@@ -61,9 +65,13 @@ class OrderServiceTest extends TestCase
 
     public function test_it_can_update_order_status()
     {
-        $customer = Customer::create([
+        $user = \App\Models\User::create([
             'name' => 'Test User',
-            'email' => 'test2@example.com',
+            'email' => 'test' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $customer = Customer::create([
+            'user_id' => $user->id,
             'phone' => '123456',
             'address' => 'Test Address'
         ]);
@@ -84,9 +92,13 @@ class OrderServiceTest extends TestCase
 
     public function test_it_can_cancel_an_order()
     {
-        $customer = Customer::create([
+        $user = \App\Models\User::create([
             'name' => 'Test User',
-            'email' => 'test3@example.com',
+            'email' => 'test' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $customer = Customer::create([
+            'user_id' => $user->id,
             'phone' => '123456',
             'address' => 'Test Address'
         ]);

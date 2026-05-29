@@ -22,11 +22,7 @@ class MenuController extends Controller
             'is_active' => $request->is_active,
         ];
 
-        $menus = $this->menuService->getAll();
-
-        if ($filters['is_active'] !== null) {
-            $menus = $menus->where('is_active', $filters['is_active']);
-        }
+        $menus = $this->menuService->getAll($filters);
 
         if ($request->wantsJson() || $request->ajax()) {
             return response()->json([
@@ -40,13 +36,7 @@ class MenuController extends Controller
 
     public function store(StoreMenuRequest $request)
     {
-        $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $data['image_url'] = $request->file('image')->store('menus', 'public');
-        }
-
-        $this->menuService->create($data);
+        $this->menuService->create($request->validated(), $request->file('image'));
 
         return redirect()->route('admin.menus.index')->with('success', 'Menu créé avec succès.');
     }
@@ -59,24 +49,12 @@ class MenuController extends Controller
 
     public function update(UpdateMenuRequest $request, int $id)
     {
-        $data = $request->validated();
-        $menu = $this->menuService->getById($id);
-
-        // Handle image removal
-        if ($request->boolean('remove_image') && $menu->image_url) {
-            Storage::disk('public')->delete($menu->image_url);
-            $data['image_url'] = null;
-        }
-
-        // Handle new image upload
-        if ($request->hasFile('image')) {
-            if ($menu->image_url) {
-                Storage::disk('public')->delete($menu->image_url);
-            }
-            $data['image_url'] = $request->file('image')->store('menus', 'public');
-        }
-
-        $this->menuService->update($id, $data);
+        $this->menuService->update(
+            $id,
+            $request->validated(),
+            $request->file('image'),
+            $request->boolean('remove_image')
+        );
 
         return redirect()->route('admin.menus.index')->with('success', 'Menu modifié avec succès.');
     }
@@ -84,21 +62,6 @@ class MenuController extends Controller
     public function destroy(Request $request, int $id)
     {
         try {
-            $menu = $this->menuService->getById($id);
-
-            // Check if menu has categories
-            if ($menu->categories()->count() > 0) {
-                $message = 'Impossible de supprimer : ce menu contient des catégories.';
-                if ($request->wantsJson() || $request->ajax()) {
-                    return response()->json(['success' => false, 'message' => $message], 422);
-                }
-                return redirect()->route('admin.menus.index')->with('error', $message);
-            }
-
-            if ($menu->image_url) {
-                Storage::disk('public')->delete($menu->image_url);
-            }
-
             $this->menuService->delete($id);
 
             if ($request->wantsJson() || $request->ajax()) {
@@ -106,6 +69,12 @@ class MenuController extends Controller
             }
 
             return redirect()->route('admin.menus.index')->with('success', 'Menu supprimé avec succès.');
+        } catch (\DomainException $e) {
+            $message = $e->getMessage();
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json(['success' => false, 'message' => $message], 422);
+            }
+            return redirect()->route('admin.menus.index')->with('error', $message);
         } catch (QueryException $e) {
             $message = 'Impossible de supprimer ce menu.';
             if ($request->wantsJson() || $request->ajax()) {

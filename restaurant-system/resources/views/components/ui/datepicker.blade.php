@@ -3,13 +3,15 @@
     'value' => '',
     'placeholder' => 'Sélectionner une date',
     'id' => null,
+    'model' => null,
+    'align' => 'left',
 ])
 
 @php
     $id = $id ?? 'datepicker-' . uniqid();
 @endphp
 
-<div x-data="customDatepicker({ initialDate: '{{ $value }}' })" x-init="init()" class="relative w-full">
+<div x-data="customDatepicker({ initialDate: '{{ $value }}', model: '{{ $model }}' })" x-init="init()" class="relative w-full">
     <!-- Hidden input to submit the actual value -->
     <input type="hidden" name="{{ $name }}" x-model="formattedDate" @if($attributes->has('onchange')) onchange="{{ $attributes->get('onchange') }}" @endif>
     
@@ -26,7 +28,7 @@
 
     <!-- Calendar Dropdown -->
     <div x-show="isOpen" x-transition.opacity.duration.200ms
-        class="absolute z-[100] mt-2 w-80 flex flex-col bg-white border border-gray-100 shadow-xl rounded-2xl overflow-hidden"
+        class="absolute z-[100] mt-2 w-80 flex flex-col bg-white border border-gray-100 shadow-xl rounded-2xl overflow-hidden @if($align === 'right') end-0 @else start-0 @endif"
         style="display: none;">
         
         <!-- Calendar Header -->
@@ -128,8 +130,59 @@
                 this.updateCalendar();
                 
                 this.$watch('formattedDate', (value) => {
-                    if (!value) this.displayDate = '';
+                    if (!value) {
+                        this.displayDate = '';
+                    }
+                    if (config.model && config.model !== 'null' && config.model !== '') {
+                        let parts = config.model.split('.');
+                        let obj = this;
+                        for (let i = 0; i < parts.length - 1; i++) {
+                            obj = obj[parts[i]];
+                        }
+                        if (obj) {
+                            obj[parts[parts.length - 1]] = value;
+                        }
+                    }
                 });
+
+                if (config.model && config.model !== 'null' && config.model !== '') {
+                    // Initialize if parent model has a value already
+                    let parts = config.model.split('.');
+                    let obj = this;
+                    let initialVal = null;
+                    for (let i = 0; i < parts.length; i++) {
+                        if (obj) obj = obj[parts[i]];
+                    }
+                    if (obj) initialVal = obj;
+                    
+                    if (initialVal) {
+                        this.formattedDate = initialVal;
+                        let d = new Date(initialVal);
+                        if (!isNaN(d.getTime())) {
+                            this.setDisplayDate(d);
+                            this.month = d.getMonth();
+                            this.year = d.getFullYear();
+                            this.updateCalendar();
+                        }
+                    }
+
+                    this.$watch(config.model, (value) => {
+                        if (value !== this.formattedDate) {
+                            this.formattedDate = value;
+                            if (value) {
+                                let d = new Date(value);
+                                if (!isNaN(d.getTime())) {
+                                    this.setDisplayDate(d);
+                                    this.month = d.getMonth();
+                                    this.year = d.getFullYear();
+                                    this.updateCalendar();
+                                }
+                            } else {
+                                this.displayDate = '';
+                            }
+                        }
+                    });
+                }
             },
             
             toggle() {
