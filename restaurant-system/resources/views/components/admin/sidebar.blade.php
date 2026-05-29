@@ -67,6 +67,15 @@
                 Commandes
             </a>
 
+            <a href="{{ route('admin.promotions.index') }}"
+               class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.promotions.index') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
+                <svg class="w-4 h-4 {{ request()->routeIs('admin.promotions.index') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581a1.875 1.875 0 002.652 0l4.318-4.318a1.875 1.875 0 000-2.652L11.16 3.659A1.875 1.875 0 009.568 3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 7.5h.008v.008H6V7.5z" />
+                </svg>
+                Promotions
+            </a>
+
             <a href="{{ route('admin.users.index') }}"
                class="nav-link flex items-center gap-x-3.5 py-2.5 px-3 rounded-xl text-sm transition-all group {{ request()->routeIs('admin.users.index') ? 'font-bold bg-emerald-50 text-emerald-700 border border-emerald-100' : 'font-medium text-gray-600 hover:bg-gray-100' }}">
                 <svg class="w-4 h-4 {{ request()->routeIs('admin.users.index') ? 'text-emerald-600' : 'text-gray-400 group-hover:text-emerald-600' }} transition" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

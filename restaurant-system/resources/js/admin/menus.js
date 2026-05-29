@@ -6,14 +6,37 @@ export default function menusApp(initialData) {
         search: '',
         statusFilter: initialData.filters?.is_active !== null ? String(initialData.filters.is_active) : '',
         showCreateModal: false,
+        showEditModal: false,
+        editForm: {
+            id: null,
+            name: '',
+            description: '',
+            currency: 'MAD',
+            display_order: 0,
+            is_active: 1,
+            image_url: null
+        },
         filteredMenus: [],
         hasErrors: initialData.hasErrors || false,
-        
+
         init() {
             this.applyFilters();
             if (this.hasErrors) {
                 this.showCreateModal = true;
             }
+        },
+
+        openEditModal(menu) {
+            this.editForm = {
+                id: menu.id,
+                name: menu.name,
+                description: menu.description || '',
+                currency: menu.currency || 'MAD',
+                display_order: menu.display_order || 0,
+                is_active: menu.is_active ? 1 : 0,
+                image_url: menu.image_url
+            };
+            this.showEditModal = true;
         },
         
         applyFilters() {
