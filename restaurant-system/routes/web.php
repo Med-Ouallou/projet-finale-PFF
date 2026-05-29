@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Public\PublicPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::prefix('client')->name('client.')->middleware(['auth', 'role:customer'])-
     Route::put('/profile', [\App\Http\Controllers\Customer\ClientProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('/password', [\App\Http\Controllers\Customer\ClientProfileController::class, 'updatePassword'])->name('password.update');
     Route::post('/orders', [\App\Http\Controllers\Customer\OrderController::class, 'store'])->name('orders.store');
+    Route::post('/orders/apply-coupon', [\App\Http\Controllers\Customer\OrderController::class, 'applyCoupon'])->name('orders.apply-coupon');
 });
 
 
@@ -84,6 +86,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin|employee
     // Reports
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
+
+    // Promotions
+    Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions.index');
+    Route::post('/promotions', [PromotionController::class, 'store'])->name('promotions.store');
+    Route::put('/promotions/{id}', [PromotionController::class, 'update'])->name('promotions.update');
+    Route::delete('/promotions/{id}', [PromotionController::class, 'destroy'])->name('promotions.destroy');
 });
 
 
