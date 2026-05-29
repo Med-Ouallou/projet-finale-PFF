@@ -65,4 +65,25 @@ class ReportService
             )
             ->first();
     }
+
+    public function getExportDailyRevenue(Carbon $from, Carbon $to)
+    {
+        return Order::whereBetween('created_at', [$from, $to])
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total_amount) as revenue'), DB::raw('COUNT(id) as orders_count'))
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+    }
+
+    public function getExportTopItems(Carbon $from, Carbon $to)
+    {
+        return DB::table('order_items')
+            ->join('menu_items', 'order_items.menu_item_id', '=', 'menu_items.id')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->whereBetween('orders.created_at', [$from, $to])
+            ->select('menu_items.name', DB::raw('SUM(order_items.quantity) as total_sold'), DB::raw('SUM(order_items.price * order_items.quantity) as total_revenue'))
+            ->groupBy('menu_items.id', 'menu_items.name')
+            ->orderByDesc('total_sold')
+            ->get();
+    }
 }

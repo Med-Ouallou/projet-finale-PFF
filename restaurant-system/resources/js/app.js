@@ -9,6 +9,7 @@ import inventoryApp from './admin/inventory';
 import alertComponent from './components/alert';
 import adminLayout from './admin/layout';
 import menusApp from './admin/menus';
+import ordersApp from './admin/orders';
 
 window.Alpine = Alpine;
 Alpine.data('cartManager', cartManager);
@@ -19,6 +20,7 @@ Alpine.data('inventoryApp', inventoryApp);
 Alpine.data('alertComponent', alertComponent);
 Alpine.data('adminLayout', adminLayout);
 Alpine.data('menusApp', menusApp);
+Alpine.data('ordersApp', ordersApp);
 
 Alpine.start();
 

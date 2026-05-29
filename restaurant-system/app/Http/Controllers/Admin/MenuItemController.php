@@ -25,21 +25,7 @@ class MenuItemController extends Controller
             'search' => $request->search,
         ];
 
-        $query = $this->menuItemService->getAll();
-
-        if ($filters['category_id']) {
-            $query = $query->where('category_id', $filters['category_id']);
-        }
-
-        if ($filters['status']) {
-            $query = $query->where('status', $filters['status']);
-        }
-
-        if ($filters['search']) {
-            $query = $query->where('name', 'like', "%{$filters['search']}%");
-        }
-
-        $items = $query;
+        $items = $this->menuItemService->getAll($filters);
         $categories = $this->categoryService->getAll();
 
         if ($request->wantsJson() || $request->ajax()) {
@@ -55,13 +41,7 @@ class MenuItemController extends Controller
 
     public function store(StoreMenuItemRequest $request)
     {
-        $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $data['image_url'] = $request->file('image')->store('menu-items', 'public');
-        }
-
-        $this->menuItemService->create($data);
+        $this->menuItemService->create($request->validated(), $request->file('image'));
 
         return redirect()->route('admin.menu-items.index')->with('success', 'Plat créé avec succès.');
     }
@@ -76,17 +56,7 @@ class MenuItemController extends Controller
 
     public function update(UpdateMenuItemRequest $request, int $id)
     {
-        $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $item = $this->menuItemService->getById($id);
-            if ($item->image_url) {
-                Storage::disk('public')->delete($item->image_url);
-            }
-            $data['image_url'] = $request->file('image')->store('menu-items', 'public');
-        }
-
-        $this->menuItemService->update($id, $data);
+        $this->menuItemService->update($id, $request->validated(), $request->file('image'));
 
         return redirect()->route('admin.menu-items.index')->with('success', 'Plat modifié avec succès.');
     }
@@ -94,12 +64,6 @@ class MenuItemController extends Controller
     public function destroy(Request $request, int $id)
     {
         try {
-            $item = $this->menuItemService->getById($id);
-
-            if ($item->image_url) {
-                Storage::disk('public')->delete($item->image_url);
-            }
-
             $this->menuItemService->delete($id);
 
             if ($request->wantsJson() || $request->ajax()) {

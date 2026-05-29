@@ -10,8 +10,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Customer\StoreOrderRequest;
 
+use App\Services\OrderService;
+
 class OrderController extends Controller
 {
+    public function __construct(private OrderService $orderService) {}
+
     public function store(StoreOrderRequest $request)
     {
         $validated = $request->validated();
@@ -24,31 +28,20 @@ class OrderController extends Controller
         }
 
         try {
-            DB::beginTransaction();
-
-            $totalAmount = collect($validated['items'])->reduce(function ($total, $item) {
-                return $total + ($item['price'] * $item['quantity']);
-            }, 0);
-
-            $order = Order::create([
-                'customer_id' => Auth::user()->customer->id,
-                'subtotal' => $totalAmount,
-                'total_amount' => $totalAmount,
-                'status' => 'pending',
-                'notes' => $validated['notes'] ?? null,
-            ]);
-
-            foreach ($validated['items'] as $item) {
-                OrderItem::create([
-                    'order_id' => $order->id,
+            $items = collect($validated['items'])->map(function ($item) {
+                return [
                     'menu_item_id' => $item['id'],
                     'quantity' => $item['quantity'],
-                    'unit_price_at_order' => $item['price'],
-                    'subtotal' => $item['price'] * $item['quantity'],
-                ]);
-            }
+                ];
+            })->toArray();
 
-            DB::commit();
+            $orderData = [
+                'customer_id' => Auth::user()->customer->id,
+                'notes' => $validated['notes'] ?? null,
+                'status' => 'pending',
+            ];
+
+            $order = $this->orderService->createOrder($orderData, $items);
 
             return response()->json([
                 'success' => true,
@@ -57,7 +50,6 @@ class OrderController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            DB::rollBack();
             return response()->json([
                 'success' => false,
                 'message' => 'Erreur lors de l\'enregistrement de la commande: ' . $e->getMessage()

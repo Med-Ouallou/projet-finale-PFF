@@ -23,17 +23,7 @@ class CategoryController extends Controller
             'is_active' => $request->is_active,
         ];
 
-        $query = $this->categoryService->getAll();
-
-        if ($filters['menu_id']) {
-            $query = $query->where('menu_id', $filters['menu_id']);
-        }
-
-        if ($filters['is_active'] !== null) {
-            $query = $query->where('is_active', $filters['is_active']);
-        }
-
-        $categories = $query;
+        $categories = $this->categoryService->getAll($filters);
         $menus = $this->menuService->getAllMenus();
 
         if ($request->wantsJson() || $request->ajax()) {
@@ -65,7 +55,15 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, int $id)
     {
-        $this->categoryService->update($id, $request->validated());
+        $category = $this->categoryService->update($id, $request->validated());
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Catégorie modifiée avec succès.',
+                'category' => $category
+            ]);
+        }
 
         return redirect()->route('admin.categories.index')->with('success', 'Catégorie modifiée avec succès.');
     }
@@ -83,8 +81,7 @@ class CategoryController extends Controller
 
     public function toggleActive(Request $request, int $id)
     {
-        $category = $this->categoryService->getById($id);
-        $category->update(['is_active' => !$category->is_active]);
+        $category = $this->categoryService->toggleActive($id);
 
         if ($request->wantsJson() || $request->ajax()) {
             return response()->json([
