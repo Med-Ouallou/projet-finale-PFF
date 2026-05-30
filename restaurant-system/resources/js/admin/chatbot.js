@@ -3,8 +3,10 @@ export default function chatbotApp(config) {
         sender: 'bot',
         text: "Bonjour ! Je suis votre assistant de gestion IA. Choisissez ce que vous voulez faire ou posez-moi directement votre question :",
         options: [
+            { label: "Créer un menu", prompt: "Ajoute le menu [Nom]", icon: "menu" },
             { label: "Créer une catégorie", prompt: "Ajoute la catégorie [Nom]", icon: "category" },
             { label: "Ajouter un plat", prompt: "Ajoute le plat [Nom] à la catégorie [Catégorie] pour [Prix] DH", icon: "item" },
+            { label: "Modifier une commande", prompt: "Marque la commande #[ID] comme [prête/livrée/annulée]", icon: "order" },
             { label: "Rapport financier", prompt: "Donne-moi le rapport financier d'aujourd'hui", icon: "report" },
             { label: "Vérifier les ruptures", prompt: "Quels plats sont en rupture de stock ?", icon: "stock" },
             { label: "Signaler une rupture", prompt: "Rend le plat [Nom] indisponible", icon: "block" }

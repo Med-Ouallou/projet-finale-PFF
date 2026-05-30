@@ -22,6 +22,27 @@ class ChatbotCommandHandler
         $message = $aiResponse['message'] ?? '';
 
         switch ($action) {
+            case 'create_menu':
+                if (empty($data['name'])) {
+                    return [
+                        'success' => false,
+                        'message' => 'Please provide a name for the menu.'
+                    ];
+                }
+
+                $menu = Menu::create([
+                    'name' => trim($data['name']),
+                    'description' => $data['description'] ?? null,
+                    'is_active' => true,
+                    'display_order' => Menu::count() + 1,
+                ]);
+
+                return [
+                    'success' => true,
+                    'message' => "Le menu '{$menu->name}' a été créé avec succès.",
+                    'data' => $menu
+                ];
+
             case 'create_category':
                 if (empty($data['name'])) {
                     return [
