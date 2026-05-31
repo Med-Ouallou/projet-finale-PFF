@@ -14,6 +14,8 @@ export default function usersApp(initialData) {
             role: ''
         },
         filteredUsers: [],
+        currentPage: 1,
+        perPage: 10,
         
         init() {
             this.applyFilters();
@@ -40,6 +42,28 @@ export default function usersApp(initialData) {
                     user.role_name === this.roleFilter;
                 return matchesSearch && matchesRole;
             });
+            this.currentPage = 1;
+        },
+
+        get paginatedUsers() {
+            const start = (this.currentPage - 1) * this.perPage;
+            return this.filteredUsers.slice(start, start + this.perPage);
+        },
+
+        get totalPages() {
+            return Math.ceil(this.filteredUsers.length / this.perPage);
+        },
+
+        nextPage() {
+            if (this.currentPage < this.totalPages) this.currentPage++;
+        },
+
+        prevPage() {
+            if (this.currentPage > 1) this.currentPage--;
+        },
+
+        goToPage(page) {
+            this.currentPage = page;
         },
         
         deleteUser(id) {

@@ -4,15 +4,17 @@
         <!-- Filters Bar -->
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-6">
             <div class="flex gap-2">
-                <x-ui.select name="status" x-model="filters.status" @change="applyFilters()"
-                    class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
-                    <option value="">Tous les statuts</option>
-                    <option value="pending">En attente</option>
-                    <option value="preparing">En préparation</option>
-                    <option value="ready">Prête</option>
-                    <option value="delivered">Livrée</option>
-                    <option value="cancelled">Annulée</option>
-                </x-ui.select>
+                <div class="w-48">
+                    <x-ui.select name="status" x-model="filters.status" @change="applyFilters()"
+                        class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                        <option value="">Tous les statuts</option>
+                        <option value="pending">En attente</option>
+                        <option value="preparing">En préparation</option>
+                        <option value="ready">Prête</option>
+                        <option value="delivered">Livrée</option>
+                        <option value="cancelled">Annulée</option>
+                    </x-ui.select>
+                </div>
                 <div class="w-40" @change="filters.date_from = $event.target.value; applyFilters()">
                     <x-ui.datepicker name="date_from" value="{{ $filters['date_from'] ?? '' }}" placeholder="Date de début" />
                 </div>
@@ -68,14 +70,14 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <a :href="'/admin/orders/' + order.id"
+                                        <button type="button" @click="openDetailModal(order)"
                                             class="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition"
                                             title="Voir détails">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                                 <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round" />
                                                 <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-                                        </a>
+                                        </button>
                                         <template x-if="order.status !== 'cancelled' && order.status !== 'delivered'">
                                             <button type="button" @click="cancelOrder(order.id)"
                                                 class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition" title="Annuler">
@@ -131,6 +133,142 @@
                             </button>
                         </nav>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Detail Modal -->
+        <div x-show="showDetailModal" 
+            class="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+            style="display: none;"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0">
+            
+            <div @click.outside="showDetailModal = false" 
+                class="w-full sm:max-w-lg bg-white border border-gray-100/80 shadow-2xl rounded-3xl overflow-hidden relative flex flex-col max-h-[90vh]"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                x-transition:leave-end="opacity-0 scale-95 translate-y-4">
+                
+                <!-- Header -->
+                <div class="flex justify-between items-center py-5 px-6 border-b border-gray-100/60 shrink-0 bg-white">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-emerald-50 rounded-2xl flex items-center justify-center shrink-0 border border-emerald-100">
+                            <svg class="w-5.5 h-5.5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold font-heading text-gray-900 text-base" x-text="'Commande #' + (selectedOrder ? selectedOrder.id : '')"></h3>
+                            <p class="text-xs text-gray-400 font-medium mt-0.5" x-text="selectedOrder ? 'Passée le ' + formatDate(selectedOrder.created_at) : ''"></p>
+                        </div>
+                    </div>
+                    <button type="button" @click="showDetailModal = false" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-100 bg-white text-gray-400 hover:text-gray-600 hover:scale-105 transition-all shrink-0 shadow-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div class="p-6 space-y-6 overflow-y-auto flex-1 bg-gray-50/20" x-show="selectedOrder">
+                    <template x-if="selectedOrder">
+                        <div class="space-y-6">
+                            <!-- Status Card -->
+                            <div class="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-bold text-gray-700">Statut de la commande</span>
+                                    <span class="inline-flex items-center py-1 px-3 rounded-full text-xs font-bold shadow-sm" 
+                                        :class="getStatusClass(selectedOrder.status)" 
+                                        x-text="getStatusLabel(selectedOrder.status)">
+                                    </span>
+                                </div>
+                                
+                                <template x-if="selectedOrder.status !== 'cancelled' && selectedOrder.status !== 'delivered'">
+                                    <div class="flex items-center justify-between gap-4 pt-3 border-t border-gray-100">
+                                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Mettre à jour</label>
+                                        <div class="w-40">
+                                            <x-ui.select id="modal-order-status-select" x-bind:value="selectedOrder.status" 
+                                                @change="updateOrderStatus(selectedOrder.id, $event.target.value)">
+                                                <option value="pending">En attente</option>
+                                                <option value="preparing">En préparation</option>
+                                                <option value="ready">Prête</option>
+                                                <option value="delivered">Livrée</option>
+                                            </x-ui.select>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <!-- Customer Info Card -->
+                            <div class="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-3">
+                                <h4 class="text-xs font-extrabold uppercase text-gray-400 tracking-wider">Client</h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-[10px] uppercase font-bold text-gray-400">Nom complet</p>
+                                        <p class="text-sm font-bold text-gray-800 mt-0.5" x-text="selectedOrder.customer?.name || 'Client inconnu'"></p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] uppercase font-bold text-gray-400">Téléphone</p>
+                                        <p class="text-sm font-bold text-gray-800 mt-0.5" x-text="selectedOrder.customer?.phone || '-'"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ordered Items List -->
+                            <div class="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm space-y-3">
+                                <h4 class="text-xs font-extrabold uppercase text-gray-400 tracking-wider">Plats Commandés</h4>
+                                <div class="divide-y divide-gray-100/70 max-h-56 overflow-y-auto pr-1">
+                                    <template x-for="item in selectedOrder.order_items" :key="item.id">
+                                        <div class="flex justify-between items-center py-3.5 first:pt-0 last:pb-0">
+                                            <div class="space-y-1">
+                                                <p class="text-sm font-bold text-gray-800" x-text="item.menu_item?.name"></p>
+                                                <p class="text-xs text-gray-400 font-medium" x-text="parseFloat(item.unit_price_at_order).toFixed(2) + ' DH × ' + item.quantity"></p>
+                                            </div>
+                                            <p class="text-sm font-bold text-gray-900" x-text="parseFloat(item.subtotal).toFixed(2) + ' DH'"></p>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!-- Billing Summary -->
+                            <div class="p-5 bg-gradient-to-br from-emerald-50/30 to-emerald-50/60 rounded-2xl border border-emerald-100/50 shadow-sm space-y-3.5">
+                                <div class="flex justify-between text-xs text-gray-500 font-medium">
+                                    <span>Sous-total</span>
+                                    <span class="font-bold text-gray-800" x-text="parseFloat(selectedOrder.subtotal).toFixed(2) + ' DH'"></span>
+                                </div>
+                                <template x-if="parseFloat(selectedOrder.discount_amount) > 0">
+                                    <div class="flex justify-between text-xs text-red-600 font-medium">
+                                        <span>Remise appliqué</span>
+                                        <span class="font-bold" x-text="'-' + parseFloat(selectedOrder.discount_amount).toFixed(2) + ' DH'"></span>
+                                    </div>
+                                </template>
+                                <div class="flex justify-between text-base font-extrabold text-gray-900 pt-3 border-t border-dashed border-emerald-200/80">
+                                    <span class="text-gray-800">Total net</span>
+                                    <span class="text-emerald-600 text-lg" x-text="parseFloat(selectedOrder.total_amount).toFixed(2) + ' DH'"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Footer -->
+                <div class="p-5 border-t border-gray-100 flex justify-between shrink-0 bg-white shadow-inner">
+                    <button type="button" @click="showDetailModal = false" class="py-2.5 px-5 text-sm font-bold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 shadow-sm transition">
+                        Fermer
+                    </button>
+                    <template x-if="selectedOrder && selectedOrder.status !== 'cancelled' && selectedOrder.status !== 'delivered'">
+                        <button type="button" @click="cancelOrder(selectedOrder.id); showDetailModal = false;" class="py-2.5 px-5 text-sm font-bold rounded-xl bg-red-50 text-red-700 hover:bg-red-100 border border-red-100 shadow-sm transition">
+                            Annuler la commande
+                        </button>
+                    </template>
                 </div>
             </div>
         </div>
