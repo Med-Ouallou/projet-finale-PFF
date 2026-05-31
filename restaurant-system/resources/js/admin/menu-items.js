@@ -7,10 +7,33 @@ export default function menuItemsApp(initialData) {
         categoryFilter: initialData.filters?.category_id || '',
         statusFilter: initialData.filters?.status || '',
         showCreateModal: false,
+        showEditModal: false,
+        editForm: {
+            id: null,
+            name: '',
+            description: '',
+            price: 0,
+            status: 'available',
+            category_id: '',
+            image_url: null
+        },
         filteredItems: [],
-        
+
         init() {
             this.applyFilters();
+        },
+
+        openEditModal(item) {
+            this.editForm = {
+                id: item.id,
+                name: item.name,
+                description: item.description || '',
+                price: item.price || 0,
+                status: item.status || 'available',
+                category_id: item.category_id,
+                image_url: item.image_url
+            };
+            this.showEditModal = true;
         },
         
         applyFilters() {

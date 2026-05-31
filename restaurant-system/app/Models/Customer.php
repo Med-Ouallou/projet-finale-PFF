@@ -14,6 +14,11 @@ class Customer extends Model
         'address',
     ];
 
+    protected $appends = [
+        'name',
+        'email',
+    ];
+
     /**
      * Get the user that owns the customer profile.
      */

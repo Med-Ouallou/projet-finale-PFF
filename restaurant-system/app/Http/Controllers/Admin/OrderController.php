@@ -20,21 +20,14 @@ class OrderController extends Controller
             'date_to' => $request->date_to,
         ];
 
-        $query = Order::with(['customer', 'orderItems.menuItem']);
+        $orders = $this->orderService->getFilteredPaginatedOrders($filters, 20);
 
-        if ($filters['status']) {
-            $query->where('status', $filters['status']);
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'orders' => $orders,
+                'filters' => $filters,
+            ]);
         }
-
-        if ($filters['date_from']) {
-            $query->whereDate('created_at', '>=', $filters['date_from']);
-        }
-
-        if ($filters['date_to']) {
-            $query->whereDate('created_at', '<=', $filters['date_to']);
-        }
-
-        $orders = $query->latest()->paginate(20);
 
         return view('admin.orders.index', compact('orders', 'filters'));
     }
@@ -53,9 +46,13 @@ class OrderController extends Controller
         return back()->with('success', 'Statut de la commande mis à jour.');
     }
 
-    public function cancel(int $id)
+    public function cancel(Request $request, int $id)
     {
         $this->orderService->cancelOrder($id);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Commande annulée avec succès.']);
+        }
 
         return back()->with('success', 'Commande annulée avec succès.');
     }

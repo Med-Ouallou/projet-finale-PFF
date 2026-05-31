@@ -121,13 +121,13 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <a :href="`/admin/menus/${menu.id}/edit`"
+                                    <button type="button" @click="openEditModal(menu)"
                                         class="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition"
                                         title="Modifier">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                             <path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                    </a>
+                                    </button>
                                     <button type="button" @click="toggleStatus(menu.id)"
                                         class="p-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"
                                         title="Changer statut">
@@ -195,14 +195,21 @@
                     @endif
 
                     <!-- Image Upload -->
-                    <div>
+                    <div x-data="{ previewUrl: null }">
                         <label class="block text-sm font-bold text-gray-800 mb-2">Image du menu</label>
                         <div class="flex items-center gap-4">
-                            <label class="w-20 h-20 rounded-2xl bg-gray-50 flex flex-col gap-1 items-center justify-center border-2 border-dashed border-gray-200 hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-500 text-gray-400 transition-all cursor-pointer group">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                                    <path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <input type="file" name="image" class="hidden" accept="image/*">
+                            <label class="w-20 h-20 rounded-2xl bg-gray-50 flex flex-col gap-1 items-center justify-center border-2 border-dashed border-gray-200 hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-500 text-gray-400 transition-all cursor-pointer group relative overflow-hidden">
+                                <template x-if="!previewUrl">
+                                    <div class="flex flex-col items-center justify-center">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                            <path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </template>
+                                <template x-if="previewUrl">
+                                    <img :src="previewUrl" class="absolute inset-0 w-full h-full object-cover">
+                                </template>
+                                <input type="file" name="image" class="sr-only" accept="image/*" @change="const file = $event.target.files[0]; if (file) { previewUrl = URL.createObjectURL(file); }">
                             </label>
                             <div>
                                 <p class="text-sm font-semibold text-gray-700">Cliquez pour uploader</p>
@@ -255,6 +262,114 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div x-show="showEditModal" 
+        class="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-3"
+        style="display: none;">
+        <div @click.outside="showEditModal = false" class="w-full sm:max-w-xl bg-white border border-gray-100 shadow-2xl rounded-3xl overflow-hidden relative">
+            <div class="flex justify-between items-center py-5 px-6 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold font-heading text-gray-900 leading-none">Modifier le menu</h3>
+                        <p class="text-xs text-gray-400 mt-0.5">Mettez à jour les informations du menu.</p>
+                    </div>
+                </div>
+                <button type="button" @click="showEditModal = false" class="size-8 inline-flex justify-center items-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <form method="POST" :action="`/admin/menus/${editForm.id}`" enctype="multipart/form-data" class="p-6 space-y-5 overflow-y-auto max-h-[70vh]">
+                @csrf
+                @method('PUT')
+
+                <!-- Image Upload -->
+                <div x-data="{ previewUrl: null }">
+                    <label class="block text-sm font-bold text-gray-800 mb-2">Image du menu</label>
+                    <div class="flex items-center gap-4">
+                        <label class="w-20 h-20 rounded-2xl bg-gray-50 flex flex-col gap-1 items-center justify-center border-2 border-dashed border-gray-200 hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-500 text-gray-400 transition-all cursor-pointer group relative overflow-hidden">
+                            <template x-if="!previewUrl && !editForm.image_url">
+                                <div class="flex flex-col items-center justify-center">
+                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                        <path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </template>
+                            <template x-if="previewUrl">
+                                <img :src="previewUrl" class="absolute inset-0 w-full h-full object-cover">
+                            </template>
+                            <template x-if="!previewUrl && editForm.image_url">
+                                <img :src="'/storage/' + editForm.image_url" class="absolute inset-0 w-full h-full object-cover">
+                            </template>
+                            <input type="file" name="image" class="sr-only" accept="image/*" @change="const file = $event.target.files[0]; if (file) { previewUrl = URL.createObjectURL(file); }">
+                        </label>
+                        <div>
+                            <p class="text-sm font-semibold text-gray-700">Cliquez pour uploader</p>
+                            <p class="text-xs text-gray-400 mt-1">PNG, JPG, WebP — max 2MB</p>
+                        </div>
+                        <template x-if="editForm.image_url">
+                            <div class="ml-auto">
+                                <label class="flex items-center gap-2 text-gray-500 cursor-pointer hover:text-red-600 transition-colors text-sm">
+                                    <input type="checkbox" name="remove_image" value="1" class="rounded bg-gray-50 border-gray-200 text-red-500 focus:ring-red-500">
+                                    <span>Supprimer l'image</span>
+                                </label>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Form Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Nom du menu <span class="text-red-400">*</span></label>
+                        <input type="text" name="name" required x-model="editForm.name"
+                            class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition"
+                            placeholder="Ex: Menu du jour">
+                    </div>
+
+                    <div class="col-span-2">
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Description</label>
+                        <textarea name="description" x-model="editForm.description" class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition" rows="3" placeholder="Description du menu..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Devise</label>
+                        <input type="text" name="currency" x-model="editForm.currency"
+                            class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-1.5">Ordre d'affichage</label>
+                        <input type="number" name="display_order" x-model="editForm.display_order" min="0"
+                            class="py-3 px-4 block w-full border border-gray-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 transition">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100">
+                    <div>
+                        <p class="text-sm font-bold text-gray-800">Actif immédiatement</p>
+                        <p class="text-xs text-gray-400 mt-0.5">Visible dans le menu client.</p>
+                    </div>
+                    <x-ui.select name="is_active" x-model="editForm.is_active" class="py-2 px-3 text-sm rounded-xl border border-gray-200 bg-white">
+                        <option value="1">Actif</option>
+                        <option value="0">Inactif</option>
+                    </x-ui.select>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button type="button" @click="showEditModal = false" class="flex-1 py-3.5 px-4 text-center text-sm font-semibold rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 transition">Annuler</button>
+                    <button type="submit" class="flex-1 py-3.5 px-4 text-sm font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition">Sauvegarder</button>
+                </div>
+            </form>
         </div>
     </div>
 

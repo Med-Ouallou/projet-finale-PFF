@@ -9,7 +9,8 @@ import inventoryApp from './admin/inventory';
 import alertComponent from './components/alert';
 import adminLayout from './admin/layout';
 import menusApp from './admin/menus';
-import chatbotApp from './admin/chatbot';
+import ordersApp from './admin/orders';
+import promotionsApp from './admin/promotions';
 
 window.Alpine = Alpine;
 Alpine.data('cartManager', cartManager);
@@ -20,7 +21,8 @@ Alpine.data('inventoryApp', inventoryApp);
 Alpine.data('alertComponent', alertComponent);
 Alpine.data('adminLayout', adminLayout);
 Alpine.data('menusApp', menusApp);
-Alpine.data('chatbotApp', chatbotApp);
+Alpine.data('ordersApp', ordersApp);
+Alpine.data('promotionsApp', promotionsApp);
 
 Alpine.start();
 

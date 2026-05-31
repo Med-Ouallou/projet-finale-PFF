@@ -9,7 +9,7 @@
     <div class="p-3 pb-0">
         <div class="relative h-44 rounded-2xl overflow-hidden bg-stone-50 shadow-inner">
             <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                 src="{{ $item->image_url ?? 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600' }}" 
+                 src="{{ $item->image_url ? (Str::startsWith($item->image_url, ['http://', 'https://']) ? $item->image_url : asset('storage/' . $item->image_url)) : 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600' }}" 
                  alt="{{ $item->name }}">
             
             <!-- Gradient Overlay for Depth -->

@@ -5,10 +5,29 @@ export default function usersApp(initialData) {
         search: '',
         roleFilter: initialData.filters?.role || '',
         showCreateModal: false,
+        showEditModal: false,
+        editForm: {
+            id: null,
+            name: '',
+            email: '',
+            password: '',
+            role: ''
+        },
         filteredUsers: [],
         
         init() {
             this.applyFilters();
+        },
+
+        openEditModal(user) {
+            this.editForm = {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                password: '',
+                role: user.roles?.[0]?.name || ''
+            };
+            this.showEditModal = true;
         },
         
         applyFilters() {

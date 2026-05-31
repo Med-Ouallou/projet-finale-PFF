@@ -78,10 +78,46 @@
         </div>
 
         <!-- Drawer Footer Billing -->
-        <div class="p-5 border-t border-stone-100 bg-[#FDFBF7]">
-            <div class="flex justify-between items-center mb-5">
-                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total à payer</span>
-                <span class="text-xl font-serif font-black text-emerald-700" x-text="totalPrice.toFixed(2) + ' DH'"></span>
+        <div class="p-5 border-t border-stone-100 bg-[#FDFBF7] space-y-4">
+            <!-- Coupon Code Section -->
+            <div class="bg-white border border-stone-150 rounded-2xl p-3 space-y-2" x-show="cart.length > 0">
+                <label class="block text-[9px] font-black text-gray-400 uppercase tracking-widest text-start">Code de Promotion</label>
+                <div class="flex gap-2">
+                    <input type="text" x-model="couponCode" :disabled="appliedCoupon" 
+                           placeholder="Saisir un code..." 
+                           class="flex-1 py-1.5 px-3 border border-stone-200 rounded-xl text-xs focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 bg-stone-50 disabled:bg-stone-100 disabled:text-stone-400 transition">
+                    <button type="button" @click="appliedCoupon ? removeCoupon() : applyCoupon()" 
+                            class="py-1.5 px-4 text-xs font-bold rounded-xl transition-all border shadow-sm"
+                            :class="appliedCoupon ? 'border-red-200 bg-red-50 text-red-650 hover:bg-red-100' : 'border-stone-200 bg-white text-stone-700 hover:bg-stone-50'">
+                        <span x-text="appliedCoupon ? 'Retirer' : 'Appliquer'"></span>
+                    </button>
+                </div>
+                <template x-if="couponError">
+                    <p class="text-[10px] text-red-600 font-medium text-start" x-text="couponError"></p>
+                </template>
+                <template x-if="couponSuccess">
+                    <p class="text-[10px] text-emerald-600 font-bold text-start" x-text="couponSuccess"></p>
+                </template>
+            </div>
+
+            <!-- Price Recap -->
+            <div class="space-y-1.5 pt-2">
+                <template x-if="appliedCoupon">
+                    <div class="flex justify-between items-center text-xs text-stone-500">
+                        <span>Sous-total</span>
+                        <span x-text="subtotal.toFixed(2) + ' DH'"></span>
+                    </div>
+                </template>
+                <template x-if="appliedCoupon">
+                    <div class="flex justify-between items-center text-xs text-red-600 font-bold">
+                        <span>Remise</span>
+                        <span x-text="'- ' + appliedCoupon.discount.toFixed(2) + ' DH'"></span>
+                    </div>
+                </template>
+                <div class="flex justify-between items-center pt-1.5 border-t border-stone-100">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total à payer</span>
+                    <span class="text-xl font-serif font-black text-emerald-700" x-text="totalPrice.toFixed(2) + ' DH'"></span>
+                </div>
             </div>
 
             <button @click="sendToWhatsApp()" 
