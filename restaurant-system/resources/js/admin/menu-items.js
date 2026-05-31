@@ -18,6 +18,8 @@ export default function menuItemsApp(initialData) {
             image_url: null
         },
         filteredItems: [],
+        currentPage: 1,
+        perPage: 10,
 
         init() {
             this.applyFilters();
@@ -46,6 +48,28 @@ export default function menuItemsApp(initialData) {
                     item.status === this.statusFilter;
                 return matchesSearch && matchesCategory && matchesStatus;
             });
+            this.currentPage = 1;
+        },
+
+        get paginatedItems() {
+            const start = (this.currentPage - 1) * this.perPage;
+            return this.filteredItems.slice(start, start + this.perPage);
+        },
+
+        get totalPages() {
+            return Math.ceil(this.filteredItems.length / this.perPage);
+        },
+
+        nextPage() {
+            if (this.currentPage < this.totalPages) this.currentPage++;
+        },
+
+        prevPage() {
+            if (this.currentPage > 1) this.currentPage--;
+        },
+
+        goToPage(page) {
+            this.currentPage = page;
         },
         
         async toggleStatus(id) {

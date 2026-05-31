@@ -67,19 +67,23 @@
                 </svg>
                 Ajouter
             </button>
-            <x-ui.select x-model="categoryFilter" @change="applyFilters()"
-                class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
-                <option value="">Toutes les catégories</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </x-ui.select>
-            <x-ui.select x-model="statusFilter" @change="applyFilters()"
-                class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
-                <option value="">Tous les statuts</option>
-                <option value="available">Disponible</option>
-                <option value="unavailable">Indisponible</option>
-            </x-ui.select>
+            <div class="w-48">
+                <x-ui.select x-model="categoryFilter" @change="applyFilters()"
+                    class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                    <option value="">Toutes les catégories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </x-ui.select>
+            </div>
+            <div class="w-48">
+                <x-ui.select x-model="statusFilter" @change="applyFilters()"
+                    class="py-2.5 px-3.5 text-sm font-medium rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                    <option value="">Tous les statuts</option>
+                    <option value="available">Disponible</option>
+                    <option value="unavailable">Indisponible</option>
+                </x-ui.select>
+            </div>
         </div>
     </div>
 
@@ -97,7 +101,7 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
-                    <template x-for="item in filteredItems" :key="item.id">
+                    <template x-for="item in paginatedItems" :key="item.id">
                         <tr class="hover:bg-emerald-50/20 transition-colors group">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3.5">
@@ -165,6 +169,45 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        
+        <!-- Pagination controls -->
+        <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between" x-show="totalPages > 1">
+            <div class="flex-1 flex justify-between sm:hidden">
+                <button @click="prevPage()" :disabled="currentPage === 1" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 transition-colors">
+                    Précédent
+                </button>
+                <button @click="nextPage()" :disabled="currentPage === totalPages" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 transition-colors">
+                    Suivant
+                </button>
+            </div>
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm text-gray-700">
+                        Affichage de <span class="font-medium" x-text="((currentPage - 1) * perPage) + 1"></span> à <span class="font-medium" x-text="Math.min(currentPage * perPage, filteredItems.length)"></span> sur <span class="font-medium" x-text="filteredItems.length"></span> plats
+                    </p>
+                </div>
+                <div>
+                    <nav class="relative z-0 inline-flex rounded-xl shadow-sm -space-x-px" aria-label="Pagination">
+                        <button @click="prevPage()" :disabled="currentPage === 1" class="relative inline-flex items-center px-2.5 py-2 rounded-l-xl border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 transition-colors">
+                            <span class="sr-only">Précédent</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        </button>
+                        
+                        <template x-for="page in totalPages" :key="page">
+                            <button @click="goToPage(page)" 
+                                :class="page === currentPage ? 'z-10 bg-emerald-50 border-emerald-500 text-emerald-600 relative inline-flex items-center px-4 py-2 border text-sm font-bold transition-all' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium transition-all'"
+                                x-text="page">
+                            </button>
+                        </template>
+
+                        <button @click="nextPage()" :disabled="currentPage === totalPages" class="relative inline-flex items-center px-2.5 py-2 rounded-r-xl border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 transition-colors">
+                            <span class="sr-only">Suivant</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </button>
+                    </nav>
+                </div>
+            </div>
         </div>
     </div>
 

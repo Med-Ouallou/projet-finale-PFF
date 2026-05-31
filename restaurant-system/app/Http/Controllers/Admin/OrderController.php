@@ -20,7 +20,7 @@ class OrderController extends Controller
             'date_to' => $request->date_to,
         ];
 
-        $orders = $this->orderService->getFilteredPaginatedOrders($filters, 20);
+        $orders = $this->orderService->getFilteredPaginatedOrders($filters, 10);
 
         if ($request->wantsJson() || $request->ajax()) {
             return response()->json([
@@ -42,6 +42,10 @@ class OrderController extends Controller
     public function updateStatus(UpdateOrderStatusRequest $request, int $id)
     {
         $this->orderService->updateStatus($id, $request->validated('status'));
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Statut de la commande mis à jour.']);
+        }
 
         return back()->with('success', 'Statut de la commande mis à jour.');
     }
