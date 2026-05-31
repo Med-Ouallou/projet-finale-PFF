@@ -33,6 +33,8 @@
 
     {{ $modal ?? '' }}
 
+    <x-admin.chatbot />
+
     <!-- Global Alert Component -->
     <x-ui.alert />
 

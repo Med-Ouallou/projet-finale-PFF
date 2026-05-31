@@ -35,6 +35,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin|employee
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Chatbot API
+    Route::post('/chatbot/message', [\App\Http\Controllers\Admin\ChatbotController::class, 'handleMessage'])->name('chatbot.message');
+
     // Notifications API
     Route::get('/api/notifications', [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('api.notifications');
 
