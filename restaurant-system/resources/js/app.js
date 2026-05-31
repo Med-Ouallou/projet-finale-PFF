@@ -11,6 +11,7 @@ import adminLayout from './admin/layout';
 import menusApp from './admin/menus';
 import ordersApp from './admin/orders';
 import promotionsApp from './admin/promotions';
+import chatbotApp from './admin/chatbot';
 
 window.Alpine = Alpine;
 Alpine.data('cartManager', cartManager);
@@ -23,6 +24,7 @@ Alpine.data('adminLayout', adminLayout);
 Alpine.data('menusApp', menusApp);
 Alpine.data('ordersApp', ordersApp);
 Alpine.data('promotionsApp', promotionsApp);
+Alpine.data('chatbotApp', chatbotApp);
 
 Alpine.start();
 
