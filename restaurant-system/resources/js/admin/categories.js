@@ -15,6 +15,8 @@ export default function categoriesApp(initialData) {
             is_active: 1
         },
         filteredCategories: [],
+        currentPage: 1,
+        perPage: 10,
 
         init() {
             this.applyFilters();
@@ -85,6 +87,28 @@ export default function categoriesApp(initialData) {
                     category.is_active == (this.statusFilter === '1');
                 return matchesSearch && matchesStatus;
             });
+            this.currentPage = 1;
+        },
+
+        get paginatedCategories() {
+            const start = (this.currentPage - 1) * this.perPage;
+            return this.filteredCategories.slice(start, start + this.perPage);
+        },
+
+        get totalPages() {
+            return Math.ceil(this.filteredCategories.length / this.perPage);
+        },
+
+        nextPage() {
+            if (this.currentPage < this.totalPages) this.currentPage++;
+        },
+
+        prevPage() {
+            if (this.currentPage > 1) this.currentPage--;
+        },
+
+        goToPage(page) {
+            this.currentPage = page;
         },
         
         async toggleActive(id) {

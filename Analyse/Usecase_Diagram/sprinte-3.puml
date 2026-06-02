@@ -1,0 +1,74 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+' ===== STYLE =====
+skinparam backgroundColor #FFFFFF
+skinparam usecase {
+    BackgroundColor #F7F7F7
+    BorderColor #333333
+    ArrowColor #333333
+}
+skinparam actor {
+    BorderColor #000000
+}
+skinparam package {
+    BackgroundColor #FFFFFF
+    BorderColor #666666
+}
+
+' ===== COMPACT LAYOUT =====
+skinparam nodesep 15
+skinparam ranksep 20
+skinparam padding 3
+skinparam packagePadding 5
+skinparam usecasePadding 5
+skinparam wrapWidth 120
+
+' ===== ACTORS =====
+actor "Admin" as Admin
+actor "Employee" as Employee
+actor "Customer" as Customer
+
+' ===== SYSTEM =====
+rectangle "Sprint 3: AI Assistant & Payments" {
+
+    package "AI Chatbot Assistant" {
+        usecase "Interact with AI Chatbot" as UA8
+        usecase "Create Menu" as UA8M
+        usecase "Create Category" as UA8C
+        usecase "Create Menu Item" as UA8I
+        usecase "Toggle Stock Status" as UA8S
+        usecase "Update Order Status" as UA8O
+        usecase "View Business Reports" as UA8R
+    }
+
+    package "Payment Operations" {
+        usecase "Configure Payment Options" as UA9
+        usecase "Process Order Payment" as UC6
+        usecase "Pay via Stripe" as UC6S
+        usecase "Pay Cash on Delivery" as UC6C
+    }
+
+    ' ── Relationships (Ensuring left-to-right flow) ──
+    UA8 <.. UA8M : <<extend>>
+    UA8 <.. UA8C : <<extend>>
+    UA8 <.. UA8I : <<extend>>
+    UA8 <.. UA8S : <<extend>>
+    UA8 <.. UA8O : <<extend>>
+    UA8 <.. UA8R : <<extend>>
+
+    UC6 <.. UC6S : <<extend>>
+    UC6 <.. UC6C : <<extend>>
+}
+
+' ===== ACTOR CONNECTIONS =====
+Admin -- UA8
+Admin -- UA9
+
+Employee -- UA8
+
+Customer -- UC6
+
+@enduml

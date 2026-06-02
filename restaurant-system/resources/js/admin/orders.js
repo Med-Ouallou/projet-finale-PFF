@@ -8,9 +8,90 @@ export default function ordersApp(initialData) {
             date_to: initialData.filters?.date_to || '',
         },
         isLoading: false,
+        selectedOrder: null,
+        showDetailModal: false,
 
         init() {
             // Initialization if needed
+        },
+
+        openDetailModal(order) {
+            this.selectedOrder = order;
+            this.showDetailModal = true;
+            
+            // Sync Preline custom select value
+            this.$nextTick(() => {
+                // Re-initialize Preline select components
+                if (window.HSStaticMethods && typeof window.HSStaticMethods.autoInit === 'function') {
+                    window.HSStaticMethods.autoInit('select');
+                }
+
+                const selectEl = document.getElementById('modal-order-status-select');
+                if (selectEl && window.HSSelect) {
+                    let selectInstance = window.HSSelect.getInstance(selectEl, true);
+                    if (!selectInstance) {
+                        try {
+                            selectInstance = new window.HSSelect(selectEl);
+                        } catch(e) {
+                            console.warn("Failed to instantiate HSSelect:", e);
+                        }
+                    }
+                    if (selectInstance) {
+                        selectInstance.value = [order.status];
+                        // Force refresh UI
+                        selectInstance.destroy();
+                        selectInstance.init();
+                    }
+                }
+            });
+        },
+
+        async updateOrderStatus(id, status) {
+            try {
+                const response = await fetch(`/admin/orders/${id}/status`, {
+                    method: 'PATCH',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status: status })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    const order = this.orders.find(o => o.id === id);
+                    if (order) {
+                        order.status = status;
+                    }
+                    if (this.selectedOrder && this.selectedOrder.id === id) {
+                        this.selectedOrder.status = status;
+                        // Sync select UI
+                        const selectEl = document.getElementById('modal-order-status-select');
+                        if (selectEl && window.HSSelect) {
+                            const selectInstance = window.HSSelect.getInstance(selectEl, true);
+                            if (selectInstance) {
+                                selectInstance.value = [status];
+                                selectInstance.destroy();
+                                selectInstance.init();
+                            }
+                        }
+                    }
+                    if (window.showAlert) {
+                        window.showAlert('Statut mis à jour avec succès', 'success');
+                    } else {
+                        alert('Statut mis à jour avec succès');
+                    }
+                } else {
+                    if (window.showAlert) {
+                        window.showAlert(data.message || 'Erreur lors de la mise à jour', 'error');
+                    } else {
+                        alert(data.message || 'Erreur lors de la mise à jour');
+                    }
+                }
+            } catch (error) {
+                console.error('Error updating order status:', error);
+            }
         },
 
         async applyFilters(page = 1) {

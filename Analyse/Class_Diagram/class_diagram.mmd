@@ -57,20 +57,8 @@ classDiagram
         class Customer {
             +int id
             +int user_id
-            +string name
             +string phone
-            +string email
             +string address
-            +datetime created_at
-            +datetime updated_at
-        }
-
-        class Employee {
-            +int id
-            +int user_id
-            +string name
-            +string phone
-            +string position
             +datetime created_at
             +datetime updated_at
         }
@@ -84,12 +72,12 @@ classDiagram
         class Menu {
             +int id
             +string name
-            +string description
-            +datetime valid_from
-            +datetime valid_until
+            +string description~nullable~
+            +datetime valid_from~nullable~
+            +datetime valid_until~nullable~
             +boolean is_active
             +int display_order
-            +string image_url
+            +string image_url~nullable~
             +string currency
             +datetime created_at
             +datetime updated_at
@@ -97,12 +85,10 @@ classDiagram
 
         class Category {
             +int id
-            +int menu_id
-            +int parent_id~nullable~
             +string name
-            +string description
+            +string description~nullable~
             +int display_order
-            +string icon_url
+            +string icon_url~nullable~
             +boolean is_active
             +datetime created_at
             +datetime updated_at
@@ -110,13 +96,12 @@ classDiagram
 
         class MenuItem {
             +int id
-            +int category_id
             +string name
-            +string description
+            +string description~nullable~
             +decimal price
-            +string unit
+            +string unit~nullable~
             +MenuItemStatus status
-            +string image_url
+            +string image_url~nullable~
             +datetime created_at
             +datetime updated_at
         }
@@ -130,21 +115,13 @@ classDiagram
         class InventoryItem {
             +int id
             +string name
-            +string reference
+            +string reference~nullable~
             +int quantity_in_stock
             +int min_threshold
             +string unit
-            +decimal unit_price
+            +decimal unit_price~nullable~
             +datetime created_at
             +datetime updated_at
-        }
-
-        class MenuItemIngredient {
-            <<association>>
-            +int id
-            +int menu_item_id
-            +int inventory_item_id
-            +decimal quantity_needed
         }
     }
 
@@ -155,9 +132,6 @@ classDiagram
     namespace OrderMgmt {
         class Order {
             +int id
-            +int customer_id
-            +int promotion_id~nullable~
-            +int updated_by~nullable~
             +OrderStatus status
             +decimal subtotal
             +decimal discount_amount
@@ -170,11 +144,11 @@ classDiagram
 
         class OrderItem {
             +int id
-            +int order_id
-            +int menu_item_id
             +int quantity
             +decimal unit_price_at_order
             +decimal subtotal
+            +datetime created_at
+            +datetime updated_at
         }
 
         class Promotion {
@@ -182,27 +156,14 @@ classDiagram
             +string code
             +decimal discount_percentage~nullable~
             +decimal discount_amount~nullable~
-            +datetime valid_from
-            +datetime valid_until
+            +datetime valid_from~nullable~
+            +datetime valid_until~nullable~
             +int usage_limit~nullable~
             +datetime created_at
             +datetime updated_at
         }
     }
 
-    %% ════════════════════════════════════════════════════════════════
-    %%  7. ANALYTICS (utility — no DB table)
-    %% ════════════════════════════════════════════════════════════════
-
-    namespace Analytics {
-        class Dashboard {
-            <<utility>>
-            +getMetrics()
-            +getRevenueReport(period)
-            +getLowStockAlerts()
-            +getEmployeeStatistics(employee)
-        }
-    }
 
     %% ════════════════════════════════════════════════════════════════
     %%  RELATIONSHIPS
@@ -214,26 +175,18 @@ classDiagram
     User "*" --> "*" Permission : direct
 
     %% ── People ↔ Auth (1:1) ──
-    Customer "1" --> "1" User : profile
-    Employee "1" --> "1" User : profile
+    User "1" --> "0..1" Customer : profile
 
     %% ── Menu hierarchy ──
     Menu "1" --> "*" Category : contains
     Category "0..1" --> "*" Category : sub-categories
     Category "1" --> "*" MenuItem : contains
 
-    %% ── Inventory M:N via pivot ──
-    MenuItem "1" --> "*" MenuItemIngredient : requires
-    MenuItemIngredient "*" --> "1" InventoryItem : uses
-
     %% ── Order flow ──
     Customer "1" --> "*" Order : places
     Order "*" --> "0..1" Promotion : applies
     Order "1" --> "*" OrderItem : contains
     OrderItem "*" --> "1" MenuItem : references
-
-    %% ── Employee → Order ──
-    Employee "1" --> "*" Order : updates status
 
     %% ── Enum usage ──
     MenuItemStatus --> MenuItem : status
