@@ -217,9 +217,9 @@ style: |
 
 ## Branche Fonctionnelle : Cas d'utilisation
 
-### Sprint 2 : Nutrition
+### Sprint 2 : Système Client & Commandes Temps Réel
 <div class="img-container">
-  <img src="images/sprinte-2.png" class="img-usecase" alt="Sprint 2 Use Case">
+  <img src="images/sprint-2.png" class="img-usecase" alt="Sprint 2 Use Case">
 </div>
 
 ---

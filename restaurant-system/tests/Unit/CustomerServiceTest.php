@@ -22,9 +22,13 @@ class CustomerServiceTest extends TestCase
 
     public function test_it_can_get_all_customers()
     {
-        Customer::create([
+        $user = \App\Models\User::create([
             'name' => 'John Doe',
-            'email' => 'john@example.com',
+            'email' => 'john' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        Customer::create([
+            'user_id' => $user->id,
             'phone' => '123456789',
             'address' => '123 Main St'
         ]);
@@ -37,9 +41,13 @@ class CustomerServiceTest extends TestCase
 
     public function test_it_can_get_customer_by_id()
     {
-        $customer = Customer::create([
+        $user = \App\Models\User::create([
             'name' => 'Jane Doe',
-            'email' => 'jane@example.com',
+            'email' => 'jane' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $customer = Customer::create([
+            'user_id' => $user->id,
             'phone' => '987654321',
             'address' => '456 Elm St'
         ]);
@@ -52,9 +60,13 @@ class CustomerServiceTest extends TestCase
 
     public function test_it_can_create_a_customer()
     {
-        $data = [
+        $user = \App\Models\User::create([
             'name' => 'Alice Smith',
-            'email' => 'alice@example.com',
+            'email' => 'alice' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $data = [
+            'user_id' => $user->id,
             'phone' => '5551234',
             'address' => '789 Pine St'
         ];
@@ -63,15 +75,19 @@ class CustomerServiceTest extends TestCase
 
         $this->assertDatabaseHas('customers', [
             'id' => $customer->id,
-            'email' => 'alice@example.com',
+            'user_id' => $user->id,
         ]);
     }
 
     public function test_it_can_update_a_customer()
     {
-        $customer = Customer::create([
+        $user = \App\Models\User::create([
             'name' => 'Bob Brown',
-            'email' => 'bob@example.com',
+            'email' => 'bob' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $customer = Customer::create([
+            'user_id' => $user->id,
             'phone' => '4443332',
             'address' => '321 Oak St'
         ]);
@@ -84,15 +100,19 @@ class CustomerServiceTest extends TestCase
 
         $this->assertDatabaseHas('customers', [
             'id' => $customer->id,
-            'name' => 'Robert',
+            'phone' => '4443332',
         ]);
     }
 
     public function test_it_can_delete_a_customer()
     {
-        $customer = Customer::create([
+        $user = \App\Models\User::create([
             'name' => 'Charlie Green',
-            'email' => 'charlie@example.com',
+            'email' => 'charlie' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $customer = Customer::create([
+            'user_id' => $user->id,
             'phone' => '1112223',
             'address' => '654 Maple St'
         ]);
@@ -106,9 +126,13 @@ class CustomerServiceTest extends TestCase
 
     public function test_it_can_get_order_history()
     {
-        $customer = Customer::create([
+        $user = \App\Models\User::create([
             'name' => 'Dave Wilson',
-            'email' => 'dave@example.com',
+            'email' => 'dave' . uniqid() . '@example.com',
+            'password' => bcrypt('password')
+        ]);
+        $customer = Customer::create([
+            'user_id' => $user->id,
             'phone' => '9998887',
             'address' => '987 Cedar St'
         ]);

@@ -182,7 +182,7 @@ Basé sur la méthode Agile Scrum, le développement est découpé en Sprints it
 | **Expérience Client** | UC6 | Prise de Commande | Le client construit son panier et valide la commande. |
 | **Logistique Staff** | UC7 | Voir Commandes | Interface AJAX single-question de traitement avec timers. |
 
-![Cas d’Utilisation du Sprint 2](images/sprinte-2.png)
+![Cas d’Utilisation du Sprint 2](images/sprint-2.png)
 
 ---
 
