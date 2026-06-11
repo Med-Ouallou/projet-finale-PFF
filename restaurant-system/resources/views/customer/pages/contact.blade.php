@@ -126,7 +126,7 @@
                 </div>
 
                 <!-- RIGHT MAIN CONTENT: Message Form (7 Cols) -->
-                <div class="col-span-12 lg:col-span-7">
+                <div class="col-span-12 lg:col-span-7" x-data="contactForm('{{ config('services.web3forms.key') }}')">
                     <div class="bg-white border border-stone-150 rounded-[32px] p-8 shadow-sm space-y-6">
                         <div class="space-y-1">
                             <h2 class="text-xl font-serif font-extrabold text-stone-855 tracking-tight flex items-center gap-2">
@@ -138,7 +138,7 @@
                             </p>
                         </div>
 
-                        <form action="#" method="POST" class="space-y-6 pt-2">
+                        <form @submit.prevent="submitForm($event)" class="space-y-6 pt-2">
                             @csrf
                             <div class="grid md:grid-cols-2 gap-6 text-start">
                                 <div class="space-y-2">
@@ -175,8 +175,15 @@
                                     rows="5" placeholder="Écrivez votre message avec le plus de détails possibles..."></textarea>
                             </div>
 
-                            <x-ui.button type="submit" variant="primary" size="xl" class="w-full rounded-full py-4 bg-emerald-700 hover:bg-emerald-800 text-xs font-bold uppercase tracking-wider shadow-md">
-                                Envoyer le message
+                            <x-ui.button type="submit" variant="primary" size="xl" ::disabled="sending" class="w-full rounded-full py-4 bg-emerald-700 hover:bg-emerald-800 text-xs font-bold uppercase tracking-wider shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+                                <span x-show="!sending">Envoyer le message</span>
+                                <span x-show="sending" class="flex items-center justify-center gap-2" x-cloak>
+                                    <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Envoi en cours...
+                                </span>
                             </x-ui.button>
                         </form>
                     </div>

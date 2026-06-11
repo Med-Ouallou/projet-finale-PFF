@@ -7,6 +7,7 @@ export default function cartManager() {
         appliedCoupon: null,
         couponError: '',
         couponSuccess: '',
+        paymentMethod: 'cash',
         
         get itemCount() {
             return this.cart.reduce((total, item) => total + item.quantity, 0);
@@ -95,7 +96,7 @@ export default function cartManager() {
             this.couponSuccess = '';
         },
         
-        async sendToWhatsApp() {
+        async submitOrder() {
             try {
                 // Save to database first
                 const response = await fetch('/client/orders', {
@@ -108,7 +109,8 @@ export default function cartManager() {
                     body: JSON.stringify({
                         items: this.cart,
                         promotion_code: this.appliedCoupon ? this.appliedCoupon.code : null,
-                        total: this.totalPrice
+                        total: this.totalPrice,
+                        payment_method: this.paymentMethod
                     })
                 });
  
@@ -126,31 +128,40 @@ export default function cartManager() {
                     throw new Error(data.message || 'Erreur lors de l\'enregistrement');
                 }
  
-                // If saved successfully, open WhatsApp
-                const phoneNumber = "212776440786"; 
-                let message = `🍱 *NOUVELLE COMMANDE #${data.order_id} - RESTOMANAGER*\n\n`;
-                
-                this.cart.forEach(item => {
-                    const sub = item.price * item.quantity;
-                    message += `• *${item.quantity}x* ${item.name} (_${sub.toFixed(2)} DH_)\n`;
-                });
-                
-                if (this.appliedCoupon) {
-                    message += `\n🏷️ *Code Promo :* ${this.appliedCoupon.code} (-${this.appliedCoupon.discount.toFixed(2)} DH)\n`;
-                }
-
-                message += `\n💰 *Total : ${this.totalPrice.toFixed(2)} DH*\n\n`;
-                message += "📍 _Je souhaite commander ces articles pour une livraison à domicile._\n";
-                message += "📞 _Merci de me confirmer la réception._";
-                
-                const encoded = encodeURIComponent(message);
-                
                 // Clear cart after success
+                const savedCart = [...this.cart];
+                const savedAppliedCoupon = this.appliedCoupon;
+                
                 this.cart = [];
                 this.persist();
                 this.removeCoupon();
                 this.cartOpen = false;
+
+                if (this.paymentMethod === 'stripe') {
+                    // Redirect to Stripe checkout
+                    window.location.href = data.checkout_url;
+                    return;
+                }
  
+                // If saved successfully with Cash on Delivery, open WhatsApp
+                const phoneNumber = "212776440786"; 
+                let message = `🍱 *NOUVELLE COMMANDE #${data.order_id} - RESTOMANAGER*\n\n`;
+                
+                savedCart.forEach(item => {
+                    const sub = item.price * item.quantity;
+                    message += `• *${item.quantity}x* ${item.name} (_${sub.toFixed(2)} DH_)\n`;
+                });
+                
+                if (savedAppliedCoupon) {
+                    message += `\n🏷️ *Code Promo :* ${savedAppliedCoupon.code} (-${savedAppliedCoupon.discount.toFixed(2)} DH)\n`;
+                }
+ 
+                const totalVal = savedAppliedCoupon ? Math.max(0, savedCart.reduce((t, i) => t + (i.price * i.quantity), 0) - savedAppliedCoupon.discount) : savedCart.reduce((t, i) => t + (i.price * i.quantity), 0);
+                message += `\n💰 *Total : ${totalVal.toFixed(2)} DH*\n\n`;
+                message += "📍 _Je souhaite commander ces articles pour une livraison à domicile._\n";
+                message += "📞 _Merci de me confirmer la réception._";
+                
+                const encoded = encodeURIComponent(message);
                 window.open(`https://wa.me/${phoneNumber}?text=${encoded}`, '_blank');
  
             } catch (error) {
