@@ -161,5 +161,10 @@
             </button>
         </div>
     </div>
+
+
+    <!-- Reusable Alert Dialog -->
+    <x-ui.alert />
 </body>
 </html>
+
