@@ -1,6 +1,6 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
-import 'preline';
+import { HSStaticMethods } from 'preline';
 import cartManager from './public/cart';
 import contactForm from './public/contact';
 import categoriesApp from './admin/categories';
@@ -15,6 +15,7 @@ import promotionsApp from './admin/promotions';
 import chatbotApp from './admin/chatbot';
 
 window.Alpine = Alpine;
+window.HSStaticMethods = HSStaticMethods;
 Alpine.data('cartManager', cartManager);
 Alpine.data('contactForm', contactForm);
 Alpine.data('categoriesApp', categoriesApp);
