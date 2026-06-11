@@ -99,6 +99,32 @@
                     <p class="text-[10px] text-emerald-600 font-bold text-start" x-text="couponSuccess"></p>
                 </template>
             </div>
+ 
+             <!-- Payment Method Selection -->
+             <div class="bg-white border border-stone-150 rounded-2xl p-3 space-y-2" x-show="cart.length > 0">
+                 <label class="block text-[9px] font-black text-gray-400 uppercase tracking-widest text-start">Mode de Paiement</label>
+                 <div class="grid grid-cols-2 gap-2">
+                     <button type="button" @click="paymentMethod = 'cash'"
+                             class="flex items-center justify-center gap-2 py-2.5 px-3 border rounded-xl text-xs font-bold transition-all"
+                             :class="paymentMethod === 'cash' ? 'border-emerald-600 bg-emerald-50 text-emerald-800' : 'border-stone-200 bg-white text-stone-600 hover:bg-stone-50'">
+                         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                             <rect x="2" y="6" width="20" height="12" rx="2" />
+                             <circle cx="12" cy="12" r="3" />
+                             <path d="M6 12h.01M18 12h.01" />
+                         </svg>
+                         Espèces
+                     </button>
+                     <button type="button" @click="paymentMethod = 'stripe'"
+                             class="flex items-center justify-center gap-2 py-2.5 px-3 border rounded-xl text-xs font-bold transition-all"
+                             :class="paymentMethod === 'stripe' ? 'border-emerald-600 bg-emerald-50 text-emerald-800' : 'border-stone-200 bg-white text-stone-600 hover:bg-stone-50'">
+                         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                             <rect x="2" y="5" width="20" height="14" rx="2" />
+                             <line x1="2" y1="10" x2="22" y2="10" />
+                         </svg>
+                         Carte
+                     </button>
+                 </div>
+             </div>
 
             <!-- Price Recap -->
             <div class="space-y-1.5 pt-2">
@@ -120,13 +146,18 @@
                 </div>
             </div>
 
-            <button @click="sendToWhatsApp()" 
+            <button @click="submitOrder()" 
                     :disabled="cart.length === 0"
                     class="w-full py-3.5 px-5 inline-flex justify-center items-center gap-x-2 text-xs font-bold rounded-full bg-emerald-700 text-[#FAF9F6] hover:bg-emerald-800 transition-all shadow-md active:scale-[0.98] disabled:opacity-40 disabled:grayscale uppercase tracking-wider">
-                <svg class="w-4 h-4 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                <!-- WhatsApp Icon -->
+                <svg x-show="paymentMethod === 'cash'" class="w-4 h-4 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.171.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.538-2.961-2.654-.087-.116-.708-.941-.708-1.795 0-.855.449-1.277.608-1.45.159-.174.348-.217.464-.217.116 0 .232.001.333.006.106.005.249-.04.391.305.144.35.492 1.203.535 1.29.043.087.072.188.014.305-.058.116-.087.188-.174.29-.087.101-.183.225-.261.305-.087.087-.179.183-.077.358.101.174.451.745.966 1.204.664.591 1.224.774 1.398.86.174.087.275.072.376-.044.101-.116.435-.508.55-.682.116-.174.232-.145.391-.087.159.058 1.014.478 1.187.565.174.087.29.131.334.203.04.072.04.417-.104.821zM12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1z" />
                 </svg>
-                Envoyer la Commande
+                <!-- Credit Card Icon -->
+                <svg x-show="paymentMethod === 'stripe'" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" x-cloak>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                </svg>
+                <span x-text="paymentMethod === 'cash' ? 'Commander via WhatsApp' : 'Payer par Carte'"></span>
             </button>
         </div>
     </div>

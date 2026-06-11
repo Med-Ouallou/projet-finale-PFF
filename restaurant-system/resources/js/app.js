@@ -2,6 +2,7 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import 'preline';
 import cartManager from './public/cart';
+import contactForm from './public/contact';
 import categoriesApp from './admin/categories';
 import menuItemsApp from './admin/menu-items';
 import usersApp from './admin/users';
@@ -15,6 +16,7 @@ import chatbotApp from './admin/chatbot';
 
 window.Alpine = Alpine;
 Alpine.data('cartManager', cartManager);
+Alpine.data('contactForm', contactForm);
 Alpine.data('categoriesApp', categoriesApp);
 Alpine.data('menuItemsApp', menuItemsApp);
 Alpine.data('usersApp', usersApp);
