@@ -26,11 +26,16 @@ Route::prefix('client')->name('client.')->middleware(['auth', 'role:customer'])-
     Route::put('/password', [\App\Http\Controllers\Customer\ClientProfileController::class, 'updatePassword'])->name('password.update');
     Route::post('/orders', [\App\Http\Controllers\Customer\OrderController::class, 'store'])->name('orders.store');
     Route::post('/orders/apply-coupon', [\App\Http\Controllers\Customer\OrderController::class, 'applyCoupon'])->name('orders.apply-coupon');
+
+    // Stripe Payments
+    Route::get('/payment/stripe/checkout', [\App\Http\Controllers\Customer\StripeController::class, 'checkout'])->name('payment.stripe.checkout');
+    Route::get('/payment/stripe/success', [\App\Http\Controllers\Customer\StripeController::class, 'success'])->name('payment.stripe.success');
+    Route::get('/payment/stripe/cancel', [\App\Http\Controllers\Customer\StripeController::class, 'cancel'])->name('payment.stripe.cancel');
 });
 
 
 
-// Protected Admin Routes
+// Protected Admin & Employee Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin|employee'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -71,13 +76,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin|employee
     Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
     Route::post('/orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
 
-    // Users
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-
     // Inventory
     Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
     Route::get('/inventory/export', [InventoryController::class, 'export'])->name('inventory.export');
@@ -86,15 +84,25 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin|employee
     Route::put('/inventory/{inventoryItem}', [InventoryController::class, 'update'])->name('inventory.update');
     Route::delete('/inventory/{inventoryItem}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
 
-    // Reports
-    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
-    Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
+    // Admin Only Operations
+    Route::middleware(['role:admin'])->group(function () {
+        // Users
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
-    // Promotions
-    Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions.index');
-    Route::post('/promotions', [PromotionController::class, 'store'])->name('promotions.store');
-    Route::put('/promotions/{id}', [PromotionController::class, 'update'])->name('promotions.update');
-    Route::delete('/promotions/{id}', [PromotionController::class, 'destroy'])->name('promotions.destroy');
+        // Reports
+        Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+        Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
+
+        // Promotions
+        Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions.index');
+        Route::post('/promotions', [PromotionController::class, 'store'])->name('promotions.store');
+        Route::put('/promotions/{id}', [PromotionController::class, 'update'])->name('promotions.update');
+        Route::delete('/promotions/{id}', [PromotionController::class, 'destroy'])->name('promotions.destroy');
+    });
 });
 
 

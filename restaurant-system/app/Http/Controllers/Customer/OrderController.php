@@ -69,15 +69,27 @@ class OrderController extends Controller
                 'customer_id' => Auth::user()->customer->id,
                 'notes' => $validated['notes'] ?? null,
                 'status' => 'pending',
+                'payment_method' => $validated['payment_method'],
                 'promotion_id' => $promotionId,
                 'discount_amount' => $discountAmount,
             ];
 
             $order = $this->orderService->createOrder($orderData, $items);
 
+            if ($validated['payment_method'] === 'stripe') {
+                return response()->json([
+                    'success' => true,
+                    'order_id' => $order->id,
+                    'payment_method' => 'stripe',
+                    'checkout_url' => route('client.payment.stripe.checkout', ['order_id' => $order->id]),
+                    'message' => 'Redirection vers Stripe...'
+                ]);
+            }
+
             return response()->json([
                 'success' => true,
                 'order_id' => $order->id,
+                'payment_method' => 'cash',
                 'message' => 'Commande enregistrée avec succès.'
             ]);
 

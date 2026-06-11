@@ -28,6 +28,7 @@ class StoreOrderRequest extends FormRequest
             'items.*.price' => 'required|numeric',
             'notes' => 'nullable|string|max:500',
             'promotion_code' => 'nullable|string|exists:promotions,code',
+            'payment_method' => 'required|string|in:cash,stripe',
         ];
     }
 
